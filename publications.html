@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Publications — Satyaghosh Maurya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script>
+  // Apply saved theme before paint to avoid a flash. Dark is default.
+  (function () {
+    if (localStorage.getItem("theme") === "light") {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+  })();
+</script>
+</head>
+<body>
+
+<div class="mobile-topbar">
+  <span class="brand">Satyaghosh Maurya</span>
+  <div style="display:flex; gap:0.5rem;">
+    <button data-theme-toggle class="theme-toggle" style="margin-top:0;">Light mode</button>
+    <button data-nav-toggle>Menu</button>
+  </div>
+</div>
+<nav class="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="research.html">Research</a>
+  <a href="publications.html" class="active">Publications</a>
+  <a href="cv.html">CV</a>
+  <a href="hobbies.html">Hobbies &amp; Interests</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<div class="site">
+  <aside class="sidebar">
+    <span class="brand">Satyaghosh Maurya</span>
+    <span class="brand-role">Postdoctoral Researcher</span>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="research.html">Research</a>
+      <a href="publications.html" class="active">Publications</a>
+      <a href="cv.html">CV</a>
+      <a href="hobbies.html">Hobbies &amp; Interests</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="sidebar-footer">
+      Weizmann Institute of Science<br>
+      Rehovot, Israel
+      <br>
+      <button data-theme-toggle class="theme-toggle">Light mode</button>
+    </div>
+  </aside>
+
+  <main>
+    <div class="content">
+      <p class="eyebrow">Publications</p>
+      <h1>Publications</h1>
+      <p class="lede">Pulled from my CV — replace links below with real DOIs/URLs when you have them.</p>
+
+      <!--
+        HOW TO ADD A NEW PUBLICATION:
+        Copy one .pub block, edit the text, and set data-pub-topics to a
+        comma-separated list of topic keys (matching the filter buttons below).
+      -->
+
+      <div class="pub-filters">
+        <button data-pub-filter="all" class="active">All</button>
+        <button data-pub-filter="folding">Protein folding / smFRET</button>
+        <button data-pub-filter="membrane">Membrane biophysics</button>
+        <button data-pub-filter="review">Reviews</button>
+      </div>
+
+      <div class="pub" data-pub-topics="membrane">
+        <div class="pub-title">Conformational flexibility is a key determinant of the lytic activity of the pore forming protein, Cytolysin A</div>
+        <div class="pub-meta">A. Kulshrestha, S. Maurya, T. Gupta, R. Roy, S. Punnathanam, K. G. Ayappa — <em>The Journal of Physical Chemistry B</em>, 2023</div>
+        <div class="pub-tags"><span class="pill">Membrane biophysics</span></div>
+      </div>
+
+      <div class="pub" data-pub-topics="membrane">
+        <div class="pub-title">Single molecule diffusion and assembly on polymer-crowded lipid membranes</div>
+        <div class="pub-meta">S. Maurya, V. H. Rai, A. Upasani, S. Umrao, D. Parwana, R. Roy — <em>Journal of Visualized Experiments</em>, 2022</div>
+        <div class="pub-tags"><span class="pill">Membrane biophysics</span></div>
+      </div>
+
+      <div class="pub" data-pub-topics="review">
+        <div class="pub-title">Evaluation of spike protein antigens for SARS-CoV-2 serology</div>
+        <div class="pub-meta">S. Jagtap, K. Ratnasri, P. Valloly, R. Sharma, S. Maurya, et al. — <em>Journal of Virological Methods</em>, 2021</div>
+        <div class="pub-tags"><span class="pill">Reviews</span></div>
+      </div>
+
+      <div class="pub" data-pub-topics="review,folding">
+        <div class="pub-title">Single-Molecule Fluorescence Imaging: Generating Insights into Molecular Interactions in Virology</div>
+        <div class="pub-meta">S. Banerjee, S. Maurya, R. Roy — <em>Journal of Biosciences</em>, 2018</div>
+        <div class="pub-tags"><span class="pill">Reviews</span><span class="pill">smFRET</span></div>
+      </div>
+
+      <div class="pub" data-pub-topics="membrane">
+        <div class="pub-title">Cholesterol Promotes Cytolysin A Activity by Stabilizing the Intermediates during Pore Formation</div>
+        <div class="pub-meta">P. Sathyanarayana, S. Maurya, A. Behera, M. Ravichandran, S. S. Visweswariah, K. G. Ayappa, R. Roy — <em>Proceedings of the National Academy of Sciences (PNAS)</em>, 2018</div>
+        <div class="pub-tags"><span class="pill">Membrane biophysics</span></div>
+      </div>
+
+      <div class="note">
+        Placeholder note: add DOI links to each title, and add newer postdoctoral publications
+        (protein folding / ZMW / Bayesian inference work) as they come out — tag them <code>folding</code>.
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

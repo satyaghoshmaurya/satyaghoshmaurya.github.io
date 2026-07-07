@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research — Satyaghosh Maurya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script>
+  // Apply saved theme before paint to avoid a flash. Dark is default.
+  (function () {
+    if (localStorage.getItem("theme") === "light") {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+  })();
+</script>
+</head>
+<body>
+
+<div class="mobile-topbar">
+  <span class="brand">Satyaghosh Maurya</span>
+  <div style="display:flex; gap:0.5rem;">
+    <button data-theme-toggle class="theme-toggle" style="margin-top:0;">Light mode</button>
+    <button data-nav-toggle>Menu</button>
+  </div>
+</div>
+<nav class="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="research.html" class="active">Research</a>
+  <a href="publications.html">Publications</a>
+  <a href="cv.html">CV</a>
+  <a href="hobbies.html">Hobbies &amp; Interests</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<div class="site">
+  <aside class="sidebar">
+    <span class="brand">Satyaghosh Maurya</span>
+    <span class="brand-role">Postdoctoral Researcher</span>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="research.html" class="active">Research</a>
+      <a href="publications.html">Publications</a>
+      <a href="cv.html">CV</a>
+      <a href="hobbies.html">Hobbies &amp; Interests</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="sidebar-footer">
+      Weizmann Institute of Science<br>
+      Rehovot, Israel
+      <br>
+      <button data-theme-toggle class="theme-toggle">Light mode</button>
+    </div>
+  </aside>
+
+  <main>
+    <div class="content">
+      <p class="eyebrow">Research</p>
+      <h1>Watching single molecules fold, move, and assemble</h1>
+      <p class="lede">
+        My work sits at the intersection of biophysics, optics, and statistics — building tools to see
+        what individual proteins and membranes do, one molecule at a time, and interpreting the noisy
+        signals that come with it.
+      </p>
+
+      <h2>In plain terms</h2>
+      <p>
+        Most of what we know about how proteins fold or assemble comes from measuring the average
+        behavior of billions of molecules at once. But biology is not average — individual proteins
+        can take very different paths to the same destination, and the rare, fast, or minority
+        pathways are often the most important ones. My research develops microscopy and data-analysis
+        methods that let us watch <em>one molecule at a time</em>, so we can catch these hidden
+        behaviors directly instead of guessing at them from bulk averages.
+      </p>
+      <p>
+        Concretely, I work with single-molecule FRET (a technique that reports on tiny distance changes
+        within or between molecules using fluorescent dyes) combined with plasmonic nanostructures
+        called zero-mode waveguides (ZMWs), which let us watch single molecules at concentrations close
+        to what's found in a real cell — something conventional microscopy struggles with. Because
+        single-molecule data is inherently noisy, I also develop Bayesian inference methods to extract
+        reliable, quantitative kinetic information from these measurements.
+      </p>
+
+      <h2>Research interests</h2>
+      <div class="cv-timeline">
+        <div class="cv-item">
+          <div class="cv-when">Current focus</div>
+          <div class="cv-what">
+            <strong>Protein folding transition paths</strong>
+            <span>Using plasmonic-enhanced smFRET to directly observe transition paths in protein folding landscapes — the fleeting, hard-to-catch moments between folded and unfolded states.</span>
+          </div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-when">Methods</div>
+          <div class="cv-what">
+            <strong>Zero-mode waveguides &amp; plasmonics</strong>
+            <span>Nanophotonic structures that confine light to observe single molecules at physiologically relevant, high concentrations.</span>
+          </div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-when">Methods</div>
+          <div class="cv-what">
+            <strong>Bayesian inference for single-molecule data</strong>
+            <span>Statistical methods to extract reliable kinetic and conformational information from noisy, photon-limited single-molecule trajectories.</span>
+          </div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-when">PhD work</div>
+          <div class="cv-what">
+            <strong>Membrane biophysics &amp; pore-forming proteins</strong>
+            <span>Assembly dynamics of the pore-forming toxin Cytolysin A (ClyA) on supported lipid bilayers, and membrane crowding by grafted polymers, studied with single-molecule imaging.</span>
+          </div>
+        </div>
+      </div>
+
+      <hr class="rule">
+
+      <h2>Research statement</h2>
+      <p class="note">
+        Placeholder — drop in your full research program / statement text here (the section hiring
+        committees will read closely). Suggested shape: motivating problem → your approach and
+        preliminary results → a 3–5 year independent research program → why this institution.
+      </p>
+      <div class="placeholder-box" style="height: 220px;">
+        [ research statement text goes here ]
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

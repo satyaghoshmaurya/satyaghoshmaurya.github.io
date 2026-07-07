@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV — Satyaghosh Maurya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script>
+  // Apply saved theme before paint to avoid a flash. Dark is default.
+  (function () {
+    if (localStorage.getItem("theme") === "light") {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+  })();
+</script>
+</head>
+<body>
+
+<div class="mobile-topbar">
+  <span class="brand">Satyaghosh Maurya</span>
+  <div style="display:flex; gap:0.5rem;">
+    <button data-theme-toggle class="theme-toggle" style="margin-top:0;">Light mode</button>
+    <button data-nav-toggle>Menu</button>
+  </div>
+</div>
+<nav class="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="research.html">Research</a>
+  <a href="publications.html">Publications</a>
+  <a href="cv.html" class="active">CV</a>
+  <a href="hobbies.html">Hobbies &amp; Interests</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<div class="site">
+  <aside class="sidebar">
+    <span class="brand">Satyaghosh Maurya</span>
+    <span class="brand-role">Postdoctoral Researcher</span>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="research.html">Research</a>
+      <a href="publications.html">Publications</a>
+      <a href="cv.html" class="active">CV</a>
+      <a href="hobbies.html">Hobbies &amp; Interests</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="sidebar-footer">
+      Weizmann Institute of Science<br>
+      Rehovot, Israel
+      <br>
+      <button data-theme-toggle class="theme-toggle">Light mode</button>
+    </div>
+  </aside>
+
+  <main>
+    <div class="content">
+      <p class="eyebrow">Curriculum Vitae</p>
+      <h1>CV</h1>
+      <div class="link-row">
+        <a class="btn" href="assets/cv/Satyaghosh_Maurya_CV.pdf" target="_blank" rel="noopener">Download PDF</a>
+      </div>
+
+      <h2>Education &amp; positions, at a glance</h2>
+      <!-- Quick-scan timeline. Keep this in sync with the PDF by hand. -->
+      <div class="cv-timeline">
+        <div class="cv-item">
+          <div class="cv-when">Dec 2022 – present</div>
+          <div class="cv-what">
+            <strong>Postdoctoral Fellow</strong>
+            <span>Dept. of Chemical &amp; Biological Physics, Weizmann Institute of Science — Gilad Haran Lab, Rehovot, Israel</span>
+          </div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-when">Apr 2022 – Dec 2022</div>
+          <div class="cv-what">
+            <strong>Research Associate</strong>
+            <span>Dept. of Chemical Engineering, Indian Institute of Science (IISc), Bangalore, India</span>
+          </div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-when">Aug 2015 – Mar 2022</div>
+          <div class="cv-what">
+            <strong>Ph.D., Chemical Engineering</strong>
+            <span>Indian Institute of Science (IISc), Bangalore, India</span>
+          </div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-when">Aug 2013 – Jun 2015</div>
+          <div class="cv-what">
+            <strong>M.E., Chemical Engineering</strong>
+            <span>Indian Institute of Science (IISc), Bangalore, India</span>
+          </div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-when">Jul 2009 – Apr 2013</div>
+          <div class="cv-what">
+            <strong>B.Tech., Chemical Engineering</strong>
+            <span>National Institute of Technology (NIT), Durgapur, India</span>
+          </div>
+        </div>
+      </div>
+
+      <h2>Full CV</h2>
+      <p style="font-size:0.88rem; color:var(--text-muted);">
+        Embedded below. If it doesn't display (some mobile browsers block inline PDFs), use the
+        download button above.
+      </p>
+      <embed class="cv-embed" src="assets/cv/Satyaghosh_Maurya_CV.pdf" type="application/pdf">
+
+    </div>
+  </main>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

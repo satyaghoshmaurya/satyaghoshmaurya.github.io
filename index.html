@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Satyaghosh Maurya — Home</title>
+<meta name="description" content="Satyaghosh Maurya, postdoctoral researcher in single-molecule biophysics, Gilad Haran Lab, Weizmann Institute of Science.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script>
+  // Apply saved theme before paint to avoid a flash. Dark is default.
+  (function () {
+    if (localStorage.getItem("theme") === "light") {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+  })();
+</script>
+</head>
+<body>
+
+<!-- ============ MOBILE TOP BAR (shown < 860px) ============ -->
+<div class="mobile-topbar">
+  <span class="brand">Satyaghosh Maurya</span>
+  <div style="display:flex; gap:0.5rem;">
+    <button data-theme-toggle class="theme-toggle" style="margin-top:0;">Light mode</button>
+    <button data-nav-toggle>Menu</button>
+  </div>
+</div>
+<nav class="mobile-nav">
+  <a href="index.html" class="active">Home</a>
+  <a href="research.html">Research</a>
+  <a href="publications.html">Publications</a>
+  <a href="cv.html">CV</a>
+  <a href="hobbies.html">Hobbies &amp; Interests</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<div class="site">
+
+  <!-- ============ SIDEBAR (desktop) ============ -->
+  <aside class="sidebar">
+    <span class="brand">Satyaghosh Maurya</span>
+    <span class="brand-role">Postdoctoral Researcher</span>
+    <nav>
+      <a href="index.html" class="active">Home</a>
+      <a href="research.html">Research</a>
+      <a href="publications.html">Publications</a>
+      <a href="cv.html">CV</a>
+      <a href="hobbies.html">Hobbies &amp; Interests</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="sidebar-footer">
+      Weizmann Institute of Science<br>
+      Rehovot, Israel
+      <br>
+      <button data-theme-toggle class="theme-toggle">Light mode</button>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN CONTENT ============ -->
+  <main>
+    <div class="content">
+
+      <div class="home-hero">
+        <div class="home-photo">
+          <img src="assets/img/satyaghosh-photo.jpg" alt="Portrait of Satyaghosh Maurya">
+        </div>
+        <div class="home-text">
+          <h1>Satyaghosh Maurya</h1>
+          <p class="lede">I study how proteins and membranes move, fold, and assemble — one molecule at a time.</p>
+          <p>
+            I am a postdoctoral researcher in the <a href="https://www.weizmann.ac.il/CBP/" target="_blank" rel="noopener">Gilad Haran Lab</a>,
+            Department of Chemical and Biological Physics, Weizmann Institute of Science, where I develop
+            single-molecule fluorescence and plasmonic sensing methods — including zero-mode waveguides
+            (ZMWs) and Bayesian inference approaches — to watch individual proteins fold and interact in
+            real time.
+          </p>
+
+          <div class="link-row">
+            <a class="btn" href="assets/cv/Satyaghosh_Maurya_CV.pdf" target="_blank" rel="noopener">Download CV</a>
+            <!-- placeholder: replace # with your actual Google Scholar profile URL -->
+            <a class="btn-outline" href="#" target="_blank" rel="noopener">Google Scholar</a>
+            <!-- placeholder: replace # with your GitHub profile URL -->
+            <a class="btn-outline" href="#" target="_blank" rel="noopener">GitHub</a>
+            <a class="btn-outline" href="mailto:satyaghosh.maurya@weizmann.ac.il">Email</a>
+          </div>
+        </div>
+      </div>
+
+      <hr class="rule">
+
+      <h2>Research interests</h2>
+      <p>
+        I use single-molecule fluorescence techniques — smFRET combined with plasmonic zero-mode
+        waveguides (ZMWs) — to watch individual proteins fold and interact, catching transition
+        paths and rare conformational events that bulk measurements average away. To make sense of
+        the noisy single-molecule signal, I develop Bayesian inference methods for extracting
+        reliable kinetics. My PhD work focused on membrane biophysics: the assembly of pore-forming
+        proteins and molecular crowding on lipid membranes. More on the <a href="research.html">Research page</a>.
+      </p>
+
+      <hr class="rule">
+
+      <h2>Currently</h2>
+      <div class="affiliations">
+        <p><strong>Postdoctoral Fellow</strong> — Department of Chemical and Biological Physics, Weizmann Institute of Science, Gilad Haran Lab (Dec 2022–present)</p>
+        <p><strong>Ph.D., Chemical Engineering</strong> — Indian Institute of Science (IISc) Bangalore (2015–2022)</p>
+      </div>
+
+      <div class="note">
+        I'm currently preparing applications for faculty positions at Indian institutions (IITs / IISERs / IISc).
+        Get in touch via the <a href="contact.html">contact page</a>.
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

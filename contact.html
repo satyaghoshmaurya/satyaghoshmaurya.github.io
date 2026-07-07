@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Satyaghosh Maurya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script>
+  // Apply saved theme before paint to avoid a flash. Dark is default.
+  (function () {
+    if (localStorage.getItem("theme") === "light") {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+  })();
+</script>
+</head>
+<body>
+
+<div class="mobile-topbar">
+  <span class="brand">Satyaghosh Maurya</span>
+  <div style="display:flex; gap:0.5rem;">
+    <button data-theme-toggle class="theme-toggle" style="margin-top:0;">Light mode</button>
+    <button data-nav-toggle>Menu</button>
+  </div>
+</div>
+<nav class="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="research.html">Research</a>
+  <a href="publications.html">Publications</a>
+  <a href="cv.html">CV</a>
+  <a href="hobbies.html">Hobbies &amp; Interests</a>
+  <a href="contact.html" class="active">Contact</a>
+</nav>
+
+<div class="site">
+  <aside class="sidebar">
+    <span class="brand">Satyaghosh Maurya</span>
+    <span class="brand-role">Postdoctoral Researcher</span>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="research.html">Research</a>
+      <a href="publications.html">Publications</a>
+      <a href="cv.html">CV</a>
+      <a href="hobbies.html">Hobbies &amp; Interests</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+    <div class="sidebar-footer">
+      Weizmann Institute of Science<br>
+      Rehovot, Israel
+      <br>
+      <button data-theme-toggle class="theme-toggle">Light mode</button>
+    </div>
+  </aside>
+
+  <main>
+    <div class="content">
+      <p class="eyebrow">Get in touch</p>
+      <h1>Contact</h1>
+
+      <div class="contact-grid">
+        <div class="contact-block">
+          <h3>Email</h3>
+          <p><a href="mailto:satyaghosh.maurya@weizmann.ac.il">satyaghosh.maurya@weizmann.ac.il</a></p>
+
+          <h3>Institutional address</h3>
+          <!-- placeholder — confirm exact department/room details -->
+          <p>
+            Department of Chemical and Biological Physics<br>
+            Gilad Haran Lab<br>
+            Weizmann Institute of Science<br>
+            Rehovot, 7610001, Israel
+          </p>
+        </div>
+
+        <div class="contact-block">
+          <h3>Elsewhere</h3>
+          <p>
+            <!-- placeholder links — replace # with real profile URLs -->
+            <a href="#" target="_blank" rel="noopener">Google Scholar</a><br>
+            <a href="#" target="_blank" rel="noopener">GitHub</a><br>
+            <a href="#" target="_blank" rel="noopener">LinkedIn</a><br>
+            <a href="#" target="_blank" rel="noopener">ORCID</a>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
