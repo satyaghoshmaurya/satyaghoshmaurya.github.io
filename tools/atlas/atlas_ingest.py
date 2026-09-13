@@ -51,7 +51,10 @@ except Exception:  # noqa: BLE001
     pass
 
 SITE_DEFAULT = Path(__file__).resolve().parents[2]
-INBOX_DEFAULT = SITE_DEFAULT / "_atlas_inbox"   # inside the project; the underscore keeps GitHub Pages from serving it
+INBOX_DEFAULT = Path(r"G:\My Drive\Anu\Satya\WebSite_github\_atlas_inbox")
+# The inbox stays in Google Drive, not in this repository, so photographs can be
+# shared straight into it from Google Photos on the phone. Only resized copies with
+# the camera metadata stripped are written into assets/img/field/atlas/ and published.
 VAULT_DEFAULT = Path(r"G:\My Drive\New_Projects\Citizen_Science\Native_flora_fauna\awadh-biodiversity-atlas")
 
 WEB_SUBDIR = Path("assets") / "img" / "field" / "atlas"

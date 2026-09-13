@@ -4,12 +4,13 @@ The species knowledge lives in the Awadh Biodiversity Atlas vault
 (`G:\My Drive\New_Projects\Citizen_Science\Native_flora_fauna\awadh-biodiversity-atlas`,
 332 species profiles, `species_index.csv` is the master list). The photos live in
 Google Photos. This folder holds the script that joins the two and puts the result on
-`hobbies.html`.
+`hobbies.html`. The inbox deliberately stays in Google Drive while the site itself is
+edited in this repository at `D:\Projects\website`.
 
 Nothing here talks to Google Photos. Photos reach a plain folder first:
 
 ```text
-G:\My Drive\Anu\Satya\WebSite_github\_atlas_inbox\   <- the inbox, inside the project
+G:\My Drive\Anu\Satya\WebSite_github\_atlas_inbox\   <- the inbox, in Drive, reachable from the phone
     IMG_2041.jpg                          <- loose photos are fine
     Ashy Prinia\IMG_2042.jpg              <- or sorted into a folder per species
     manifest.csv                          <- generated; the only file you edit

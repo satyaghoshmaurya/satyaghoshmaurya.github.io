@@ -6,50 +6,107 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
 <style>
   /* Rendered at exactly 1200x630 and saved to assets/img/og-card.png.
-     See tools/og/README.md for the one command that regenerates it. */
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+     The right half runs the real hero figure, so the card carries both the
+     conformational landscape and the FRET trace below it. See README.md. */
+  * { box-sizing: border-box; }
   body {
     width: 1200px;
     height: 630px;
+    margin: 0;
     overflow: hidden;
-    background: #ffffff;
-    color: #1f2328;
-    font-family: "Public Sans", -apple-system, "Segoe UI", sans-serif;
+    background: var(--bg);
     display: grid;
-    grid-template-columns: 560px 1fr;
+    grid-template-columns: 530px 1fr;
     align-items: center;
   }
-  .left { padding: 58px 0 58px 64px; }
-  .id { display: flex; align-items: center; gap: 20px; margin-bottom: 26px; }
-  .id img { width: 96px; height: 96px; border-radius: 8px; object-fit: cover; border: 1px solid #d0d7de; }
-  .role { font-size: 15px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: #656d76; }
-  .org { font-size: 18px; color: #1f2328; margin-top: 4px; }
-  h1 { font-family: "Newsreader", Georgia, serif; font-size: 56px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; }
-  .lede { font-family: "Newsreader", Georgia, serif; font-size: 27px; line-height: 1.35; color: #1f2328; margin-top: 18px; }
-  .keys { font-size: 17px; color: #656d76; margin-top: 22px; }
-  .url { font-size: 16px; color: #0969da; font-weight: 600; margin-top: 30px; }
-  .right { height: 100%; display: flex; align-items: center; justify-content: center; background: #f6f8fa; border-left: 1px solid #d0d7de; padding: 40px 34px; }
-  .right img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+  .card-left { padding: 50px 0 50px 60px; }
+
+  .card-id { display: flex; align-items: center; gap: 18px; margin-bottom: 22px; }
+  .card-id img {
+    width: 92px; height: 92px; border-radius: 8px;
+    object-fit: cover; border: 1px solid var(--border); flex-shrink: 0;
+  }
+  .card-role {
+    font-size: 12.5px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--text-muted);
+  }
+  .card-org { font-size: 16.5px; color: var(--text); margin: 0 0 9px; }
+  .card-org:last-child { margin-bottom: 0; }
+
+  .card-name {
+    font-family: var(--font-serif); font-size: 52px; font-weight: 500;
+    letter-spacing: -0.02em; line-height: 1.08; margin: 0;
+  }
+  .card-lede {
+    font-family: var(--font-serif); font-size: 25px; line-height: 1.34;
+    color: var(--text); margin: 16px 0 0;
+  }
+  .card-keys { font-size: 16px; color: var(--text-muted); margin: 20px 0 0; }
+  .card-url { font-size: 15.5px; color: var(--accent); font-weight: 600; margin: 26px 0 0; }
+
+  /* right half: the live figure, stripped of its controls and caption */
+  .card-figure {
+    height: 100%; padding: 30px 36px;
+    background: var(--bg-alt); border-left: 1px solid var(--border);
+    display: flex; align-items: center;
+  }
+  .card-figure .landscape-hero {
+    margin: 0; width: 100%; border: none; background: transparent; box-shadow: none;
+    padding: 0; border-radius: 0;
+  }
+  .card-figure .landscape-hero-bar,
+  .card-figure .landscape-hero-caption { display: none; }
+  .card-figure .landscape-canvas { height: 330px; }
+  .card-figure .trace-canvas { height: 225px; }
 </style>
 </head>
 <body>
-  <div class="left">
-    <div class="id">
+  <div class="card-left">
+    <div class="card-id">
       <img src="../../assets/img/portrait.jpg" alt="">
       <div>
-        <div class="role">Postdoctoral Researcher</div>
-        <div class="org">Weizmann Institute of Science</div>
+        <div class="card-role">Postdoctoral Researcher</div>
+        <p class="card-org">Weizmann Institute of Science</p>
+        <div class="card-role">Ph.D. in Chemical Engineering</div>
+        <p class="card-org">Indian Institute of Science, Bangalore</p>
       </div>
     </div>
-    <h1>Dr. Satyaghosh Maurya</h1>
-    <p class="lede">I watch single proteins change shape, and time the moment they do.</p>
-    <p class="keys">Single-molecule biophysics &middot; Nanophotonics &middot; Chemical engineering</p>
-    <p class="url">satyaghoshmaurya.github.io</p>
+    <h1 class="card-name">Dr. Satyaghosh Maurya</h1>
+    <p class="card-lede">I watch single proteins change shape, and time the moment they do.</p>
+    <p class="card-keys">Single-molecule biophysics &middot; Nanophotonics &middot; Chemical engineering</p>
+    <p class="card-url">satyaghoshmaurya.github.io</p>
   </div>
-  <div class="right">
-    <img src="../../assets/img/research/landscape.png" alt="">
+
+  <div class="card-figure">
+    <figure class="landscape-hero" id="landscapeHero">
+      <div class="landscape-hero-bar">
+        <span class="landscape-hero-title">Watching a single protein open and close</span>
+        <div class="landscape-hero-controls">
+          <label class="landscape-hero-slider">
+            <span>Temperature</span>
+            <input type="range" id="heroTemp" min="0.22" max="0.70" step="0.01" value="0.40">
+            <span id="heroTempVal" class="mono">&Delta;G&Dagger; &asymp; 2.8 kBT</span>
+          </label>
+          <button type="button" class="hero-btn hero-btn-primary" id="heroPlay">Play</button>
+        </div>
+      </div>
+      <canvas id="landscapeCanvas" class="landscape-canvas" role="img" aria-label="Conformational free-energy landscape"></canvas>
+      <canvas id="traceCanvas" class="trace-canvas" role="img" aria-label="Donor and acceptor photon counts and FRET efficiency"></canvas>
+      <figcaption class="landscape-hero-caption">
+        <span>E<sub>FRET</sub> = <strong id="heroReadoutE" class="mono">0.84</strong></span>
+        <span>State: <strong id="heroReadoutState">Closed</strong></span>
+        <span>Transitions: <strong id="heroReadoutN" class="mono">0</strong></span>
+        <span>Last transition path: <strong id="heroReadoutTP" class="mono">&ndash;</strong></span>
+        <span class="hero-hint" id="heroHint"></span>
+        <span class="landscape-hero-note"></span>
+      </figcaption>
+    </figure>
   </div>
+
+  <script src="../../js/landscape-hero.js"></script>
 </body>
 </html>
