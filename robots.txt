@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /_atlas_inbox/
+Disallow: /tools/
+
+Sitemap: https://satyaghoshmaurya.github.io/sitemap.xml

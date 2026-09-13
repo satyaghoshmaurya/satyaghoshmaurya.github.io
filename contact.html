@@ -3,92 +3,153 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact — Satyaghosh Maurya</title>
+<title>Contact — Dr. Satyaghosh Maurya</title>
+<meta name="description" content="Contact information and academic coordinates for Dr. Satyaghosh Maurya at Weizmann Institute of Science.">
+<!-- Canonical, social preview and structured data -->
+<link rel="canonical" href="https://satyaghoshmaurya.github.io/contact.html">
+<meta property="og:site_name" content="Dr. Satyaghosh Maurya">
+<meta property="og:locale" content="en_GB">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contact — Dr. Satyaghosh Maurya">
+<meta property="og:description" content="Contact information and academic coordinates for Dr. Satyaghosh Maurya at Weizmann Institute of Science.">
+<meta property="og:url" content="https://satyaghoshmaurya.github.io/contact.html">
+<meta property="og:image" content="https://satyaghoshmaurya.github.io/assets/img/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Portrait of Satyaghosh Maurya beside a two-well conformational free-energy landscape">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Contact — Dr. Satyaghosh Maurya">
+<meta name="twitter:description" content="Contact information and academic coordinates for Dr. Satyaghosh Maurya at Weizmann Institute of Science.">
+<meta name="twitter:image" content="https://satyaghoshmaurya.github.io/assets/img/og-card.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Public+Sans:wght@400;500;600;700&display=optional" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <script>
-  // Apply saved theme before paint to avoid a flash. Dark is default.
   (function () {
-    if (localStorage.getItem("theme") === "light") {
-      document.documentElement.setAttribute("data-theme", "light");
-    }
+    try {
+      if (localStorage.getItem("theme") === "dark") {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    } catch(e) {}
   })();
 </script>
 </head>
 <body>
 
-<div class="mobile-topbar">
-  <span class="brand">Satyaghosh Maurya</span>
-  <div style="display:flex; gap:0.5rem;">
-    <button data-theme-toggle class="theme-toggle" style="margin-top:0;">Light mode</button>
-    <button data-nav-toggle>Menu</button>
-  </div>
-</div>
-<nav class="mobile-nav">
-  <a href="index.html">Home</a>
-  <a href="research.html">Research</a>
-  <a href="publications.html">Publications</a>
-  <a href="cv.html">CV</a>
-  <a href="hobbies.html">Hobbies &amp; Interests</a>
-  <a href="contact.html" class="active">Contact</a>
-</nav>
+<a class="skip-link" href="#main">Skip to content</a>
 
-<div class="site">
-  <aside class="sidebar">
-    <span class="brand">Satyaghosh Maurya</span>
-    <span class="brand-role">Postdoctoral Researcher</span>
-    <nav>
-      <a href="index.html">Home</a>
+<!-- ============ SITE HEADER ============ -->
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-name">Dr. Satyaghosh Maurya</span>
+      <span class="brand-role">Postdoctoral Researcher &middot; Weizmann Institute of Science</span>
+    </a>
+    <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="siteNav">Menu</button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary">
+      <a href="index.html">About</a>
       <a href="research.html">Research</a>
       <a href="publications.html">Publications</a>
       <a href="cv.html">CV</a>
-      <a href="hobbies.html">Hobbies &amp; Interests</a>
-      <a href="contact.html" class="active">Contact</a>
+      <a href="hobbies.html">Field &amp; Art</a>
+      <a href="contact.html" class="active" aria-current="page">Contact</a>
+      <button type="button" data-theme-toggle class="theme-toggle-btn">Toggle theme</button>
     </nav>
-    <div class="sidebar-footer">
-      Weizmann Institute of Science<br>
-      Rehovot, Israel
-      <br>
-      <button data-theme-toggle class="theme-toggle">Light mode</button>
-    </div>
-  </aside>
+  </div>
+</header>
 
-  <main>
+<div class="site">
+
+  <main id="main">
     <div class="content">
-      <p class="eyebrow">Get in touch</p>
       <h1>Contact</h1>
+      <p class="lede">I welcome discussions on scientific collaborations, single-molecule methods, and prospective student research.</p>
 
       <div class="contact-grid">
         <div class="contact-block">
           <h3>Email</h3>
-          <p><a href="mailto:satyaghosh.maurya@weizmann.ac.il">satyaghosh.maurya@weizmann.ac.il</a></p>
+          <p style="font-size:1.05rem;">
+            <a href="mailto:satyaghosh.maurya@weizmann.ac.il">satyaghosh.maurya@weizmann.ac.il</a>
+          </p>
 
-          <h3>Institutional address</h3>
-          <!-- placeholder — confirm exact department/room details -->
+          <h3 style="margin-top:1.8rem;">Curriculum Vitae</h3>
           <p>
-            Department of Chemical and Biological Physics<br>
-            Gilad Haran Lab<br>
+            <a class="btn-outline" href="assets/cv/Satyaghosh_Maurya_CV.pdf" target="_blank" rel="noopener">Download CV (PDF)</a>
+          </p>
+
+          <h3 style="margin-top:1.8rem;">Institutional Address</h3>
+          <p style="color:var(--text-muted); line-height:1.6;">
+            <strong>Department of Chemical and Biological Physics</strong><br>
+            Gilad Haran Laboratory<br>
             Weizmann Institute of Science<br>
-            Rehovot, 7610001, Israel
+            234 Herzl St, Rehovot, 7610001, Israel
+          </p>
+
+          <h3 style="margin-top:1.8rem;">Seminars &amp; Visits</h3>
+          <p style="color:var(--text-muted); font-size:0.9rem;">
+            Available for seminars and research presentations.
           </p>
         </div>
 
         <div class="contact-block">
-          <h3>Elsewhere</h3>
-          <p>
-            <!-- placeholder links — replace # with real profile URLs -->
-            <a href="#" target="_blank" rel="noopener">Google Scholar</a><br>
-            <a href="#" target="_blank" rel="noopener">GitHub</a><br>
-            <a href="#" target="_blank" rel="noopener">LinkedIn</a><br>
-            <a href="#" target="_blank" rel="noopener">ORCID</a>
-          </p>
+          <h3>Academic &amp; Professional Profiles</h3>
+          <div style="display:flex; flex-direction:column; gap:0.8rem; margin-top:0.8rem;">
+            <div>
+              <strong>Google Scholar:</strong><br>
+              <a href="https://scholar.google.com/citations?user=LGxS32gAAAAJ&hl=en" target="_blank" rel="noopener">
+                scholar.google.com/citations?user=LGxS32gAAAAJ
+              </a>
+            </div>
+
+            <div>
+              <strong>ORCID:</strong><br>
+              <a href="https://orcid.org/0000-0003-2757-7742" target="_blank" rel="noopener">
+                orcid.org/0000-0003-2757-7742
+              </a>
+            </div>
+
+            <div>
+              <strong>LinkedIn:</strong><br>
+              <a href="https://www.linkedin.com/in/satyaghosh-maurya-98bbbaa2/" target="_blank" rel="noopener">
+                linkedin.com/in/satyaghosh-maurya-98bbbaa2
+              </a>
+            </div>
+
+            <div>
+              <strong>GitHub:</strong><br>
+              <a href="https://github.com/sgmaurya" target="_blank" rel="noopener">
+                github.com/sgmaurya
+              </a>
+            </div>
+
+            <div>
+              <strong>ResearchGate:</strong><br>
+              <a href="https://www.researchgate.net/profile/Satyaghosh-Maurya" target="_blank" rel="noopener">
+                researchgate.net/profile/Satyaghosh-Maurya
+              </a>
+            </div>
+          </div>
         </div>
       </div>
 
     </div>
   </main>
+
+  <!-- ============ SITE FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <span class="footer-left">&copy; 2026 Satyaghosh Maurya <button type="button" class="theme-toggle-btn footer-anim" data-anim-toggle>Play all animations</button></span>
+      <span class="footer-links">
+        <a href="https://scholar.google.com/citations?user=LGxS32gAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>
+        <a href="https://orcid.org/0000-0003-2757-7742" target="_blank" rel="noopener">ORCID</a>
+        <a href="https://github.com/sgmaurya" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/satyaghosh-maurya-98bbbaa2/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:satyaghosh.maurya@weizmann.ac.il">Email</a>
+      </span>
+    </div>
+  </footer>
 </div>
 
 <script src="js/main.js"></script>

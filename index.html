@@ -3,121 +3,309 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Satyaghosh Maurya — Home</title>
-<meta name="description" content="Satyaghosh Maurya, postdoctoral researcher in single-molecule biophysics, Gilad Haran Lab, Weizmann Institute of Science.">
+<title>Dr. Satyaghosh Maurya — Biophysics &amp; Nanophotonics</title>
+<meta name="description" content="Dr. Satyaghosh Maurya, chemical engineer by training (B.Tech NIT Durgapur, M.E. and Ph.D. IISc Bangalore) and postdoctoral researcher in single-molecule biophysics and nanophotonics at the Weizmann Institute of Science (Gilad Haran Lab).">
+<meta name="author" content="Satyaghosh Maurya">
+
+<!-- Canonical, social preview and structured data -->
+<link rel="canonical" href="https://satyaghoshmaurya.github.io/">
+<meta property="og:site_name" content="Dr. Satyaghosh Maurya">
+<meta property="og:locale" content="en_GB">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Dr. Satyaghosh Maurya — Single-Molecule Biophysics">
+<meta property="og:description" content="Watching single proteins change shape, one molecule at a time. Chemical engineer by training, postdoctoral researcher at the Weizmann Institute of Science.">
+<meta property="og:url" content="https://satyaghoshmaurya.github.io/">
+<meta property="og:image" content="https://satyaghoshmaurya.github.io/assets/img/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Portrait of Satyaghosh Maurya beside a two-well conformational free-energy landscape">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Dr. Satyaghosh Maurya — Single-Molecule Biophysics">
+<meta name="twitter:description" content="Watching single proteins change shape, one molecule at a time. Chemical engineer by training, postdoctoral researcher at the Weizmann Institute of Science.">
+<meta name="twitter:image" content="https://satyaghoshmaurya.github.io/assets/img/og-card.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Public+Sans:wght@400;500;600;700&display=optional" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <script>
-  // Apply saved theme before paint to avoid a flash. Dark is default.
   (function () {
-    if (localStorage.getItem("theme") === "light") {
-      document.documentElement.setAttribute("data-theme", "light");
-    }
+    try {
+      if (localStorage.getItem("theme") === "dark") {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    } catch(e) {}
   })();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Satyaghosh Maurya",
+  "honorificPrefix": "Dr.",
+  "givenName": "Satyaghosh",
+  "familyName": "Maurya",
+  "jobTitle": "Postdoctoral Researcher",
+  "description": "Single-molecule biophysicist and chemical engineer studying transition paths of protein conformational change with zero-mode waveguides, plasmonic nanostructures and photon-by-photon analysis.",
+  "url": "https://satyaghoshmaurya.github.io/",
+  "image": "https://satyaghoshmaurya.github.io/assets/img/portrait.jpg",
+  "email": "mailto:satyaghosh.maurya@weizmann.ac.il",
+  "worksFor": {
+    "@type": "ResearchOrganization",
+    "name": "Weizmann Institute of Science",
+    "url": "https://www.weizmann.ac.il/",
+    "department": {
+      "@type": "Organization",
+      "name": "Department of Chemical and Biological Physics"
+    }
+  },
+  "alumniOf": [
+    {
+      "@type": "CollegeOrUniversity",
+      "name": "Indian Institute of Science, Bangalore",
+      "url": "https://iisc.ac.in/"
+    },
+    {
+      "@type": "CollegeOrUniversity",
+      "name": "National Institute of Technology, Durgapur",
+      "url": "https://nitdgp.ac.in/"
+    }
+  ],
+  "knowsAbout": [
+    "Single-molecule biophysics",
+    "Single-molecule FRET",
+    "Zero-mode waveguides",
+    "Plasmonic nanostructures",
+    "Transition path times",
+    "Membrane biophysics",
+    "Chemical engineering"
+  ],
+  "identifier": {
+    "@type": "PropertyValue",
+    "propertyID": "ORCID",
+    "value": "0000-0003-2757-7742"
+  },
+  "sameAs": [
+    "https://orcid.org/0000-0003-2757-7742",
+    "https://scholar.google.com/citations?user=LGxS32gAAAAJ",
+    "https://github.com/sgmaurya",
+    "https://www.linkedin.com/in/satyaghosh-maurya-98bbbaa2/"
+  ]
+}
 </script>
 </head>
 <body>
 
-<!-- ============ MOBILE TOP BAR (shown < 860px) ============ -->
-<div class="mobile-topbar">
-  <span class="brand">Satyaghosh Maurya</span>
-  <div style="display:flex; gap:0.5rem;">
-    <button data-theme-toggle class="theme-toggle" style="margin-top:0;">Light mode</button>
-    <button data-nav-toggle>Menu</button>
-  </div>
-</div>
-<nav class="mobile-nav">
-  <a href="index.html" class="active">Home</a>
-  <a href="research.html">Research</a>
-  <a href="publications.html">Publications</a>
-  <a href="cv.html">CV</a>
-  <a href="hobbies.html">Hobbies &amp; Interests</a>
-  <a href="contact.html">Contact</a>
-</nav>
+<a class="skip-link" href="#main">Skip to content</a>
 
-<div class="site">
-
-  <!-- ============ SIDEBAR (desktop) ============ -->
-  <aside class="sidebar">
-    <span class="brand">Satyaghosh Maurya</span>
-    <span class="brand-role">Postdoctoral Researcher</span>
-    <nav>
-      <a href="index.html" class="active">Home</a>
+<!-- ============ SITE HEADER ============ -->
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-name">Dr. Satyaghosh Maurya</span>
+      <span class="brand-role">Postdoctoral Researcher &middot; Weizmann Institute of Science</span>
+    </a>
+    <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="siteNav">Menu</button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary">
+      <a href="index.html" class="active" aria-current="page">About</a>
       <a href="research.html">Research</a>
       <a href="publications.html">Publications</a>
       <a href="cv.html">CV</a>
-      <a href="hobbies.html">Hobbies &amp; Interests</a>
+      <a href="hobbies.html">Field &amp; Art</a>
       <a href="contact.html">Contact</a>
+      <button type="button" data-theme-toggle class="theme-toggle-btn">Toggle theme</button>
     </nav>
-    <div class="sidebar-footer">
-      Weizmann Institute of Science<br>
-      Rehovot, Israel
-      <br>
-      <button data-theme-toggle class="theme-toggle">Light mode</button>
-    </div>
-  </aside>
+  </div>
+</header>
 
-  <!-- ============ MAIN CONTENT ============ -->
-  <main>
+<div class="site">
+
+  <main id="main">
+    <div class="content content-wide">
+
+      <section class="hero-grid">
+        <div class="hero-intro">
+          <div class="hero-id">
+            <div class="home-photo">
+              <img src="assets/img/portrait.jpg" alt="Portrait of Satyaghosh Maurya" width="120" height="120">
+            </div>
+            <div class="hero-affil">
+              <p class="eyebrow">Postdoctoral Researcher</p>
+              <p class="hero-credential">Weizmann Institute of Science</p>
+              <p class="eyebrow hero-affil-gap">Ph.D. in Chemical Engineering</p>
+              <p class="hero-credential">Indian Institute of Science, Bangalore</p>
+            </div>
+          </div>
+          <h1>Dr. Satyaghosh Maurya</h1>
+          <p class="lede">I watch single proteins change shape, and time the moment they do.</p>
+          <p>
+            I am a postdoctoral researcher in the <a href="https://www.weizmann.ac.il/chembiophys/cfharan/home" target="_blank" rel="noopener">Gilad Haran Lab</a> at the Weizmann Institute of Science. Proteins work by switching between conformations: an enzyme closes over its substrates and opens again, a transporter flips between inward- and outward-facing states. Each spends almost all of its time settled in one conformation or the other, and only microseconds actually crossing between them.
+          </p>
+          <p class="hero-cta"><a href="research.html">Read the research &rarr;</a></p>
+          <p class="hero-links">
+            <a href="assets/cv/Satyaghosh_Maurya_CV.pdf" target="_blank" rel="noopener">Curriculum vitae (PDF)</a> &middot;
+            <a href="https://scholar.google.com/citations?user=LGxS32gAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a> &middot;
+            <a href="https://orcid.org/0000-0003-2757-7742" target="_blank" rel="noopener">ORCID</a>
+          </p>
+        </div>
+      <!-- Interactive hero: Brownian walker on a folding landscape + synchronized smFRET trace -->
+      <div class="hero-side">
+      <figure class="landscape-hero" id="landscapeHero">
+          <div class="landscape-hero-bar">
+            <span class="landscape-hero-title">Watching a single protein open and close</span>
+            <div class="landscape-hero-controls">
+              <label class="landscape-hero-slider">
+                <span>Temperature</span>
+                <input type="range" id="heroTemp" min="0.22" max="0.70" step="0.01" value="0.40" aria-label="Thermal energy relative to the conformational barrier">
+                <span id="heroTempVal" class="mono">&Delta;G&Dagger; &asymp; 2.8 kBT</span>
+              </label>
+              <button type="button" class="hero-btn hero-btn-primary" id="heroPlay">Play</button>
+            </div>
+          </div>
+          <canvas id="landscapeCanvas" class="landscape-canvas" role="img" aria-label="A schematic protein diffusing on a two-well conformational free-energy landscape, switching between open and closed states"></canvas>
+          <canvas id="traceCanvas" class="trace-canvas" role="img" aria-label="Simulated donor and acceptor photon counts and FRET efficiency over time for the same molecule"></canvas>
+          <figcaption class="landscape-hero-caption">
+            <span>E<sub>FRET</sub> = <strong id="heroReadoutE" class="mono">0.84</strong></span>
+            <span>State: <strong id="heroReadoutState">Closed</strong></span>
+            <span>Transitions: <strong id="heroReadoutN" class="mono">0</strong></span>
+            <span>Last transition path: <strong id="heroReadoutTP" class="mono">&ndash;</strong></span>
+            <span class="hero-hint" id="heroHint">Paused so the text can be read first. Press Play to watch it live.</span>
+          <span class="landscape-hero-note">A schematic two-domain protein diffusing on its conformational free-energy landscape (overdamped Langevin dynamics); the donor and acceptor photon counts and FRET efficiency below are computed from the same trajectory. Amber marks completed transition paths, the stretch between leaving one well and arriving in the other. Representational, not measured data.</span>
+          </figcaption>
+        </figure>
+      </div>
+        <div class="hero-about">
+          <h2>About</h2>
+              <p>
+                That crossing, the transition path, is where the mechanism lives. It is chemical reaction engineering at the scale of one molecule: a conformational change is a unimolecular reaction, the two conformations are wells on a potential, and the crossing is the barrier passage that rate theory, from Arrhenius to Kramers, has always described from the outside. A transition-path time measures that passage directly, reporting on the shape and roughness of the barrier in a way that rates, which only count how often crossings happen, cannot.
+              </p>
+              <p>
+                The obstacle is photons. A single FRET pair yields a few hundred photons per millisecond at best, so a microsecond crossing leaves a photon or two, too few for conventional smFRET to time. We fabricate zero-mode waveguides and plasmonic nanostructures that confine light to a zeptolitre volume, through which single molecules diffuse, and accelerate their emission; the photon stream is then treated as the noisy process data it is and fitted photon by photon with maximum-likelihood and Bayesian methods.
+              </p>
+              <p>
+                I trained as a chemical engineer, at NIT Durgapur and then at the Indian Institute of Science, where my Ph.D. followed pore-forming toxins assembling on membranes and proteins diffusing through grafted polymer layers: nucleation and growth, and transport at an interface, watched one molecule at a time. That training is the lens for everything above.
+              </p>
+        </div>
+      </section>
+
+    </div>
+
     <div class="content">
 
-      <div class="home-hero">
-        <div class="home-photo">
-          <img src="assets/img/satyaghosh-photo.jpg" alt="Portrait of Satyaghosh Maurya">
-        </div>
-        <div class="home-text">
-          <h1>Satyaghosh Maurya</h1>
-          <p class="lede">I study how proteins and membranes move, fold, and assemble — one molecule at a time.</p>
-          <p>
-            I am a postdoctoral researcher in the <a href="https://www.weizmann.ac.il/CBP/" target="_blank" rel="noopener">Gilad Haran Lab</a>,
-            Department of Chemical and Biological Physics, Weizmann Institute of Science, where I develop
-            single-molecule fluorescence and plasmonic sensing methods — including zero-mode waveguides
-            (ZMWs) and Bayesian inference approaches — to watch individual proteins fold and interact in
-            real time.
-          </p>
+      <hr class="rule">
 
-          <div class="link-row">
-            <a class="btn" href="assets/cv/Satyaghosh_Maurya_CV.pdf" target="_blank" rel="noopener">Download CV</a>
-            <!-- placeholder: replace # with your actual Google Scholar profile URL -->
-            <a class="btn-outline" href="#" target="_blank" rel="noopener">Google Scholar</a>
-            <!-- placeholder: replace # with your GitHub profile URL -->
-            <a class="btn-outline" href="#" target="_blank" rel="noopener">GitHub</a>
-            <a class="btn-outline" href="mailto:satyaghosh.maurya@weizmann.ac.il">Email</a>
+      <h2>Core Research Themes</h2>
+      <p class="lede">Bridging single-molecule optics, nanophotonics, statistical inference, and membrane biophysics.</p>
+
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <canvas class="pillar-figure" data-figure="zmw" data-compact role="img" aria-label="Zero-mode waveguide with dye-labelled enzymes diffusing freely in and out of the evanescent volume"></canvas>
+          <h3>Zero-Mode Waveguides &amp; Nanophotonics</h3>
+          <p>
+            Overcoming the optical diffraction and concentration barrier using metallic nano-apertures (ZMWs) to study single-molecule interactions at micromolar, physiological concentrations.
+          </p>
+          <a href="research.html#zmw" class="pillar-link">Explore methods →</a>
+        </div>
+
+        <div class="pillar-card">
+          <img src="assets/img/research/landscape.png" alt="Two-well conformational free-energy landscape with a schematic protein crossing the barrier" loading="lazy">
+          <h3>Transition Paths of Conformational Change</h3>
+          <p>
+            Timing the microsecond crossings between protein conformations, starting with an enzyme opening and closing, with plasmon-enhanced smFRET and photon-by-photon analysis.
+          </p>
+          <a href="research.html#folding" class="pillar-link">Read more →</a>
+        </div>
+
+        <div class="pillar-card">
+          <img src="assets/img/research/clya-assembly-wide.jpg" alt="Hand-painted schematic of Cytolysin A monomers binding a membrane and assembling into pores" loading="lazy">
+          <h3>Membrane Biophysics &amp; Pore Formation</h3>
+          <p>
+            Dissecting the oligomerization pathway, conformational plasticity, and cholesterol stabilization of pore-forming toxins (Cytolysin A) on supported lipid bilayers.
+          </p>
+          <a href="research.html#membrane" class="pillar-link">View discoveries →</a>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-figure pillar-formula">P(θ | D) ∝ P(D | θ) · P(θ)</div>
+          <h3>Photon-by-Photon Inference &amp; Image Analysis</h3>
+          <p>
+            H<sup>2</sup>MM, the photon-by-photon hidden Markov method developed in the Gilad Haran Lab, recovers conformational states, rates and transition-path times straight from photon arrival times, with no binning. From my Ph.D.: single-particle tracking and photobleaching-step counting on TIRF movies to measure mobility and oligomer size.
+          </p>
+          <a href="research.html#bayesian" class="pillar-link">View methods →</a>
+        </div>
+      </div>
+
+      <!-- Feature: citizen science -->
+      <div class="card feature-card">
+        <h3>Awadh Biodiversity Atlas: community natural history</h3>
+        <p>
+          An open-access citizen-science initiative profiling the overlooked native flora, insects, birds and wetland life of rural eastern Uttar Pradesh, in the Basti and Ayodhya districts. More than 330 species so far, each with its Hindi and English names. Working toward bilingual pictographic field guides and rural school science programmes.
+        </p>
+        <p class="feature-link"><a href="hobbies.html#citizen-science">About the initiative and the species catalogue &rarr;</a></p>
+      </div>
+      <hr class="rule">
+
+      <h2>Academic Trajectory</h2>
+      <div class="cv-timeline">
+        <div class="cv-item">
+          <div class="cv-when">Dec 2022 – present</div>
+          <div class="cv-what">
+            <strong>Postdoctoral Researcher</strong>
+            <span>Weizmann Institute of Science, Rehovot, Israel — Gilad Haran Lab</span>
+            <div class="cv-details">Focus: plasmon-enhanced smFRET, zero-mode waveguides, and transition-path kinetics of protein conformational change.</div>
+          </div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-when">Apr – Dec 2022</div>
+          <div class="cv-what">
+            <strong>Research Associate</strong>
+            <span>Department of Chemical Engineering, Indian Institute of Science (IISc), Bangalore, India</span>
+          </div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-when">2015 – 2022</div>
+          <div class="cv-what">
+            <strong>Ph.D. in Chemical Engineering</strong>
+            <span>Indian Institute of Science (IISc), Bangalore, India</span>
+            <div class="cv-details">Advisors: Prof. Rahul Roy &amp; Prof. K. G. Ayappa. Dissertation on pore assembly dynamics of Cytolysin A and diffusion in crowded lipid membranes.</div>
+          </div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-when">2013 – 2015</div>
+          <div class="cv-what">
+            <strong>M.E. in Chemical Engineering</strong>
+            <span>Indian Institute of Science (IISc), Bangalore, India</span>
+          </div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-when">2009 – 2013</div>
+          <div class="cv-what">
+            <strong>B.Tech. in Chemical Engineering</strong>
+            <span>National Institute of Technology (NIT), Durgapur, India</span>
           </div>
         </div>
       </div>
 
-      <hr class="rule">
-
-      <h2>Research interests</h2>
-      <p>
-        I use single-molecule fluorescence techniques — smFRET combined with plasmonic zero-mode
-        waveguides (ZMWs) — to watch individual proteins fold and interact, catching transition
-        paths and rare conformational events that bulk measurements average away. To make sense of
-        the noisy single-molecule signal, I develop Bayesian inference methods for extracting
-        reliable kinetics. My PhD work focused on membrane biophysics: the assembly of pore-forming
-        proteins and molecular crowding on lipid membranes. More on the <a href="research.html">Research page</a>.
-      </p>
-
-      <hr class="rule">
-
-      <h2>Currently</h2>
-      <div class="affiliations">
-        <p><strong>Postdoctoral Fellow</strong> — Department of Chemical and Biological Physics, Weizmann Institute of Science, Gilad Haran Lab (Dec 2022–present)</p>
-        <p><strong>Ph.D., Chemical Engineering</strong> — Indian Institute of Science (IISc) Bangalore (2015–2022)</p>
-      </div>
-
-      <div class="note">
-        I'm currently preparing applications for faculty positions at Indian institutions (IITs / IISERs / IISc).
-        Get in touch via the <a href="contact.html">contact page</a>.
-      </div>
-
     </div>
   </main>
+
+  <!-- ============ SITE FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <span class="footer-left">&copy; 2026 Satyaghosh Maurya <button type="button" class="theme-toggle-btn footer-anim" data-anim-toggle>Play all animations</button></span>
+      <span class="footer-links">
+        <a href="https://scholar.google.com/citations?user=LGxS32gAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>
+        <a href="https://orcid.org/0000-0003-2757-7742" target="_blank" rel="noopener">ORCID</a>
+        <a href="https://github.com/sgmaurya" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/satyaghosh-maurya-98bbbaa2/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:satyaghosh.maurya@weizmann.ac.il">Email</a>
+      </span>
+    </div>
+  </footer>
 </div>
 
+<script src="js/zmw-figure.js"></script>
+<script src="js/landscape-hero.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

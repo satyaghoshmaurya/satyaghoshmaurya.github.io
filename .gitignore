@@ -1,0 +1,31 @@
+# Working notes for the site, not part of the published site
+PLAN.md
+CURATION.md
+GEMINI.md
+.agents/
+.hermes/
+.claude/
+
+# Original field photographs, with camera date and GPS in them.
+# Only resized copies with the metadata stripped are published, under
+# assets/img/field/atlas/. See tools/atlas/README.md.
+_atlas_inbox/
+
+# Local helpers and scratch
+open_in_chrome.bat
+serve_locally.bat
+test_storage.html
+*.bak
+__pycache__/
+*.pyc
+
+# Source material kept in Drive; the site does not use these
+assets/img/Satya.png
+assets/cv/SatyaCV (1).pdf
+assets/schematics/
+assets/img/hobbies/
+
+# Operating system noise
+.DS_Store
+Thumbs.db
+desktop.ini

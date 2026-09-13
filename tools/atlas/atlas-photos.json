@@ -1,0 +1,233 @@
+{
+  "generated": "2026-09-13 22:30",
+  "species_profiled": 332,
+  "groups": [
+    {
+      "label": "Birds",
+      "count": 73
+    },
+    {
+      "label": "Insects",
+      "count": 49
+    },
+    {
+      "label": "Trees",
+      "count": 36
+    },
+    {
+      "label": "Weeds, herbs and grasses",
+      "count": 35
+    },
+    {
+      "label": "Fish, snails and crabs",
+      "count": 26
+    },
+    {
+      "label": "Reptiles and amphibians",
+      "count": 25
+    },
+    {
+      "label": "Spiders and soil life",
+      "count": 25
+    },
+    {
+      "label": "Crops",
+      "count": 18
+    },
+    {
+      "label": "Mammals",
+      "count": 17
+    },
+    {
+      "label": "Mushrooms",
+      "count": 15
+    },
+    {
+      "label": "Aquatic and lower plants",
+      "count": 13
+    }
+  ],
+  "cards": [
+    {
+      "species_id": "FLR-0001",
+      "slug": "parthenium_hysterophorus",
+      "category": "flora/weeds",
+      "kingdom": "plantae",
+      "english": "Congress Grass",
+      "hindi": "गाजर घास",
+      "scientific": "Parthenium hysterophorus",
+      "family": "Asteraceae",
+      "status": "Weed, invasive",
+      "hook": "The roadside invader that poisons the soil around it, so that little native grows back where it has settled.",
+      "hook_hi": "सड़क किनारे का यह आक्रमणकारी अपने आसपास की मिट्टी में ज़हर घोल देता है, ताकि जहाँ यह जम जाए वहाँ देसी पौधे मुश्किल से उगें।",
+      "picto": "herb",
+      "photo_count": 0
+    },
+    {
+      "species_id": "FLR-0002",
+      "slug": "calotropis_gigantea",
+      "category": "flora/weeds",
+      "kingdom": "plantae",
+      "english": "Giant Milkweed",
+      "hindi": "आक",
+      "scientific": "Calotropis gigantea",
+      "family": "Apocynaceae",
+      "status": "Weed",
+      "hook": "Toxic latex and star-shaped flowers; the only plant the Plain Tiger butterfly will lay its eggs on.",
+      "hook_hi": "ज़हरीला दूध और तारे जैसे फूल; प्लेन टाइगर तितली अपने अंडे सिर्फ़ इसी पौधे पर देती है।",
+      "picto": "herb",
+      "photo_count": 0
+    },
+    {
+      "species_id": "INS-0007",
+      "slug": "asian_honey_bee",
+      "category": "fauna/insects",
+      "kingdom": "animalia",
+      "english": "Asian Honey Bee",
+      "hindi": "मधुमक्खी",
+      "scientific": "Apis cerana",
+      "family": "Apidae",
+      "status": "Insect",
+      "hook": "The native bee behind the mustard and lentil harvest: smaller colonies than its European cousin, and quick to leave a disturbed hive.",
+      "hook_hi": "सरसों और मसूर की फ़सल के पीछे की देसी मक्खी: यूरोपीय मक्खी से छोटे छत्ते, और छेड़े जाने पर छत्ता छोड़ने में तेज़।",
+      "picto": "bee",
+      "photo_count": 0
+    },
+    {
+      "species_id": "BRD-0005",
+      "slug": "black_drongo",
+      "category": "fauna/birds",
+      "kingdom": "animalia",
+      "english": "Black Drongo",
+      "hindi": "भुजंगा",
+      "scientific": "Dicrurus macrocercus",
+      "family": "Dicruridae",
+      "status": "Bird",
+      "hook": "A forked tail on a wire, looping out for grasshoppers and termites; it will dive at a kite twice its size.",
+      "hook_hi": "तार पर बैठी दोफाड़ पूँछ, टिड्डों और दीमकों पर झपट्टा मारती; अपने से दुगुनी चील पर भी टूट पड़ती है।",
+      "picto": "bird",
+      "photo_count": 0
+    },
+    {
+      "species_id": "FLR-0006",
+      "slug": "peepal",
+      "category": "flora/trees",
+      "kingdom": "plantae",
+      "english": "Peepal",
+      "hindi": "पीपल",
+      "scientific": "Ficus religiosa",
+      "family": "Moraceae",
+      "status": "Tree",
+      "hook": "Figs in the lean months when nothing else fruits, which is why so many birds and bats depend on this one tree.",
+      "hook_hi": "जब कोई और पेड़ नहीं फलता, तब भी इसके फल मिलते हैं; इसीलिए इतने पक्षी और चमगादड़ इसी एक पेड़ पर टिके हैं।",
+      "picto": "tree",
+      "photo_count": 0
+    },
+    {
+      "species_id": "FLR-0013",
+      "slug": "water_hyacinth",
+      "category": "flora/aquatic",
+      "kingdom": "plantae",
+      "english": "Water Hyacinth",
+      "hindi": "जलकुंभी",
+      "scientific": "Eichhornia crassipes",
+      "family": "Pontederiaceae",
+      "status": "Aquatic plant, invasive",
+      "hook": "A beautiful floating invader that clogs canals and starves ponds of oxygen; the fishers of Basti pay for it.",
+      "hook_hi": "सुंदर पर आक्रमणकारी: नहरें जाम करती है और तालाबों की ऑक्सीजन छीन लेती है; इसकी कीमत बस्ती के मछुआरे चुकाते हैं।",
+      "picto": "aquatic",
+      "photo_count": 0
+    },
+    {
+      "species_id": "INS-0002",
+      "slug": "wandering_glider",
+      "category": "fauna/insects",
+      "kingdom": "animalia",
+      "english": "Wandering Glider",
+      "hindi": "सुनहरी व्याधपतंग",
+      "scientific": "Pantala flavescens",
+      "family": "Libellulidae",
+      "status": "Insect",
+      "hook": "The dragonfly that migrates across oceans with the monsoon, catching mosquitoes on nine attempts out of ten.",
+      "hook_hi": "मानसून के साथ समुद्र पार कर आने वाली व्याधपतंग, जो दस में से नौ झपट्टों में मच्छर पकड़ लेती है।",
+      "picto": "dragonfly",
+      "photo_count": 0
+    },
+    {
+      "species_id": "REP-0009",
+      "slug": "checkered_keelback",
+      "category": "fauna/reptiles",
+      "kingdom": "animalia",
+      "english": "Checkered Keelback",
+      "hindi": "धारीदार पानी साँप",
+      "scientific": "Xenochrophis piscator",
+      "family": "Colubridae",
+      "status": "Reptile",
+      "hook": "The paddy field's water snake: non-venomous, harmless to people, and a steady predator of frogs, rodents and insects.",
+      "hook_hi": "धान के खेत का पानी साँप: विषहीन, इंसान के लिए हानिरहित, और मेंढकों, चूहों व कीड़ों का पक्का शिकारी।",
+      "picto": "snake",
+      "photo_count": 0
+    },
+    {
+      "species_id": "BRD-0002",
+      "slug": "sarus_crane",
+      "category": "fauna/birds",
+      "kingdom": "animalia",
+      "english": "Sarus Crane",
+      "hindi": "सारस",
+      "scientific": "Antigone antigone",
+      "family": "Gruidae",
+      "status": "Bird, IUCN Vulnerable",
+      "hook": "The tallest flying bird on Earth, foraging in paddy and wetland; Vulnerable, and a sign that the wetland still works.",
+      "hook_hi": "धरती का सबसे ऊँचा उड़ने वाला पक्षी, धान और दलदल में चरता हुआ; IUCN की सूची में असुरक्षित, और इस बात का संकेत कि आर्द्रभूमि अभी ज़िंदा है।",
+      "picto": "wader",
+      "photo_count": 0
+    },
+    {
+      "species_id": "SFL-0001",
+      "slug": "termite",
+      "category": "fauna/soil_fauna",
+      "kingdom": "animalia",
+      "english": "Mound-building Termite",
+      "hindi": "दीमक",
+      "scientific": "Odontotermes obesus",
+      "family": "Termitidae",
+      "status": "Soil fauna",
+      "hook": "Called a pest, it recycles cellulose, aerates the soil metres deep, and leaves mound earth richer than the field around it.",
+      "hook_hi": "जिसे कीट कहते हैं, वही सेल्यूलोज़ को मिट्टी में लौटाती है, कई मीटर गहराई तक मिट्टी में हवा भरती है, और बाँबी की मिट्टी को आसपास के खेत से ज़्यादा उपजाऊ छोड़ती है।",
+      "picto": "ant",
+      "photo_count": 0
+    },
+    {
+      "species_id": "FNG-0001",
+      "slug": "termite_mushroom",
+      "category": "fungi/mushrooms",
+      "kingdom": "fungi",
+      "english": "Termite Mushroom",
+      "hindi": "दीमक छत्ता",
+      "scientific": "Termitomyces heimii",
+      "family": "Lyophyllaceae",
+      "status": "Mushroom",
+      "hook": "Grows only from a termite nest, after the first rains; a spike on the cap and a long false root give it away.",
+      "hook_hi": "पहली बारिश के बाद सिर्फ़ दीमक की बाँबी से उगता है; टोपी पर नोक और लंबी नकली जड़ इसकी पहचान है।",
+      "picto": "mushroom",
+      "photo_count": 0
+    },
+    {
+      "species_id": "MAM-0011",
+      "slug": "nilgai",
+      "category": "fauna/mammals",
+      "kingdom": "animalia",
+      "english": "Nilgai",
+      "hindi": "नीलगाय",
+      "scientific": "Boselaphus tragocamelus",
+      "family": "Bovidae",
+      "status": "Mammal",
+      "hook": "An antelope with 'cow' in its name: raids wheat and sugarcane at night, and is protected all the same.",
+      "hook_hi": "नाम में 'गाय' वाला मृग: रात में गेहूँ और गन्ना उजाड़ता है, फिर भी संरक्षित है।",
+      "picto": "mammal",
+      "photo_count": 0
+    }
+  ],
+  "photos": []
+}

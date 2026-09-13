@@ -3,134 +3,327 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Research — Satyaghosh Maurya</title>
+<title>Research — Dr. Satyaghosh Maurya</title>
+<meta name="description" content="Research programme of Dr. Satyaghosh Maurya: single-molecule biophysics, nanophotonics, zero-mode waveguides, transition paths of protein conformational change, and membrane dynamics.">
+<!-- Canonical, social preview and structured data -->
+<link rel="canonical" href="https://satyaghoshmaurya.github.io/research.html">
+<meta property="og:site_name" content="Dr. Satyaghosh Maurya">
+<meta property="og:locale" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Research — Dr. Satyaghosh Maurya">
+<meta property="og:description" content="Research programme of Dr. Satyaghosh Maurya: single-molecule biophysics, nanophotonics, zero-mode waveguides, transition paths of protein conformational change, and membrane dynamics.">
+<meta property="og:url" content="https://satyaghoshmaurya.github.io/research.html">
+<meta property="og:image" content="https://satyaghoshmaurya.github.io/assets/img/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Portrait of Satyaghosh Maurya beside a two-well conformational free-energy landscape">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Research — Dr. Satyaghosh Maurya">
+<meta name="twitter:description" content="Research programme of Dr. Satyaghosh Maurya: single-molecule biophysics, nanophotonics, zero-mode waveguides, transition paths of protein conformational change, and membrane dynamics.">
+<meta name="twitter:image" content="https://satyaghoshmaurya.github.io/assets/img/og-card.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Public+Sans:wght@400;500;600;700&display=optional" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <script>
-  // Apply saved theme before paint to avoid a flash. Dark is default.
   (function () {
-    if (localStorage.getItem("theme") === "light") {
-      document.documentElement.setAttribute("data-theme", "light");
-    }
+    try {
+      if (localStorage.getItem("theme") === "dark") {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    } catch(e) {}
   })();
 </script>
 </head>
 <body>
 
-<div class="mobile-topbar">
-  <span class="brand">Satyaghosh Maurya</span>
-  <div style="display:flex; gap:0.5rem;">
-    <button data-theme-toggle class="theme-toggle" style="margin-top:0;">Light mode</button>
-    <button data-nav-toggle>Menu</button>
-  </div>
-</div>
-<nav class="mobile-nav">
-  <a href="index.html">Home</a>
-  <a href="research.html" class="active">Research</a>
-  <a href="publications.html">Publications</a>
-  <a href="cv.html">CV</a>
-  <a href="hobbies.html">Hobbies &amp; Interests</a>
-  <a href="contact.html">Contact</a>
-</nav>
+<a class="skip-link" href="#main">Skip to content</a>
 
-<div class="site">
-  <aside class="sidebar">
-    <span class="brand">Satyaghosh Maurya</span>
-    <span class="brand-role">Postdoctoral Researcher</span>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="research.html" class="active">Research</a>
+<!-- ============ SITE HEADER ============ -->
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-name">Dr. Satyaghosh Maurya</span>
+      <span class="brand-role">Postdoctoral Researcher &middot; Weizmann Institute of Science</span>
+    </a>
+    <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="siteNav">Menu</button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary">
+      <a href="index.html">About</a>
+      <a href="research.html" class="active" aria-current="page">Research</a>
       <a href="publications.html">Publications</a>
       <a href="cv.html">CV</a>
-      <a href="hobbies.html">Hobbies &amp; Interests</a>
+      <a href="hobbies.html">Field &amp; Art</a>
       <a href="contact.html">Contact</a>
+      <button type="button" data-theme-toggle class="theme-toggle-btn">Toggle theme</button>
     </nav>
-    <div class="sidebar-footer">
-      Weizmann Institute of Science<br>
-      Rehovot, Israel
-      <br>
-      <button data-theme-toggle class="theme-toggle">Light mode</button>
-    </div>
-  </aside>
+  </div>
+</header>
 
-  <main>
+<div class="site">
+
+  <main id="main">
     <div class="content">
-      <p class="eyebrow">Research</p>
       <h1>Watching single molecules fold, move, and assemble</h1>
       <p class="lede">
-        My work sits at the intersection of biophysics, optics, and statistics — building tools to see
-        what individual proteins and membranes do, one molecule at a time, and interpreting the noisy
-        signals that come with it.
+        My work sits at the intersection of single-molecule biophysics, nanophotonics, and statistical mechanics — building optical instrumentation to resolve how individual biomolecules overcome free-energy barriers and function in crowded environments.
       </p>
 
-      <h2>In plain terms</h2>
-      <p>
-        Most of what we know about how proteins fold or assemble comes from measuring the average
-        behavior of billions of molecules at once. But biology is not average — individual proteins
-        can take very different paths to the same destination, and the rare, fast, or minority
-        pathways are often the most important ones. My research develops microscopy and data-analysis
-        methods that let us watch <em>one molecule at a time</em>, so we can catch these hidden
-        behaviors directly instead of guessing at them from bulk averages.
-      </p>
-      <p>
-        Concretely, I work with single-molecule FRET (a technique that reports on tiny distance changes
-        within or between molecules using fluorescent dyes) combined with plasmonic nanostructures
-        called zero-mode waveguides (ZMWs), which let us watch single molecules at concentrations close
-        to what's found in a real cell — something conventional microscopy struggles with. Because
-        single-molecule data is inherently noisy, I also develop Bayesian inference methods to extract
-        reliable, quantitative kinetic information from these measurements.
-      </p>
-
-      <h2>Research interests</h2>
-      <div class="cv-timeline">
-        <div class="cv-item">
-          <div class="cv-when">Current focus</div>
-          <div class="cv-what">
-            <strong>Protein folding transition paths</strong>
-            <span>Using plasmonic-enhanced smFRET to directly observe transition paths in protein folding landscapes — the fleeting, hard-to-catch moments between folded and unfolded states.</span>
-          </div>
-        </div>
-        <div class="cv-item">
-          <div class="cv-when">Methods</div>
-          <div class="cv-what">
-            <strong>Zero-mode waveguides &amp; plasmonics</strong>
-            <span>Nanophotonic structures that confine light to observe single molecules at physiologically relevant, high concentrations.</span>
-          </div>
-        </div>
-        <div class="cv-item">
-          <div class="cv-when">Methods</div>
-          <div class="cv-what">
-            <strong>Bayesian inference for single-molecule data</strong>
-            <span>Statistical methods to extract reliable kinetic and conformational information from noisy, photon-limited single-molecule trajectories.</span>
-          </div>
-        </div>
-        <div class="cv-item">
-          <div class="cv-when">PhD work</div>
-          <div class="cv-what">
-            <strong>Membrane biophysics &amp; pore-forming proteins</strong>
-            <span>Assembly dynamics of the pore-forming toxin Cytolysin A (ClyA) on supported lipid bilayers, and membrane crowding by grafted polymers, studied with single-molecule imaging.</span>
-          </div>
-        </div>
+      <div class="card">
+        <h3>The Core Scientific Motivation</h3>
+        <p>
+          Conventional bulk biophysical assays record the synchronized average of billions of molecules. In doing so, they wash away transient intermediate states, rare barrier-crossing trajectories, and dynamic heterogeneity. Yet, it is precisely these fleeting, non-equilibrium transitions that dictate biological function, misfolding diseases, and enzymatic catalysis.
+        </p>
+        <p>
+          By pairing <strong>single-molecule Förster Resonance Energy Transfer (smFRET)</strong> with <strong>nanophotonic zero-mode waveguides</strong> and <strong>Bayesian trajectory analysis</strong>, my research directly captures these elusive molecular events with nanometer spatial sensitivity and microsecond temporal resolution.
+        </p>
       </div>
 
       <hr class="rule">
 
-      <h2>Research statement</h2>
-      <p class="note">
-        Placeholder — drop in your full research program / statement text here (the section hiring
-        committees will read closely). Suggested shape: motivating problem → your approach and
-        preliminary results → a 3–5 year independent research program → why this institution.
-      </p>
-      <div class="placeholder-box" style="height: 220px;">
-        [ research statement text goes here ]
-      </div>
+      <!-- Research Pillar 1 -->
+      <section id="folding">
+        <h2>1. Transition Paths of Protein Conformational Change</h2>
+        <p>
+          Proteins work by switching between conformations, and each spends almost all of its time settled in one meta-stable free-energy well or another. The crossing itself, the <strong>transition path</strong>, lasts only microseconds (τ<sub>tp</sub> ~ 1–10 µs), yet it is where the mechanism of the change is decided. An enzyme opening and closing over its substrates is our current test case; the same measurement applies to any protein whose function rides on a conformational switch.
+        </p>
+        <figure class="fig-card">
+          <div class="fig-static">
+            <img src="assets/img/research/landscape.png" alt="Two-well conformational free-energy landscape with a schematic protein crossing the barrier between open and closed states" width="1440" height="590" loading="lazy">
+          </div>
+          <figcaption class="fig-caption">
+            <span class="fig-note">Two conformations, two wells; the transition path is the brief crossing of the barrier between them. A still from the interactive figure on the home page.</span>
+          </figcaption>
+        </figure>
+        <p>
+          In the <strong>Gilad Haran Lab</strong> at the Weizmann Institute of Science, we develop plasmonic-enhanced smFRET methodologies that boost photon emission rates to directly track individual protein molecules as they traverse the barrier.
+        </p>
+        <ul>
+          <li><strong>Quantifying Transition Path Durations:</strong> Measuring barrier crossing transit times directly from photon arrival timestamps rather than inferring them from transition rates.</li>
+          <li><strong>Internal Friction &amp; Viscosity Effects:</strong> Probing how solvent dynamics and intra-chain roughness modulate the velocity of conformational reconfiguration.</li>
+          <li><strong>Energy Landscape Topography:</strong> Mapping multidimensional reaction coordinates beyond simplified one-dimensional projections.</li>
+        </ul>
+      </section>
+
+      <hr class="rule">
+
+      <!-- Research Pillar 2 -->
+      <section id="zmw">
+        <h2>2. Zero-Mode Waveguides &amp; Plasmonic Nanophotonics</h2>
+        <p>
+          A historical bottleneck in single-molecule fluorescence microscopy has been the diffraction limit: standard confocal illumination requires sub-nanomolar fluorophore concentrations (below 1 nM) to isolate individual diffraction-limited spots. However, physiological macromolecular interactions, weak protein complexes, and enzymatic reactions operate in the micromolar regime (1–100 µM).
+        </p>
+        <figure class="fig-card" id="zmwFigure">
+          <div class="fig-bar">
+            <span class="fig-title">Inside a zero-mode waveguide</span>
+            <div class="fig-controls">
+              <label class="fig-slider">
+                <span>Aperture</span>
+                <input type="range" min="50" max="200" step="10" value="100" data-zmw-aperture aria-label="Aperture diameter in nanometres">
+                <span class="mono" data-zmw-aperture-val>100 nm</span>
+              </label>
+              <label class="fig-slider">
+                <span>Concentration</span>
+                <input type="range" min="-0.3" max="2" step="0.1" value="0.7" data-zmw-conc aria-label="Enzyme concentration, logarithmic scale">
+                <span class="mono" data-zmw-conc-val>5 nM</span>
+              </label>
+              <button type="button" class="hero-btn hero-btn-primary" data-zmw-play>Play</button>
+            </div>
+          </div>
+          <canvas class="fig-canvas" data-figure="zmw" role="img" aria-label="Cross-section of a nanoaperture in an aluminium film on glass. Dye-labelled enzymes diffuse freely in and out of the aperture and light up only in the evanescent volume near the floor, so about one molecule at a time is seen."></canvas>
+          <figcaption class="fig-caption">
+            <span>Decay length: <strong class="mono" data-zmw-out-l>&asymp; 14 nm</strong></span>
+            <span>Observation volume: <strong class="mono" data-zmw-out-v>&asymp; 113 zL</strong></span>
+            <span class="fig-note">Light entering from below cannot propagate through an aperture narrower than its cutoff, so it decays evanescently from the glass floor and defines a zeptolitre observation volume. The dye-labelled enzyme diffuses freely: many molecules are in solution, but the volume is so small that it holds about one at a time, and only that one is excited and seen. Nothing is tethered; every surface is passivated with PEG-2k, about 5 nm thick, so nothing sticks. The decay length is computed for 532 nm excitation in a 100 nm aluminium film. Schematic, not to scale.</span>
+          </figcaption>
+        </figure>
+        <p>
+          We utilize <strong>Zero-Mode Waveguides (ZMWs)</strong> — sub-wavelength circular nano-apertures fabricated in thin metallic films (aluminum/gold) on fused quartz coverslips:
+        </p>
+        <ul>
+          <li><strong>Volume Confinement:</strong> Light propagating into apertures narrower than the optical cutoff wavelength decays exponentially as an evanescent wave, confining the effective observation volume to zeptoliters (V<sub>obs</sub> ~ 10<sup>−21</sup> L).</li>
+          <li><strong>Single molecules at high concentration:</strong> Keeps the number of molecules inside the observation volume near one even when the solution holds far more than a confocal volume could tolerate, so freely diffusing, dye-labelled enzymes can be watched one at a time.</li>
+          <li><strong>Plasmonic Field Enhancement:</strong> Localized surface plasmon resonances boost excitation rates and enhance radiative decay, accelerating fluorescence emission for ultra-fast photon statistics.</li>
+        </ul>
+
+        <h3>A second route to more photons: plasmonic nanorods in a confocal volume</h3>
+        <p>
+          The nanorod experiments keep the ordinary confocal geometry but attach the dye-labelled enzyme to a gold nanorod through a PEG brush and a biotin&ndash;streptavidin bridge, which holds the dyes a defined distance from the metal. As the conjugate diffuses through the focus, the rod&rsquo;s plasmon resonance raises the excitation and emission rates of dyes near its tips, so each passage yields a far brighter burst than a free enzyme gives in the same volume.
+        </p>
+        <figure class="fig-card" id="plasmonicFigure">
+          <div class="fig-bar">
+            <span class="fig-title">Free enzyme versus enzyme on a nanorod</span>
+            <div class="fig-controls">
+              <label class="fig-slider">
+                <span>Enhancement</span>
+                <input type="range" min="2" max="100" step="1" value="15" data-pl-enh aria-label="Plasmonic enhancement factor">
+                <span class="mono" data-pl-enh-val>15&times;</span>
+              </label>
+              <button type="button" class="hero-btn hero-btn-primary" data-pl-play>Play</button>
+            </div>
+          </div>
+          <canvas class="fig-canvas fig-canvas-tall" data-figure="plasmonic" role="img" aria-label="Two confocal volumes side by side. On the left, free dye-labelled enzymes diffusing through the focus give small photon bursts. On the right, the same enzymes carried on gold nanorods give much brighter bursts on the same photon scale."></canvas>
+          <figcaption class="fig-caption">
+            <span>Burst from a free enzyme: <strong class="mono" data-pl-out-free>&asymp; 25 photons</strong></span>
+            <span>On the nanorod: <strong class="mono" data-pl-out-rod>&asymp; 375 photons</strong></span>
+            <span class="fig-note">Both panels show the same diffraction-limited focal volume, about a femtolitre, with molecules diffusing through it. The donor and acceptor photon traces share one scale across the two panels, and the balance between red and green follows the conformation of whichever enzyme is in the focus. On the right the enzyme rides a PEGylated gold nanorod, held roughly 10 nm from the metal by the biotin&ndash;streptavidin stack so the dyes sit in the plasmonic hotspot without being quenched. The rod also diffuses more slowly, so its bursts last longer. Slide the enhancement to see the free-enzyme bursts shrink by comparison. Schematic, not to scale.</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <hr class="rule">
+
+      <!-- Research Pillar 3 -->
+      <section id="bayesian">
+        <h2>3. Photon-by-Photon Inference &amp; Single-Molecule Image Analysis</h2>
+        <p>
+          Single-molecule data are photon-limited. Binning photon arrival times into millisecond histograms throws away exactly the microsecond events we care about, so the analysis has to work with every photon.
+        </p>
+
+        <div class="card">
+          <h3>H<sup>2</sup>MM: hidden Markov analysis photon by photon</h3>
+          <p>
+            H<sup>2</sup>MM, developed in the Gilad Haran Lab, fits a hidden Markov model directly to the arrival time and colour of each photon in a single-molecule FRET measurement. It returns the number of conformational states, their FRET efficiencies and the rates between them, and the most likely state path through the data. I use it, with extensions for transition-path times and batch processing, on freely diffusing enzymes in zero-mode waveguides and on nanorod conjugates.
+          </p>
+          <div class="link-row" style="margin: 0.6rem 0 0;">
+            <a class="btn-outline" href="https://github.com/sgmaurya/H2MM_photon_by_photon" target="_blank" rel="noopener">Code: H2MM photon-by-photon (MATLAB)</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Single-molecule image analysis from the Ph.D.</h3>
+          <p>
+            Movies of dye-labelled proteins on supported lipid bilayers, recorded by TIRF microscopy, were turned into numbers with pipelines I built and published as a protocol:
+          </p>
+          <ul>
+            <li><strong>Single-particle tracking:</strong> localisation and linking with u-track or TrackMate, then mean-squared and instantaneous squared displacement analysis to classify diffusion and separate mixed populations.</li>
+            <li><strong>Binding kinetics:</strong> rate constants from the appearance of particles on the membrane over time.</li>
+            <li><strong>Oligomer stoichiometry:</strong> single-molecule photobleaching step counting, with a binomial correction for incomplete labelling, which gave the ClyA oligomer distributions in the PNAS and JoVE papers.</li>
+            <li><strong>Housekeeping:</strong> drift correction, trace extraction and particle counting for image stacks.</li>
+          </ul>
+          <div class="link-row" style="margin: 0.6rem 0 0;">
+            <a class="btn-outline" href="https://github.com/sgmaurya/SMTrack_Analysis" target="_blank" rel="noopener">Code: SMTrack_Analysis (MATLAB)</a>
+            <a class="btn-outline" href="https://www.jove.com/t/64243/single-molecule-diffusion-assembly-on-polymer-crowded-lipid" target="_blank" rel="noopener">Protocol and video (JoVE, 2022)</a>
+          </div>
+        </div>
+      </section>
+
+      <hr class="rule">
+
+      <!-- Research Pillar 4 -->
+      <section id="membrane">
+        <h2>4. Membrane Biophysics &amp; Pore-Forming Toxins (ClyA)</h2>
+        <p>
+          During my doctoral research at the Indian Institute of Science (IISc) with Prof. Rahul Roy and Prof. K. G. Ayappa, I investigated how bacterial pore-forming toxins breach mammalian and bacterial cell membranes.
+        </p>
+        <figure class="fig-card" id="clyaPainting">
+          <div class="fig-bar">
+            <span class="fig-title">The assembly pathway of Cytolysin A</span>
+          </div>
+          <div class="fig-static fig-static-narrow">
+            <img src="assets/img/research/clya-assembly-steps.jpg" alt="Hand-painted schematic: water-soluble Cytolysin A monomers bind a lipid bilayer, undergo a protomer transition, interact protomer to protomer into arcs, and complete pores that leak the membrane; outer membrane vesicles fuse from above." width="695" height="720" loading="lazy">
+          </div>
+          <figcaption class="fig-caption">
+            <span class="fig-note">Water-soluble monomers bind the membrane, switch to the protomer conformation, and grow through protomer&ndash;protomer contacts into arcs and finally leaky pores. Hand-painted by Satyaghosh Maurya.</span>
+          </figcaption>
+        </figure>
+        <p>
+          Using single-molecule tracking and total internal reflection fluorescence (TIRF) microscopy on model supported lipid bilayers (SLBs):
+        </p>
+        <ul>
+          <li><strong>Intermediate Oligomer Trapping:</strong> Discovered that cholesterol acts as a kinetic cofactor that stabilizes intermediate oligomeric assemblies of Cytolysin A (ClyA), lowering the barrier to assembly of the dodecameric pore.</li>
+          <li><strong>Conformational Plasticity:</strong> Demonstrated that intrinsic flexibility within the ClyA monomer governs its lytic competence and membrane-binding kinetics.</li>
+          <li><strong>Macromolecular Crowding:</strong> Characterized the diffusion and self-assembly of proteins on membranes crowded with grafted polymer brushes, mimicking physiological glycocalyx barriers.</li>
+        </ul>
+
+        <figure class="fig-card" id="clyaFigure">
+          <div class="fig-bar">
+            <span class="fig-title">Watching pores assemble, one at a time</span>
+            <div class="fig-controls">
+              <button type="button" class="hero-btn" data-clya-reset>Restart</button>
+              <button type="button" class="hero-btn hero-btn-primary" data-clya-play>Play</button>
+            </div>
+          </div>
+          <canvas class="fig-canvas" data-figure="clya" role="img" aria-label="Side view of a supported lipid bilayer. Soluble Cytolysin A monomers bind, diffuse along the membrane and pair up; dimers fall apart until one locks into a stable nucleus, after which monomers add quickly until the twelve-subunit pore inserts, and pores accumulate over time."></canvas>
+          <figcaption class="fig-caption">
+            <span>Phase: <strong data-clya-out-phase>lag</strong></span>
+            <span>Largest oligomer: <strong class="mono" data-clya-out-max>&ndash;</strong></span>
+            <span>Pores: <strong class="mono" data-clya-out-pores>0</strong></span>
+            <span>Elapsed: <strong class="mono" data-clya-out-t>0 s</strong></span>
+            <span class="fig-note">Monomers bind the membrane and diffuse laterally. Pairs form and fall apart; only rarely does a pair lock into a stable nucleus, and that wait sets the lag. Once a nucleus exists, monomers add rapidly until the dodecameric pore inserts through the bilayer, and a population of pores builds up as new nuclei form. A caricature of the single-molecule kinetics. Not to scale.</span>
+          </figcaption>
+        </figure>
+
+        <h3>Crowded membranes: grafted polymers as a tunable obstacle</h3>
+        <p>
+          Cell membranes are crowded by a dense layer of glycans and grafted macromolecules. We rebuild that crowding on supported lipid bilayers with grafted PEG, tune the layer from sparse mushrooms to a dense brush, and follow single molecules in it with TIRF microscopy. How strongly a molecule feels the layer depends on how far it protrudes above the bilayer rather than on what it is made of. Once the brush is fully developed, diffusion of protruding molecules turns sub-diffusive and the layer gates the access and assembly of membrane-lytic proteins. Lifting the bilayer off the glass on a polymer cushion separates the brush&rsquo;s own effect from an extra slowdown that belongs to the substrate (manuscript in preparation).
+        </p>
+        <figure class="fig-card" id="crowdingFigure">
+          <div class="fig-bar">
+            <span class="fig-title">Grafted polymers on a supported bilayer</span>
+          </div>
+          <div class="fig-static">
+            <img src="assets/img/research/crowding-schematic.png" alt="Schematic of a POPC supported lipid bilayer with increasing amounts of PEG-2k grafted lipids, from sparse mushrooms to a dense brush, with lipid, cholesterol and DNA-tethered tracers marked." width="1200" height="681" loading="lazy">
+          </div>
+          <figcaption class="fig-caption">
+            <span class="fig-note">Increasing the fraction of PEG-2k lipids takes the layer from sparse mushrooms (i) through crowding (ii) to a brush (iii). Tracers that sit flat in the bilayer, a lipid probe and a cholesterol probe, are compared with ones that protrude into the layer, such as a DNA tethered to the membrane.</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <hr class="rule">
+
+      <!-- Future Directions -->
+      <section id="future-vision">
+        <h2>Future Directions</h2>
+        <p class="lede">
+          Directions I am developing toward an independent programme that joins nanophotonic measurement, statistical inference, and membrane biophysics.
+        </p>
+        
+        <div class="card">
+          <h3>Theme A: High-Throughput Nanophotonic Platforms for Biomolecular Condensates</h3>
+          <p>
+            Liquid-liquid phase separation (LLPS) and intrinsically disordered proteins (IDPs) are central to membraneless organelle formation and neurodegenerative aggregation. We will engineer high-throughput arrays of plasmonic zero-mode waveguides to monitor conformational fluctuations and nucleation kinetics of IDPs within dense droplet microenvironments.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Theme B: Coupled Mechanical &amp; Optical Probing of Membrane Translocators</h3>
+          <p>
+            Combining nanophotonics with supported bilayer platforms to observe how membrane mechanical tension and curvature couple to the conformational cycles of multi-protein transport machineries and antibacterial pore complexes in real time.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Theme C: Open Statistical Biophysics Software &amp; Indigenous Instrumentation</h3>
+          <p>
+            Building open-source, GPU-accelerated Bayesian analysis pipelines for single-molecule microscopy, alongside cost-effective, indigenous optical setups tailored for research and training at Indian academic universities.
+          </p>
+        </div>
+
+      </section>
 
     </div>
   </main>
+
+  <!-- ============ SITE FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <span class="footer-left">&copy; 2026 Satyaghosh Maurya <button type="button" class="theme-toggle-btn footer-anim" data-anim-toggle>Play all animations</button></span>
+      <span class="footer-links">
+        <a href="https://scholar.google.com/citations?user=LGxS32gAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>
+        <a href="https://orcid.org/0000-0003-2757-7742" target="_blank" rel="noopener">ORCID</a>
+        <a href="https://github.com/sgmaurya" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/satyaghosh-maurya-98bbbaa2/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:satyaghosh.maurya@weizmann.ac.il">Email</a>
+      </span>
+    </div>
+  </footer>
 </div>
 
+<script src="js/zmw-figure.js"></script>
+<script src="js/plasmonic-figure.js"></script>
+<script src="js/clya-figure.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

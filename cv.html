@@ -3,99 +3,132 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CV — Satyaghosh Maurya</title>
+<title>Curriculum Vitae — Dr. Satyaghosh Maurya</title>
+<meta name="description" content="Academic Curriculum Vitae of Dr. Satyaghosh Maurya: appointments, education, honours, presentations, teaching, and technical expertise.">
+<!-- Canonical, social preview and structured data -->
+<link rel="canonical" href="https://satyaghoshmaurya.github.io/cv.html">
+<meta property="og:site_name" content="Dr. Satyaghosh Maurya">
+<meta property="og:locale" content="en_GB">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Curriculum Vitae — Dr. Satyaghosh Maurya">
+<meta property="og:description" content="Academic Curriculum Vitae of Dr. Satyaghosh Maurya: appointments, education, honours, presentations, teaching, and technical expertise.">
+<meta property="og:url" content="https://satyaghoshmaurya.github.io/cv.html">
+<meta property="og:image" content="https://satyaghoshmaurya.github.io/assets/img/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Portrait of Satyaghosh Maurya beside a two-well conformational free-energy landscape">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Curriculum Vitae — Dr. Satyaghosh Maurya">
+<meta name="twitter:description" content="Academic Curriculum Vitae of Dr. Satyaghosh Maurya: appointments, education, honours, presentations, teaching, and technical expertise.">
+<meta name="twitter:image" content="https://satyaghoshmaurya.github.io/assets/img/og-card.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Public+Sans:wght@400;500;600;700&display=optional" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <script>
-  // Apply saved theme before paint to avoid a flash. Dark is default.
   (function () {
-    if (localStorage.getItem("theme") === "light") {
-      document.documentElement.setAttribute("data-theme", "light");
-    }
+    try {
+      if (localStorage.getItem("theme") === "dark") {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    } catch(e) {}
   })();
 </script>
 </head>
 <body>
 
-<div class="mobile-topbar">
-  <span class="brand">Satyaghosh Maurya</span>
-  <div style="display:flex; gap:0.5rem;">
-    <button data-theme-toggle class="theme-toggle" style="margin-top:0;">Light mode</button>
-    <button data-nav-toggle>Menu</button>
-  </div>
-</div>
-<nav class="mobile-nav">
-  <a href="index.html">Home</a>
-  <a href="research.html">Research</a>
-  <a href="publications.html">Publications</a>
-  <a href="cv.html" class="active">CV</a>
-  <a href="hobbies.html">Hobbies &amp; Interests</a>
-  <a href="contact.html">Contact</a>
-</nav>
+<a class="skip-link" href="#main">Skip to content</a>
 
-<div class="site">
-  <aside class="sidebar">
-    <span class="brand">Satyaghosh Maurya</span>
-    <span class="brand-role">Postdoctoral Researcher</span>
-    <nav>
-      <a href="index.html">Home</a>
+<!-- ============ SITE HEADER ============ -->
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-name">Dr. Satyaghosh Maurya</span>
+      <span class="brand-role">Postdoctoral Researcher &middot; Weizmann Institute of Science</span>
+    </a>
+    <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="siteNav">Menu</button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary">
+      <a href="index.html">About</a>
       <a href="research.html">Research</a>
       <a href="publications.html">Publications</a>
-      <a href="cv.html" class="active">CV</a>
-      <a href="hobbies.html">Hobbies &amp; Interests</a>
+      <a href="cv.html" class="active" aria-current="page">CV</a>
+      <a href="hobbies.html">Field &amp; Art</a>
       <a href="contact.html">Contact</a>
+      <button type="button" data-theme-toggle class="theme-toggle-btn">Toggle theme</button>
     </nav>
-    <div class="sidebar-footer">
-      Weizmann Institute of Science<br>
-      Rehovot, Israel
-      <br>
-      <button data-theme-toggle class="theme-toggle">Light mode</button>
-    </div>
-  </aside>
+  </div>
+</header>
 
-  <main>
+<div class="site">
+
+  <main id="main">
     <div class="content">
-      <p class="eyebrow">Curriculum Vitae</p>
-      <h1>CV</h1>
+      <h1>Curriculum Vitae</h1>
+      <p class="lede">Appointments, education, honours, presentations, teaching, and technical expertise. The PDF is the complete record.</p>
+
       <div class="link-row">
-        <a class="btn" href="assets/cv/Satyaghosh_Maurya_CV.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <a class="btn" href="assets/cv/Satyaghosh_Maurya_CV.pdf" target="_blank" rel="noopener">Download Full CV (PDF)</a>
+        <a class="btn-outline" href="https://scholar.google.com/citations?user=LGxS32gAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>
+        <a class="btn-outline" href="https://orcid.org/0000-0003-2757-7742" target="_blank" rel="noopener">ORCID</a>
       </div>
 
-      <h2>Education &amp; positions, at a glance</h2>
-      <!-- Quick-scan timeline. Keep this in sync with the PDF by hand. -->
+      <hr class="rule">
+
+      <!-- Section: Appointments -->
+      <h2>Professional Appointments</h2>
       <div class="cv-timeline">
         <div class="cv-item">
           <div class="cv-when">Dec 2022 – present</div>
           <div class="cv-what">
-            <strong>Postdoctoral Fellow</strong>
-            <span>Dept. of Chemical &amp; Biological Physics, Weizmann Institute of Science — Gilad Haran Lab, Rehovot, Israel</span>
+            <strong>Postdoctoral Researcher</strong>
+            <span>Department of Chemical and Biological Physics, Weizmann Institute of Science, Rehovot, Israel</span>
+            <div class="cv-details">
+              Gilad Haran Lab.<br>
+              Developing single-molecule fluorescence spectroscopy coupled with nanoplasmonics to observe transition paths directly in protein folding landscapes.
+            </div>
           </div>
         </div>
+
         <div class="cv-item">
-          <div class="cv-when">Apr 2022 – Dec 2022</div>
+          <div class="cv-when">Apr – Dec 2022</div>
           <div class="cv-what">
             <strong>Research Associate</strong>
-            <span>Dept. of Chemical Engineering, Indian Institute of Science (IISc), Bangalore, India</span>
+            <span>Department of Chemical Engineering, Indian Institute of Science (IISc), Bangalore, India</span>
+            <div class="cv-details">
+              Single-molecule tracking of protein mobility and assembly on polymer-crowded lipid membranes.
+            </div>
           </div>
         </div>
+      </div>
+
+      <hr class="rule">
+
+      <!-- Section: Education -->
+      <h2>Education</h2>
+      <div class="cv-timeline">
         <div class="cv-item">
-          <div class="cv-when">Aug 2015 – Mar 2022</div>
+          <div class="cv-when">2015 – 2022</div>
           <div class="cv-what">
             <strong>Ph.D., Chemical Engineering</strong>
             <span>Indian Institute of Science (IISc), Bangalore, India</span>
+            <div class="cv-details">
+              Advisors: Prof. Rahul Roy and Prof. K. Ganapathy Ayappa.<br>
+              Thesis: <em>Investigating membrane dynamics and oligomerization of pore-forming toxins using single-molecule fluorescence techniques.</em>
+            </div>
           </div>
         </div>
+
         <div class="cv-item">
-          <div class="cv-when">Aug 2013 – Jun 2015</div>
+          <div class="cv-when">2013 – 2015</div>
           <div class="cv-what">
             <strong>M.E., Chemical Engineering</strong>
             <span>Indian Institute of Science (IISc), Bangalore, India</span>
           </div>
         </div>
+
         <div class="cv-item">
-          <div class="cv-when">Jul 2009 – Apr 2013</div>
+          <div class="cv-when">2009 – 2013</div>
           <div class="cv-what">
             <strong>B.Tech., Chemical Engineering</strong>
             <span>National Institute of Technology (NIT), Durgapur, India</span>
@@ -103,15 +136,167 @@
         </div>
       </div>
 
-      <h2>Full CV</h2>
-      <p style="font-size:0.88rem; color:var(--text-muted);">
-        Embedded below. If it doesn't display (some mobile browsers block inline PDFs), use the
-        download button above.
-      </p>
-      <embed class="cv-embed" src="assets/cv/Satyaghosh_Maurya_CV.pdf" type="application/pdf">
+      <hr class="rule">
+
+      <!-- Section: Graduate research -->
+      <h2>Graduate Research Projects</h2>
+      <div class="cv-timeline">
+        <div class="cv-item">
+          <div class="cv-when">Doctoral</div>
+          <div class="cv-what">
+            <strong>Assembly dynamics of the pore-forming toxin Cytolysin A</strong>
+            <span>Membrane binding, conformational transitions, and oligomerization of ClyA on supported lipid bilayers, followed with single-molecule fluorescence.</span>
+          </div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-when">Doctoral</div>
+          <div class="cv-what">
+            <strong>Biological membrane crowding by polymers</strong>
+            <span>Mobility and self-assembly of biomolecules on polymer-grafted lipid membranes.</span>
+          </div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-when">Master's</div>
+          <div class="cv-what">
+            <strong>Antimicrobial peptides</strong>
+            <span>Role of bioactive compounds in bacterial killing by the LL-37 antimicrobial peptide.</span>
+          </div>
+        </div>
+      </div>
+
+      <hr class="rule">
+
+      <!-- Section: Honours -->
+      <h2>Honours &amp; Awards</h2>
+      <div class="cv-timeline">
+        <div class="cv-item">
+          <div class="cv-when">2018</div>
+          <div class="cv-what">
+            <strong>Zeeshan Khan Memorial Award for best paper presentation</strong>
+            <span>Bangalore Microscopy Course, National Centre for Biological Sciences (NCBS), Bangalore</span>
+            <div class="cv-details">Talk: “Cholesterol promotes Cytolysin A activity by stabilizing the intermediates during pore formation.”</div>
+          </div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-when">2017</div>
+          <div class="cv-what">
+            <strong>Best poster</strong>
+            <span>Indian Biophysical Society Meeting, IISER Mohali</span>
+            <div class="cv-details">Poster: “Cholesterol promotes Cytolysin A activity by stabilizing the intermediates during pore formation.”</div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="rule">
+
+      <!-- Section: Conferences -->
+      <h2>Conferences, Workshops &amp; Schools</h2>
+      <div class="cv-timeline">
+        <div class="cv-item">
+          <div class="cv-when">2020</div>
+          <div class="cv-what">
+            <strong>Single-Molecule Sensors and Nano Systems International Conference (S3IC)</strong>
+            <span>Online</span>
+          </div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-when">2019</div>
+          <div class="cv-what">
+            <strong>Seeing is Believing</strong>
+            <span>EMBL / EMBO</span>
+            <div class="cv-details">Poster: “Investigating oligomerization pathway of pore forming toxin ClyA.”</div>
+          </div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-when">2017</div>
+          <div class="cv-what">
+            <strong>National Workshop on Fluorescence and Raman Spectroscopy</strong>
+            <span>IIT Guwahati</span>
+          </div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-when">2016</div>
+          <div class="cv-what">
+            <strong>Optics Within Life Sciences</strong>
+            <span>TIFR and IIT Bombay</span>
+          </div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-when">2015</div>
+          <div class="cv-what">
+            <strong>Fluorescence and Raman Spectroscopy</strong>
+            <span>IISER Pune</span>
+          </div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-when">2015</div>
+          <div class="cv-what">
+            <strong>Winter School on Quantitative Systems Biology</strong>
+            <span>International Centre for Theoretical Sciences (ICTS), Bangalore</span>
+          </div>
+        </div>
+      </div>
+
+      <hr class="rule">
+
+      <!-- Section: Teaching & Mentoring -->
+      <h2>Teaching &amp; Mentoring</h2>
+      <div class="cv-timeline">
+        <div class="cv-item">
+          <div class="cv-when">Sep 2018</div>
+          <div class="cv-what">
+            <strong>Teaching Assistant, Bangalore Microscopy Course</strong>
+            <span>National Centre for Biological Sciences (NCBS), Bangalore</span>
+          </div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-when">Aug – Dec 2017</div>
+          <div class="cv-what">
+            <strong>Teaching Assistant, Chemical Engineering Mathematics</strong>
+            <span>Indian Institute of Science (IISc), Bangalore</span>
+          </div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-when">Mentoring</div>
+          <div class="cv-what">
+            <strong>Supervision of junior researchers</strong>
+            <span>Two junior graduate students, two project assistants, and seven summer interns.</span>
+          </div>
+        </div>
+      </div>
+
+      <hr class="rule">
+
+      <!-- Section: Skills -->
+      <h2>Skills &amp; Expertise</h2>
+      <div class="card">
+        <p><strong>Advanced microscopy:</strong> single-particle tracking (SPT), single-molecule FRET (smFRET), FRAP, FCS, PALM, AFM, TEM.</p>
+        <p><strong>Molecular biology:</strong> site-directed mutagenesis, protein purification, supported lipid bilayer preparation.</p>
+        <p><strong>Data analysis:</strong> MATLAB, Python, image processing.</p>
+        <p><strong>Fabrication and microfluidics:</strong> soft lithography, microfluidics, focused ion beam and electron beam lithography.</p>
+      </div>
+
+      <hr class="rule">
+
+      <h2>Publications</h2>
+      <p>Five peer-reviewed journal articles, with links to publisher versions, preprints, and BibTeX, are listed on the <a href="publications.html">Publications</a> page.</p>
 
     </div>
   </main>
+
+  <!-- ============ SITE FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <span class="footer-left">&copy; 2026 Satyaghosh Maurya <button type="button" class="theme-toggle-btn footer-anim" data-anim-toggle>Play all animations</button></span>
+      <span class="footer-links">
+        <a href="https://scholar.google.com/citations?user=LGxS32gAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>
+        <a href="https://orcid.org/0000-0003-2757-7742" target="_blank" rel="noopener">ORCID</a>
+        <a href="https://github.com/sgmaurya" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/satyaghosh-maurya-98bbbaa2/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:satyaghosh.maurya@weizmann.ac.il">Email</a>
+      </span>
+    </div>
+  </footer>
 </div>
 
 <script src="js/main.js"></script>

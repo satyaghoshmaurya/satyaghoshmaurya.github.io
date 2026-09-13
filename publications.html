@@ -3,114 +3,268 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Publications — Satyaghosh Maurya</title>
+<title>Publications — Dr. Satyaghosh Maurya</title>
+<meta name="description" content="Peer-reviewed publications by Dr. Satyaghosh Maurya in single-molecule biophysics, membrane proteins, pore-forming toxins, and fluorescence spectroscopy.">
+<!-- Canonical, social preview and structured data -->
+<link rel="canonical" href="https://satyaghoshmaurya.github.io/publications.html">
+<meta property="og:site_name" content="Dr. Satyaghosh Maurya">
+<meta property="og:locale" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Publications — Dr. Satyaghosh Maurya">
+<meta property="og:description" content="Peer-reviewed publications by Dr. Satyaghosh Maurya in single-molecule biophysics, membrane proteins, pore-forming toxins, and fluorescence spectroscopy.">
+<meta property="og:url" content="https://satyaghoshmaurya.github.io/publications.html">
+<meta property="og:image" content="https://satyaghoshmaurya.github.io/assets/img/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Portrait of Satyaghosh Maurya beside a two-well conformational free-energy landscape">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Publications — Dr. Satyaghosh Maurya">
+<meta name="twitter:description" content="Peer-reviewed publications by Dr. Satyaghosh Maurya in single-molecule biophysics, membrane proteins, pore-forming toxins, and fluorescence spectroscopy.">
+<meta name="twitter:image" content="https://satyaghoshmaurya.github.io/assets/img/og-card.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Public+Sans:wght@400;500;600;700&display=optional" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <script>
-  // Apply saved theme before paint to avoid a flash. Dark is default.
   (function () {
-    if (localStorage.getItem("theme") === "light") {
-      document.documentElement.setAttribute("data-theme", "light");
-    }
+    try {
+      if (localStorage.getItem("theme") === "dark") {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    } catch(e) {}
   })();
 </script>
 </head>
 <body>
 
-<div class="mobile-topbar">
-  <span class="brand">Satyaghosh Maurya</span>
-  <div style="display:flex; gap:0.5rem;">
-    <button data-theme-toggle class="theme-toggle" style="margin-top:0;">Light mode</button>
-    <button data-nav-toggle>Menu</button>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ============ SITE HEADER ============ -->
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-name">Dr. Satyaghosh Maurya</span>
+      <span class="brand-role">Postdoctoral Researcher &middot; Weizmann Institute of Science</span>
+    </a>
+    <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="siteNav">Menu</button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary">
+      <a href="index.html">About</a>
+      <a href="research.html">Research</a>
+      <a href="publications.html" class="active" aria-current="page">Publications</a>
+      <a href="cv.html">CV</a>
+      <a href="hobbies.html">Field &amp; Art</a>
+      <a href="contact.html">Contact</a>
+      <button type="button" data-theme-toggle class="theme-toggle-btn">Toggle theme</button>
+    </nav>
   </div>
-</div>
-<nav class="mobile-nav">
-  <a href="index.html">Home</a>
-  <a href="research.html">Research</a>
-  <a href="publications.html" class="active">Publications</a>
-  <a href="cv.html">CV</a>
-  <a href="hobbies.html">Hobbies &amp; Interests</a>
-  <a href="contact.html">Contact</a>
-</nav>
+</header>
 
 <div class="site">
-  <aside class="sidebar">
-    <span class="brand">Satyaghosh Maurya</span>
-    <span class="brand-role">Postdoctoral Researcher</span>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="research.html">Research</a>
-      <a href="publications.html" class="active">Publications</a>
-      <a href="cv.html">CV</a>
-      <a href="hobbies.html">Hobbies &amp; Interests</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-    <div class="sidebar-footer">
-      Weizmann Institute of Science<br>
-      Rehovot, Israel
-      <br>
-      <button data-theme-toggle class="theme-toggle">Light mode</button>
-    </div>
-  </aside>
 
-  <main>
+  <main id="main">
     <div class="content">
-      <p class="eyebrow">Publications</p>
       <h1>Publications</h1>
-      <p class="lede">Pulled from my CV — replace links below with real DOIs/URLs when you have them.</p>
+      <p class="lede">Peer-reviewed journal articles from doctoral and postdoctoral research, with links to publisher versions, preprints, and BibTeX.</p>
 
-      <!--
-        HOW TO ADD A NEW PUBLICATION:
-        Copy one .pub block, edit the text, and set data-pub-topics to a
-        comma-separated list of topic keys (matching the filter buttons below).
-      -->
-
-      <div class="pub-filters">
-        <button data-pub-filter="all" class="active">All</button>
-        <button data-pub-filter="folding">Protein folding / smFRET</button>
-        <button data-pub-filter="membrane">Membrane biophysics</button>
-        <button data-pub-filter="review">Reviews</button>
+      <div class="link-row" style="margin: 0.8rem 0 1.8rem;">
+        <a class="btn" href="https://scholar.google.com/citations?user=LGxS32gAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar Profile</a>
+        <a class="btn-outline" href="https://orcid.org/0000-0003-2757-7742" target="_blank" rel="noopener">ORCID: 0000-0003-2757-7742</a>
       </div>
 
-      <div class="pub" data-pub-topics="membrane">
-        <div class="pub-title">Conformational flexibility is a key determinant of the lytic activity of the pore forming protein, Cytolysin A</div>
-        <div class="pub-meta">A. Kulshrestha, S. Maurya, T. Gupta, R. Roy, S. Punnathanam, K. G. Ayappa — <em>The Journal of Physical Chemistry B</em>, 2023</div>
-        <div class="pub-tags"><span class="pill">Membrane biophysics</span></div>
-      </div>
+      <h2>2023</h2>
 
-      <div class="pub" data-pub-topics="membrane">
-        <div class="pub-title">Single molecule diffusion and assembly on polymer-crowded lipid membranes</div>
-        <div class="pub-meta">S. Maurya, V. H. Rai, A. Upasani, S. Umrao, D. Parwana, R. Roy — <em>Journal of Visualized Experiments</em>, 2022</div>
-        <div class="pub-tags"><span class="pill">Membrane biophysics</span></div>
-      </div>
+      <!-- JPCB 2023 -->
+      <article class="pub">
+        <div class="pub-title">
+          <a href="https://doi.org/10.1021/acs.jpcb.2c05785" target="_blank" rel="noopener">
+            Conformational Flexibility Is a Key Determinant for the Lytic Activity of the Pore-Forming Protein, Cytolysin A
+          </a>
+        </div>
+        <div class="pub-meta">
+          A. Kulshrestha, <strong>S. Maurya</strong>, T. Gupta, R. Roy, S. N. Punnathanam, K. G. Ayappa —
+          <em>The Journal of Physical Chemistry B</em>, 127 (1), 69–84 (2023)
+        </div>
+        <div class="pub-actions">
+          <a href="https://doi.org/10.1021/acs.jpcb.2c05785" target="_blank" rel="noopener">DOI</a>
+          <a href="https://pubs.acs.org/doi/10.1021/acs.jpcb.2c05785" target="_blank" rel="noopener">Publisher</a>
+          <a href="https://doi.org/10.1101/2021.10.23.465544" target="_blank" rel="noopener">Preprint (bioRxiv)</a>
+          <button type="button" data-bibtex-toggle="bib-kulshrestha2023">BibTeX</button>
+        </div>
+        <div class="bibtex-drawer" id="bib-kulshrestha2023">
+          <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
+            <span>BibTeX</span>
+            <button type="button" data-bibtex-copy class="hero-btn">Copy</button>
+          </div>
+<pre><code>@article{kulshrestha2023conformational,
+  title   = {Conformational Flexibility Is a Key Determinant for the Lytic Activity of the Pore-Forming Protein, Cytolysin A},
+  author  = {Kulshrestha, Avijeet and Maurya, Satyaghosh and Gupta, Twinkle and Roy, Rahul and Punnathanam, Sudeep N. and Ayappa, K. Ganapathy},
+  journal = {The Journal of Physical Chemistry B},
+  volume  = {127},
+  number  = {1},
+  pages   = {69--84},
+  year    = {2023},
+  doi     = {10.1021/acs.jpcb.2c05785}
+}</code></pre>
+        </div>
+      </article>
 
-      <div class="pub" data-pub-topics="review">
-        <div class="pub-title">Evaluation of spike protein antigens for SARS-CoV-2 serology</div>
-        <div class="pub-meta">S. Jagtap, K. Ratnasri, P. Valloly, R. Sharma, S. Maurya, et al. — <em>Journal of Virological Methods</em>, 2021</div>
-        <div class="pub-tags"><span class="pill">Reviews</span></div>
-      </div>
+      <h2>2022</h2>
 
-      <div class="pub" data-pub-topics="review,folding">
-        <div class="pub-title">Single-Molecule Fluorescence Imaging: Generating Insights into Molecular Interactions in Virology</div>
-        <div class="pub-meta">S. Banerjee, S. Maurya, R. Roy — <em>Journal of Biosciences</em>, 2018</div>
-        <div class="pub-tags"><span class="pill">Reviews</span><span class="pill">smFRET</span></div>
-      </div>
+      <!-- JoVE 2022 -->
+      <article class="pub">
+        <div class="pub-title">
+          <a href="https://doi.org/10.3791/64243" target="_blank" rel="noopener">
+            Single-Molecule Diffusion and Assembly on Polymer-Crowded Lipid Membranes
+          </a>
+        </div>
+        <div class="pub-meta">
+          <strong>S. Maurya</strong>, V. H. Rai, A. Upasani, S. Umrao, D. Parwana, R. Roy —
+          <em>Journal of Visualized Experiments</em>, (185), e64243 (2022)
+        </div>
+        <div class="pub-actions">
+          <a href="https://doi.org/10.3791/64243" target="_blank" rel="noopener">DOI</a>
+          <a href="https://www.jove.com/t/64243/single-molecule-diffusion-assembly-on-polymer-crowded-lipid" target="_blank" rel="noopener">Article and video (JoVE)</a>
+          <button type="button" data-bibtex-toggle="bib-maurya2022">BibTeX</button>
+        </div>
+        <div class="bibtex-drawer" id="bib-maurya2022">
+          <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
+            <span>BibTeX</span>
+            <button type="button" data-bibtex-copy class="hero-btn">Copy</button>
+          </div>
+<pre><code>@article{maurya2022single,
+  title   = {Single-Molecule Diffusion and Assembly on Polymer-Crowded Lipid Membranes},
+  author  = {Maurya, Satyaghosh and Rai, Vishwesh Haricharan and Upasani, Aditya and Umrao, Saurabh and Parwana, Diksha and Roy, Rahul},
+  journal = {Journal of Visualized Experiments},
+  number  = {185},
+  pages   = {e64243},
+  year    = {2022},
+  doi     = {10.3791/64243}
+}</code></pre>
+        </div>
+      </article>
 
-      <div class="pub" data-pub-topics="membrane">
-        <div class="pub-title">Cholesterol Promotes Cytolysin A Activity by Stabilizing the Intermediates during Pore Formation</div>
-        <div class="pub-meta">P. Sathyanarayana, S. Maurya, A. Behera, M. Ravichandran, S. S. Visweswariah, K. G. Ayappa, R. Roy — <em>Proceedings of the National Academy of Sciences (PNAS)</em>, 2018</div>
-        <div class="pub-tags"><span class="pill">Membrane biophysics</span></div>
-      </div>
+      <h2>2021</h2>
 
-      <div class="note">
-        Placeholder note: add DOI links to each title, and add newer postdoctoral publications
-        (protein folding / ZMW / Bayesian inference work) as they come out — tag them <code>folding</code>.
-      </div>
+      <!-- J Virol Methods 2021 -->
+      <article class="pub">
+        <div class="pub-title">
+          <a href="https://doi.org/10.1016/j.jviromet.2021.114222" target="_blank" rel="noopener">
+            Evaluation of spike protein antigens for SARS-CoV-2 serology
+          </a>
+        </div>
+        <div class="pub-meta">
+          S. Jagtap, K. Ratnasri, P. Valloly, R. Sharma, <strong>S. Maurya</strong>, A. Gaigore, C. Ardhya, D. S. Biligi, B. K. Desiraju, U. C. M. Natchu, D. K. Saini, R. Roy —
+          <em>Journal of Virological Methods</em>, 296, 114222 (2021)
+        </div>
+        <div class="pub-actions">
+          <a href="https://doi.org/10.1016/j.jviromet.2021.114222" target="_blank" rel="noopener">DOI</a>
+          <a href="https://www.sciencedirect.com/science/article/pii/S0166093421001610" target="_blank" rel="noopener">Publisher</a>
+          <button type="button" data-bibtex-toggle="bib-jagtap2021">BibTeX</button>
+        </div>
+        <div class="bibtex-drawer" id="bib-jagtap2021">
+          <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
+            <span>BibTeX</span>
+            <button type="button" data-bibtex-copy class="hero-btn">Copy</button>
+          </div>
+<pre><code>@article{jagtap2021evaluation,
+  title   = {Evaluation of spike protein antigens for SARS-CoV-2 serology},
+  author  = {Jagtap, Suraj and K, Ratnasri and Valloly, Priyanka and Sharma, Rakhi and Maurya, Satyaghosh and Gaigore, Anushree and Ardhya, Chitra and Biligi, Dayananda S. and Desiraju, Bapu Koundinya and Natchu, Uma Chandra Mouli and Saini, Deepak Kumar and Roy, Rahul},
+  journal = {Journal of Virological Methods},
+  volume  = {296},
+  pages   = {114222},
+  year    = {2021},
+  doi     = {10.1016/j.jviromet.2021.114222}
+}</code></pre>
+        </div>
+      </article>
+
+      <h2>2018</h2>
+
+      <!-- J Biosci 2018 -->
+      <article class="pub">
+        <div class="pub-title">
+          <a href="https://doi.org/10.1007/s12038-018-9769-y" target="_blank" rel="noopener">
+            Single-molecule fluorescence imaging: Generating insights into molecular interactions in virology
+          </a>
+        </div>
+        <div class="pub-meta">
+          S. Banerjee, <strong>S. Maurya</strong>, R. Roy —
+          <em>Journal of Biosciences</em>, 43 (3), 519–540 (2018)
+        </div>
+        <div class="pub-actions">
+          <a href="https://doi.org/10.1007/s12038-018-9769-y" target="_blank" rel="noopener">DOI</a>
+          <a href="https://link.springer.com/article/10.1007/s12038-018-9769-y" target="_blank" rel="noopener">Publisher</a>
+          <button type="button" data-bibtex-toggle="bib-banerjee2018">BibTeX</button>
+        </div>
+        <div class="bibtex-drawer" id="bib-banerjee2018">
+          <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
+            <span>BibTeX</span>
+            <button type="button" data-bibtex-copy class="hero-btn">Copy</button>
+          </div>
+<pre><code>@article{banerjee2018single,
+  title   = {Single-molecule fluorescence imaging: Generating insights into molecular interactions in virology},
+  author  = {Banerjee, Sunaina and Maurya, Satyaghosh and Roy, Rahul},
+  journal = {Journal of Biosciences},
+  volume  = {43},
+  number  = {3},
+  pages   = {519--540},
+  year    = {2018},
+  doi     = {10.1007/s12038-018-9769-y}
+}</code></pre>
+        </div>
+      </article>
+
+      <!-- PNAS 2018 -->
+      <article class="pub">
+        <div class="pub-title">
+          <a href="https://doi.org/10.1073/pnas.1721228115" target="_blank" rel="noopener">
+            Cholesterol promotes Cytolysin A activity by stabilizing the intermediates during pore formation
+          </a>
+        </div>
+        <div class="pub-meta">
+          P. Sathyanarayana, <strong>S. Maurya</strong>, A. Behera, M. Ravichandran, S. S. Visweswariah, K. G. Ayappa, R. Roy —
+          <em>Proceedings of the National Academy of Sciences</em>, 115 (31), E7323–E7330 (2018)
+        </div>
+        <div class="pub-actions">
+          <a href="https://doi.org/10.1073/pnas.1721228115" target="_blank" rel="noopener">DOI</a>
+          <a href="https://www.pnas.org/doi/10.1073/pnas.1721228115" target="_blank" rel="noopener">Publisher</a>
+          <button type="button" data-bibtex-toggle="bib-sathyanarayana2018">BibTeX</button>
+        </div>
+        <div class="bibtex-drawer" id="bib-sathyanarayana2018">
+          <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
+            <span>BibTeX</span>
+            <button type="button" data-bibtex-copy class="hero-btn">Copy</button>
+          </div>
+<pre><code>@article{sathyanarayana2018cholesterol,
+  title   = {Cholesterol promotes Cytolysin A activity by stabilizing the intermediates during pore formation},
+  author  = {Sathyanarayana, Pradeep and Maurya, Satyaghosh and Behera, Amit and Ravichandran, Monisha and Visweswariah, Sandhya S. and Ayappa, K. Ganapathy and Roy, Rahul},
+  journal = {Proceedings of the National Academy of Sciences},
+  volume  = {115},
+  number  = {31},
+  pages   = {E7323--E7330},
+  year    = {2018},
+  doi     = {10.1073/pnas.1721228115}
+}</code></pre>
+        </div>
+      </article>
 
     </div>
   </main>
+
+  <!-- ============ SITE FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <span class="footer-left">&copy; 2026 Satyaghosh Maurya <button type="button" class="theme-toggle-btn footer-anim" data-anim-toggle>Play all animations</button></span>
+      <span class="footer-links">
+        <a href="https://scholar.google.com/citations?user=LGxS32gAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>
+        <a href="https://orcid.org/0000-0003-2757-7742" target="_blank" rel="noopener">ORCID</a>
+        <a href="https://github.com/sgmaurya" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/satyaghosh-maurya-98bbbaa2/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:satyaghosh.maurya@weizmann.ac.il">Email</a>
+      </span>
+    </div>
+  </footer>
 </div>
 
 <script src="js/main.js"></script>
