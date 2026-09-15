@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-13 23:46",
+  "generated": "2026-09-15 16:07",
   "species_profiled": 332,
   "groups": [
     {
@@ -61,6 +61,7 @@
       "hook": "The roadside invader that poisons the soil around it, so that little native grows back where it has settled.",
       "hook_hi": "सड़क किनारे का यह आक्रमणकारी अपने आसपास की मिट्टी में ज़हर घोल देता है, ताकि जहाँ यह जम जाए वहाँ देसी पौधे मुश्किल से उगें।",
       "picto": "herb",
+      "url": "https://sgmaurya.github.io/awadh-biodiversity-atlas-site/species/parthenium_hysterophorus/",
       "photo_count": 0
     },
     {
@@ -76,6 +77,7 @@
       "hook": "Toxic latex and star-shaped flowers; the only plant the Plain Tiger butterfly will lay its eggs on.",
       "hook_hi": "ज़हरीला दूध और तारे जैसे फूल; प्लेन टाइगर तितली अपने अंडे सिर्फ़ इसी पौधे पर देती है।",
       "picto": "herb",
+      "url": "https://sgmaurya.github.io/awadh-biodiversity-atlas-site/species/calotropis_gigantea/",
       "photo_count": 0
     },
     {
@@ -91,6 +93,7 @@
       "hook": "The native bee behind the mustard and lentil harvest: smaller colonies than its European cousin, and quick to leave a disturbed hive.",
       "hook_hi": "सरसों और मसूर की फ़सल के पीछे की देसी मक्खी: यूरोपीय मक्खी से छोटे छत्ते, और छेड़े जाने पर छत्ता छोड़ने में तेज़।",
       "picto": "bee",
+      "url": "https://sgmaurya.github.io/awadh-biodiversity-atlas-site/species/asian_honey_bee/",
       "photo_count": 0
     },
     {
@@ -106,6 +109,7 @@
       "hook": "A forked tail on a wire, looping out for grasshoppers and termites; it will dive at a kite twice its size.",
       "hook_hi": "तार पर बैठी दोफाड़ पूँछ, टिड्डों और दीमकों पर झपट्टा मारती; अपने से दुगुनी चील पर भी टूट पड़ती है।",
       "picto": "bird",
+      "url": "https://sgmaurya.github.io/awadh-biodiversity-atlas-site/species/black_drongo/",
       "photo_count": 0
     },
     {
@@ -121,6 +125,7 @@
       "hook": "Figs in the lean months when nothing else fruits, which is why so many birds and bats depend on this one tree.",
       "hook_hi": "जब कोई और पेड़ नहीं फलता, तब भी इसके फल मिलते हैं; इसीलिए इतने पक्षी और चमगादड़ इसी एक पेड़ पर टिके हैं।",
       "picto": "tree",
+      "url": "https://sgmaurya.github.io/awadh-biodiversity-atlas-site/species/peepal/",
       "photo_count": 0
     },
     {
@@ -136,6 +141,7 @@
       "hook": "A beautiful floating invader that clogs canals and starves ponds of oxygen; the fishers of Basti pay for it.",
       "hook_hi": "सुंदर पर आक्रमणकारी: नहरें जाम करती है और तालाबों की ऑक्सीजन छीन लेती है; इसकी कीमत बस्ती के मछुआरे चुकाते हैं।",
       "picto": "aquatic",
+      "url": "https://sgmaurya.github.io/awadh-biodiversity-atlas-site/species/water_hyacinth/",
       "photo_count": 0
     },
     {
@@ -151,6 +157,7 @@
       "hook": "The dragonfly that migrates across oceans with the monsoon, catching mosquitoes on nine attempts out of ten.",
       "hook_hi": "मानसून के साथ समुद्र पार कर आने वाली व्याधपतंग, जो दस में से नौ झपट्टों में मच्छर पकड़ लेती है।",
       "picto": "dragonfly",
+      "url": "https://sgmaurya.github.io/awadh-biodiversity-atlas-site/species/wandering_glider/",
       "photo_count": 0
     },
     {
@@ -166,6 +173,7 @@
       "hook": "The paddy field's water snake: non-venomous, harmless to people, and a steady predator of frogs, rodents and insects.",
       "hook_hi": "धान के खेत का पानी साँप: विषहीन, इंसान के लिए हानिरहित, और मेंढकों, चूहों व कीड़ों का पक्का शिकारी।",
       "picto": "snake",
+      "url": "https://sgmaurya.github.io/awadh-biodiversity-atlas-site/species/checkered_keelback/",
       "photo_count": 0
     },
     {
@@ -181,6 +189,7 @@
       "hook": "The tallest flying bird on Earth, foraging in paddy and wetland; Vulnerable, and a sign that the wetland still works.",
       "hook_hi": "धरती का सबसे ऊँचा उड़ने वाला पक्षी, धान और दलदल में चरता हुआ; IUCN की सूची में असुरक्षित, और इस बात का संकेत कि आर्द्रभूमि अभी ज़िंदा है।",
       "picto": "wader",
+      "url": "https://sgmaurya.github.io/awadh-biodiversity-atlas-site/species/sarus_crane/",
       "photo_count": 0
     },
     {
@@ -196,6 +205,7 @@
       "hook": "Called a pest, it recycles cellulose, aerates the soil metres deep, and leaves mound earth richer than the field around it.",
       "hook_hi": "जिसे कीट कहते हैं, वही सेल्यूलोज़ को मिट्टी में लौटाती है, कई मीटर गहराई तक मिट्टी में हवा भरती है, और बाँबी की मिट्टी को आसपास के खेत से ज़्यादा उपजाऊ छोड़ती है।",
       "picto": "ant",
+      "url": "https://sgmaurya.github.io/awadh-biodiversity-atlas-site/species/termite/",
       "photo_count": 0
     },
     {
@@ -211,6 +221,7 @@
       "hook": "Grows only from a termite nest, after the first rains; a spike on the cap and a long false root give it away.",
       "hook_hi": "पहली बारिश के बाद सिर्फ़ दीमक की बाँबी से उगता है; टोपी पर नोक और लंबी नकली जड़ इसकी पहचान है।",
       "picto": "mushroom",
+      "url": "https://sgmaurya.github.io/awadh-biodiversity-atlas-site/species/termite_mushroom/",
       "photo_count": 0
     },
     {
@@ -226,6 +237,7 @@
       "hook": "An antelope with 'cow' in its name: raids wheat and sugarcane at night, and is protected all the same.",
       "hook_hi": "नाम में 'गाय' वाला मृग: रात में गेहूँ और गन्ना उजाड़ता है, फिर भी संरक्षित है।",
       "picto": "mammal",
+      "url": "https://sgmaurya.github.io/awadh-biodiversity-atlas-site/species/nilgai/",
       "photo_count": 0
     }
   ],

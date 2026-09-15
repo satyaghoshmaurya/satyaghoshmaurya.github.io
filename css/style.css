@@ -1561,3 +1561,43 @@ figure.gallery-item {
     grid-row: 2;
   }
 }
+
+/* ---- Tiles link into the live atlas (2026-09-15) ---- */
+.atlas-visit {
+  margin: 0.9rem 0 0.2rem;
+}
+
+.atlas-visit a {
+  font-weight: 600;
+}
+
+a.atlas-link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+a.atlas-link:hover {
+  border-color: var(--accent);
+}
+
+a.atlas-link:hover .atlas-soon {
+  color: var(--accent);
+}
+
+a.atlas-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.atlas-open {
+  display: inline-block;
+  margin-top: 0.35rem;
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+
+.feature-sep {
+  color: var(--text-muted);
+  margin: 0 0.3rem;
+}
