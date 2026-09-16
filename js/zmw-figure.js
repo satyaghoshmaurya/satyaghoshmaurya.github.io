@@ -203,7 +203,7 @@
       m.op = m.open;
       for (var i = 0; i < 60; i++) {
         var x = G.r + Math.random() * (W - 2 * G.r);
-        var y = G.top + Math.random() * (G.glassTop - G.top);
+        var y = G.top + Math.random() * (G.filmTop - G.top);   // newcomers appear in the bulk, never inside the hole
         if (ok(x, y)) { m.x = x; m.y = y; break; }
       }
       return m;
@@ -220,13 +220,29 @@
 
     function step() {
       var s = (compact ? 2.5 : 3.6) * speed;
+      // The aperture holds one molecule at a time. At nanomolar concentration a
+      // hole this size is empty nearly always, and that is the whole point of
+      // it: whoever is inside is alone. A molecule outside may not enter while
+      // another is in; it is reflected at the mouth until the hole is free.
+      var occupant = -1;
+      for (var k = 0; k < mols.length; k++) if (mols[k].y >= G.filmTop) { occupant = k; break; }
       for (var i = 0; i < mols.length; i++) {
         var m = mols[i];
-        var nx = m.x + s * gauss(), ny = m.y + s * gauss();
+        // hindered diffusion near a wall: within a few nanometres of the floor a
+        // protein's mobility is roughly halved, so a molecule that reaches the
+        // lit layer lingers there, and a visit is a burst rather than a blip
+        var sm = field(m.x, m.y) > 0.45 ? s * 0.5 : s;
+        var nx = m.x + sm * gauss(), ny = m.y + sm * gauss();
         if (!ok(nx, m.y)) nx = m.x - (nx - m.x);
         if (!ok(nx, m.y)) nx = m.x;
         if (!ok(nx, ny)) ny = m.y - (ny - m.y);
         if (!ok(nx, ny)) ny = m.y;
+        if (m.y < G.filmTop && ny >= G.filmTop && occupant !== -1 && occupant !== i) {
+          ny = m.y - (ny - m.y);
+          if (!ok(nx, ny)) ny = m.y;
+        }
+        if (occupant === i && ny < G.filmTop) occupant = -1;
+        else if (occupant === -1 && ny >= G.filmTop) occupant = i;
         m.x = nx; m.y = ny;
         if (Math.random() < 0.012) m.open = m.open ? 0 : 1;
         m.op += (m.open - m.op) * 0.1;

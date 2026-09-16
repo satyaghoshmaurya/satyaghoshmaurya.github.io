@@ -33,8 +33,11 @@ JOBS = {
                  extra="&kT=0.70&every=2&fscale=1.3", min_cross=3, attempts=8,
                  name="hero-transition-path.gif",
                  note="protein crossing its barrier repeatedly, photon traces below"),
-    "zmw": dict(cols=6, rows=10, fw=1000, src=(700, 550), ms=120, hold=0,
-                extra="&d=120&c=1.0&speed=1.5&every=2&fscale=1.5", min_cross=0, attempts=2,
+    # the hole holds one molecule at a time, so visits are rare and short; a
+    # longer loop and faster diffusion make several fit, and each take is
+    # judged by counting the bursts in its final trace
+    "zmw": dict(cols=6, rows=15, fw=1000, src=(700, 550), ms=120, hold=0,
+                extra="&d=120&c=1.0&speed=2.0&every=2&fscale=1.5", min_bursts=3, attempts=6,
                 name="zmw-120nm.gif",
                 note="enzymes diffusing through a 120 nm aperture at 10 nM, with photon bursts"),
 }
@@ -117,6 +120,43 @@ def count_crossings(xs):
     return n
 
 
+def count_bursts(frame, src):
+    """Bursts visible in the photon trace of one frame: runs of columns where the
+    donor fill rises clearly above the baseline. Geometry follows capture.html
+    (a 380 px cross-section over a 170 px trace, drawn at width 700)."""
+    fw, fh = frame.size
+    src_w, src_h = src
+    k = fh / src_h
+    trace_top = 380 * k
+    y0 = int(trace_top + (8 + 133 / 2) * k)
+    hh = int(133 / 2 * k)
+    x0, x1 = int(51 * fw / src_w), int(688 * fw / src_w)
+    px = frame.load()
+    heights = []
+    for x in range(x0, x1):
+        top = None
+        for y in range(y0 - hh, y0):
+            r, g, b = px[x, y]
+            if g > r + 20 and g > b + 20:
+                top = y
+                break
+        heights.append(0 if top is None else y0 - top)
+    # a burst is a run of at least four columns rising past 30 percent of the
+    # axis: blips from a molecule grazing the layer do not count
+    thresh = hh * 0.30
+    runs, run = 0, 0
+    for h in heights:
+        if h > thresh:
+            run += 1
+        else:
+            if run >= 4:
+                runs += 1
+            run = 0
+    if run >= 4:
+        runs += 1
+    return runs
+
+
 def slice_to_gif(shot, cfg, cols, rows, fw, fh, out_path):
     sheet = Image.open(shot).convert("RGB")
     frames = []
@@ -186,9 +226,11 @@ def main():
                 print("   attempt %d: %2d frames, %d crossings, %d frames on the barrier%s"
                       % (attempt, len(frames), nc, held, "  accepted" if ok else ""))
             else:
-                ok = len(frames) >= cols * rows - 2
-                score = len(frames)
-                print("   attempt %d: %2d frames%s" % (attempt, len(frames), "  accepted" if ok else ""))
+                nb = count_bursts(frames[-1], cfg["src"])
+                ok = len(frames) >= cols * rows - 2 and nb >= cfg.get("min_bursts", 0)
+                score = nb * 100 + len(frames)
+                print("   attempt %d: %2d frames, %d bursts in the final trace%s"
+                      % (attempt, len(frames), nb, "  accepted" if ok else ""))
             if best is None or score > best:
                 best = score
                 shutil.copyfile(cand, final)
