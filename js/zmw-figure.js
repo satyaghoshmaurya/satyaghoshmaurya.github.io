@@ -152,7 +152,7 @@
     var traceCv = q("[data-zmw-trace]"), tctx = traceCv ? traceCv.getContext("2d") : null;
     var TW = 0, TH = 0;
     var NB = 240, bufD = new Float32Array(NB), bufA = new Float32Array(NB), bhead = 0;
-    var PH_MAX = 45, BG = 1.2;   // photons per bin at full field; background per channel
+    var PH_MAX = 140, BG = 1.2;  // photons per bin at the floor, so a typical visit fills most of the panel; background per channel
 
     function conc() { return Math.pow(10, logc); }
 
@@ -312,7 +312,7 @@
       ctx.moveTo(11, gt - 1); ctx.lineTo(17, gt - 1);
       ctx.stroke();
       ctx.fillStyle = rgba(C.bg, 0.95); ctx.fillText("Aluminium film, 100 nm", 22, ft + G.filmT / 2 + 4);
-      ctx.fillStyle = rgba(C.muted, 1); ctx.fillText("Fused silica", 10, H - 12);
+      ctx.fillStyle = rgba(C.muted, 1); ctx.fillText("Glass / quartz", 10, H - 12);
       ctx.fillStyle = rgba(C.laser, 1); ctx.textAlign = "right"; ctx.fillText("532 nm excitation", W - 10, H - 12);
       ctx.textAlign = "right"; ctx.fillStyle = rgba(C.muted, 1);
       ctx.fillText("Dye-labelled enzyme, freely diffusing · " + fmtConc(conc()), W - 10, G.fs + 5);
@@ -353,18 +353,27 @@
       var L = Math.round(fs * 3.4), R = 12, T = 8, B = Math.round(fs * 1.9);
       var pw = w - L - R, ph = h - T - B;
       if (pw <= 0 || ph <= 0) return;
-      var y0 = T + ph / 2, hh = ph / 2 - 2, YMAX = 50, dx = pw / (NB - 1);
+      var y0 = T + ph / 2, hh = ph / 2 - 2, YMAX = 100, dx = pw / (NB - 1);
       c2.clearRect(0, 0, w, h);
       c2.strokeStyle = rgba(C.border, 1); c2.lineWidth = 1; c2.strokeRect(L + 0.5, T + 0.5, pw, ph);
       c2.strokeStyle = rgba(C.muted, 0.6); c2.beginPath(); c2.moveTo(L, y0 + 0.5); c2.lineTo(L + pw, y0 + 0.5); c2.stroke();
       function trace(buf, sign, rgb) {
+        var j, v, vx, vy;
+        c2.beginPath(); c2.moveTo(L, y0);
+        for (j = 0; j < NB; j++) {
+          v = buf[(bhead + j) % NB];
+          vx = L + j * dx; vy = y0 - sign * Math.min(v, YMAX) / YMAX * hh;
+          c2.lineTo(vx, vy);
+        }
+        c2.lineTo(L + pw, y0); c2.closePath();
+        c2.fillStyle = rgba(rgb, 0.28); c2.fill();
         c2.beginPath();
-        for (var j = 0; j < NB; j++) {
-          var v = buf[(bhead + j) % NB];
-          var vx = L + j * dx, vy = y0 - sign * Math.min(v, YMAX) / YMAX * hh;
+        for (j = 0; j < NB; j++) {
+          v = buf[(bhead + j) % NB];
+          vx = L + j * dx; vy = y0 - sign * Math.min(v, YMAX) / YMAX * hh;
           if (j === 0) c2.moveTo(vx, vy); else c2.lineTo(vx, vy);
         }
-        c2.strokeStyle = rgba(rgb, 0.95); c2.lineWidth = 1.3; c2.lineJoin = "round"; c2.stroke();
+        c2.strokeStyle = rgba(rgb, 0.95); c2.lineWidth = 1.2; c2.lineJoin = "round"; c2.stroke();
       }
       trace(bufD, 1, C.donor);
       trace(bufA, -1, C.acceptor);
