@@ -320,7 +320,7 @@
       var eg = ctx.createLinearGradient(0, gt, 0, ft);
       for (var k = 0; k <= 10; k++) {
         var f = k / 10;
-        eg.addColorStop(f, rgba(C.accent, 0.62 * Math.exp(-(f * fT) / G.L)));
+        eg.addColorStop(f, rgba(C.amber, 0.85 * Math.exp(-(f * fT) / G.L)));
       }
       ctx.fillStyle = eg; ctx.fillRect(cx - half, ft, 2 * half, fT);
       var mg = ctx.createLinearGradient(0, ft, 0, gt);
