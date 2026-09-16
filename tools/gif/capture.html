@@ -11,17 +11,21 @@
   /* Captures an animated figure as a grid of frames in one canvas, so a single
      headless screenshot yields every frame. tools/gif/make_gifs.py slices it.
 
-     The live figure stays inside the viewport at almost zero opacity: its
-     IntersectionObserver pauses the animation if the element leaves the screen,
-     so it cannot simply be hidden. The opaque grid canvas covers it. */
+     The figures are driven SYNCHRONOUSLY through the _captureFrame hook each
+     module exposes: n simulation steps, one redraw, snapshot, repeat, all in
+     one script task. Nothing waits on requestAnimationFrame or timers, so the
+     frame count is exact and there is nothing for Chrome's screenshot timing
+     to race. (Earlier versions sampled on a timer and got 1 to 41 frames from
+     identical settings.)
+
+     The live figure sits in the viewport at almost zero opacity so its
+     IntersectionObserver never pauses it; the opaque grid canvas covers it. */
   html, body { margin: 0; padding: 0; background: #fff; }
-  #stage {
-    position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.01;
-    pointer-events: none;
-  }
+  #stage { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.01; pointer-events: none; }
   #strip { display: block; background: #fff; }
   .fig-card, .landscape-hero { margin: 0 !important; border: none !important; box-shadow: none !important; }
   .fig-bar, .landscape-hero-bar, .fig-caption, .landscape-hero-caption { display: none !important; }
+  .fig-canvas-trace { border-top: none !important; }
 </style>
 </head>
 <body>
@@ -34,38 +38,35 @@
   var FIG = Q.get("fig") || "hero";
   var COLS = parseInt(Q.get("cols") || "6", 10);
   var ROWS = parseInt(Q.get("rows") || "6", 10);
-  var FW = parseInt(Q.get("fw") || "600", 10);
-  var SAMPLE_MS = parseInt(Q.get("ms") || "120", 10);
-  var SX = parseInt(Q.get("sx") || "0", 10);      // source crop, CSS px
-  var SW = parseInt(Q.get("sw") || "0", 10);      // 0 means the full width
+  var FW = parseInt(Q.get("fw") || "1000", 10);
+  var EVERY = parseInt(Q.get("every") || "1", 10);      // simulation ticks per captured frame
+  var FSCALE = Q.get("fscale") || "1";
+  var DSF = window.devicePixelRatio || 1;
 
   var stage = document.getElementById("stage");
-  var srcW, srcH, FH, sources = [];
+  var srcW, srcH, sources = [], hookCanvas;
 
   if (FIG === "hero") {
-    srcW = 900;
+    srcW = 1000; srcH = 650;
     stage.style.width = srcW + "px";
     stage.innerHTML =
-      '<figure class="landscape-hero" id="landscapeHero">' +
+      '<figure class="landscape-hero" id="landscapeHero" data-font-scale="' + FSCALE + '">' +
         '<div class="landscape-hero-bar">' +
           '<input type="range" id="heroTemp" min="0.22" max="0.70" step="0.01" value="0.40">' +
           '<span id="heroTempVal" class="mono"></span>' +
           '<button type="button" id="heroPlay">Play</button>' +
         '</div>' +
-        '<canvas id="landscapeCanvas" class="landscape-canvas"></canvas>' +
-        '<canvas id="traceCanvas" class="trace-canvas"></canvas>' +
+        '<canvas id="landscapeCanvas" class="landscape-canvas" style="height:380px"></canvas>' +
+        '<canvas id="traceCanvas" class="trace-canvas" style="height:270px"></canvas>' +
         '<figcaption class="landscape-hero-caption">' +
           '<strong id="heroReadoutE"></strong><strong id="heroReadoutState"></strong>' +
           '<strong id="heroReadoutN"></strong><strong id="heroReadoutTP"></strong>' +
           '<span id="heroHint"></span>' +
         '</figcaption>' +
       '</figure>';
-    document.getElementById("landscapeCanvas").style.height = "360px";
-    document.getElementById("traceCanvas").style.height = "260px";
     sources = ["landscapeCanvas", "traceCanvas"];
-    srcH = 620;
   } else {
-    srcW = 1000;
+    srcW = 700; srcH = 550;
     stage.style.width = srcW + "px";
     stage.innerHTML =
       '<figure class="fig-card" id="zmwFigure">' +
@@ -76,22 +77,24 @@
           '<span class="mono" data-zmw-conc-val></span>' +
           '<button type="button" data-zmw-play>Play</button>' +
         '</div>' +
-        '<canvas class="fig-canvas" data-figure="zmw"></canvas>' +
+        '<canvas class="fig-canvas" data-figure="zmw" style="height:380px" data-zmw-speed="' + (Q.get("speed") || "1") + '" data-font-scale="' + FSCALE + '"></canvas>' +
+        '<canvas class="fig-canvas fig-canvas-trace" data-zmw-trace style="height:170px"></canvas>' +
         '<figcaption class="fig-caption">' +
           '<strong class="mono" data-zmw-out-l></strong><strong class="mono" data-zmw-out-v></strong>' +
           '<strong class="mono" data-zmw-out-n></strong><strong class="mono" data-zmw-out-nc></strong>' +
         '</figcaption>' +
       '</figure>';
-    document.querySelector('[data-figure="zmw"]').style.height = "400px";
-    sources = ['[data-figure="zmw"]'];
-    srcH = 400;
+    sources = ['[data-figure="zmw"]', '[data-zmw-trace]'];
   }
 
-  var CW = SW || srcW;
-  FH = Math.round(FW * srcH / CW);
+  var FH = Math.round(FW * srcH / srcW);
   var strip = document.getElementById("strip");
   strip.width = COLS * FW;
   strip.height = ROWS * FH;
+  // at device scale factor 2 the screenshot is twice the CSS size, so the grid
+  // is laid out at half size and comes out 1:1 with its backing pixels
+  strip.style.width = (COLS * FW / DSF) + "px";
+  strip.style.height = (ROWS * FH / DSF) + "px";
   var sctx = strip.getContext("2d");
   sctx.fillStyle = "#fff";
   sctx.fillRect(0, 0, strip.width, strip.height);
@@ -100,57 +103,52 @@
     return sel.charAt(0) === "[" ? document.querySelector(sel) : document.getElementById(sel);
   }
 
-  var s = document.createElement("script");
-  s.src = FIG === "hero" ? "../../js/landscape-hero.js" : "../../js/zmw-figure.js";
-  s.onload = function () { setTimeout(start, 120); };
-  document.body.appendChild(s);
+  function snap(i) {
+    var dx = (i % COLS) * FW, dy = Math.floor(i / COLS) * FH, oy = 0;
+    for (var k = 0; k < sources.length; k++) {
+      var c = grab(sources[k]);
+      var h = Math.round(FW * c.clientHeight / c.clientWidth);
+      sctx.drawImage(c, 0, 0, c.width, c.height, dx, dy + oy, FW, h);
+      oy += h;
+    }
+  }
+
+  function setRange(el, value) {
+    if (!el) return;
+    el.value = value;
+    el.dispatchEvent(new Event("input", { bubbles: true }));
+  }
 
   function start() {
     if (FIG === "hero") {
-      // a warmer landscape so the crossing actually happens inside a short loop
-      var t = document.getElementById("heroTemp");
-      t.value = Q.get("kT") || "0.60";
-      t.dispatchEvent(new Event("input", { bubbles: true }));
-      document.getElementById("heroPlay").click();
+      setRange(document.getElementById("heroTemp"), Q.get("kT") || "0.68");
+      hookCanvas = document.getElementById("landscapeCanvas");
     } else {
-      var a = document.querySelector("[data-zmw-aperture]");
-      a.value = Q.get("d") || "120";
-      a.dispatchEvent(new Event("input", { bubbles: true }));
-      document.querySelector("[data-zmw-play]").click();
+      setRange(document.querySelector("[data-zmw-aperture]"), Q.get("d") || "120");
+      setRange(document.querySelector("[data-zmw-conc]"), Q.get("c") || "0.7");
+      hookCanvas = document.querySelector('[data-figure="zmw"]');
     }
-    // Capture from inside the animation callback, not from a timer. Under
-    // --virtual-time-budget a setInterval does not interleave with
-    // requestAnimationFrame the way a real clock does, so timed samples kept
-    // grabbing the same unredrawn canvas: duplicate frames, which Pillow then
-    // merged away and whose durations it summed.
-    var i = 0, total = COLS * ROWS, ticks = 0;
-    var EVERY = parseInt(Q.get("every") || "2", 10);   // animation frames per captured frame
-    function snap() {
-      var dx = (i % COLS) * FW, dy = Math.floor(i / COLS) * FH, oy = 0;
-      for (var k = 0; k < sources.length; k++) {
-        var c = grab(sources[k]);
-        var r = c.width / c.clientWidth;               // backing pixels per CSS pixel
-        var cw = SW || c.clientWidth;
-        var h = Math.round(FW * c.clientHeight / cw);
-        sctx.drawImage(c, SX * r, 0, cw * r, c.height, dx, dy + oy, FW, h);
-        oy += h;
-      }
-      i++;
+    if (!hookCanvas || !hookCanvas._captureFrame) {
+      document.title = "no hook";
+      return;
     }
-    function loop() {
-      if (i >= total) {
-        document.title = "done";
-        var mark = document.createElement("div");
-        mark.id = "capture-complete";
-        document.body.appendChild(mark);
-        return;
-      }
-      ticks++;
-      if (ticks % EVERY === 0) snap();
-      requestAnimationFrame(loop);
+    var total = COLS * ROWS;
+    for (var i = 0; i < total; i++) {
+      hookCanvas._captureFrame(EVERY);
+      snap(i);
     }
-    requestAnimationFrame(loop);
+    document.title = "done " + total;
   }
+
+  var s = document.createElement("script");
+  s.src = FIG === "hero" ? "../../js/landscape-hero.js" : "../../js/zmw-figure.js";
+  s.onload = function () {
+    // draw with the real fonts, or with the fallback if they never arrive
+    var ready = (document.fonts && document.fonts.ready) || Promise.resolve();
+    var timeout = new Promise(function (r) { setTimeout(r, 3000); });
+    Promise.race([ready, timeout]).then(function () { setTimeout(start, 50); });
+  };
+  document.body.appendChild(s);
 })();
 </script>
 </body>

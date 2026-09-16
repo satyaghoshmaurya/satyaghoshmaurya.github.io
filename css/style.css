@@ -1601,3 +1601,15 @@ a.atlas-link:focus-visible {
   color: var(--text-muted);
   margin: 0 0.3rem;
 }
+
+/* ---- Photon-burst trace under the waveguide figure (2026-09-17) ---- */
+.fig-canvas-trace {
+  height: 150px;
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 520px) {
+  .fig-canvas-trace {
+    height: 130px;
+  }
+}

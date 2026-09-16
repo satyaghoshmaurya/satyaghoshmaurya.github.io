@@ -38,6 +38,7 @@
     C.donor = hexToRgb(cssVar("--donor-green", "#1a7f37"));
     C.acceptor = hexToRgb(cssVar("--acceptor-red", "#cf222e"));
     C.amber = [210, 153, 34];
+    C.laser = [30, 180, 90];   // 532 nm excitation, and everything it lights
     C.font = cssVar("--font-body", "sans-serif");
   }
 
@@ -49,6 +50,12 @@
     var m = Math.sqrt(-2 * Math.log(r) / r);
     spare = v * m;
     return u * m;
+  }
+  function poisson(lambda) {
+    if (lambda > 30) return Math.max(0, Math.round(lambda + Math.sqrt(lambda) * gauss()));
+    var L = Math.exp(-lambda), k = 0, q = 1;
+    do { k++; q *= Math.random(); } while (q > L);
+    return k - 1;
   }
 
   var reduceMotion = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
@@ -138,6 +145,14 @@
     var W = 0, H = 0, dpr = 1;
     var G = {};
     var mols = [];
+    var speed = parseFloat(canvas.getAttribute("data-zmw-speed")) || 1;
+    var fscale = parseFloat(canvas.getAttribute("data-font-scale")) || 1;
+    // Optional photon trace: donor and acceptor counts per bin from whatever
+    // sits in the evanescent volume, so a visit shows as a burst.
+    var traceCv = q("[data-zmw-trace]"), tctx = traceCv ? traceCv.getContext("2d") : null;
+    var TW = 0, TH = 0;
+    var NB = 240, bufD = new Float32Array(NB), bufA = new Float32Array(NB), bhead = 0;
+    var PH_MAX = 45, BG = 1.2;   // photons per bin at full field; background per channel
 
     function conc() { return Math.pow(10, logc); }
 
@@ -151,6 +166,7 @@
       G.L = decayLength(d) * scale;                // evanescent intensity decay length, px
       G.r = compact ? 1.8 : 2.4;                   // molecule radius when drawn as a dot
       G.top = 6;
+      G.fs = Math.round(Math.max(11, Math.min(15, W / 65)) * fscale);
     }
 
     function fit() {
@@ -158,6 +174,11 @@
       W = canvas.clientWidth; H = canvas.clientHeight;
       canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      if (traceCv) {
+        TW = traceCv.clientWidth; TH = traceCv.clientHeight;
+        traceCv.width = Math.round(TW * dpr); traceCv.height = Math.round(TH * dpr);
+        tctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
       geom();
     }
 
@@ -198,7 +219,7 @@
     }
 
     function step() {
-      var s = compact ? 2.5 : 3.6;
+      var s = (compact ? 2.5 : 3.6) * speed;
       for (var i = 0; i < mols.length; i++) {
         var m = mols[i];
         var nx = m.x + s * gauss(), ny = m.y + s * gauss();
@@ -210,6 +231,20 @@
         if (Math.random() < 0.012) m.open = m.open ? 0 : 1;
         m.op += (m.open - m.op) * 0.1;
       }
+      if (traceCv) {
+        var pd = 0, pa = 0;
+        for (var j = 0; j < mols.length; j++) {
+          var b = field(mols[j].x, mols[j].y);
+          // observed brightness falls off faster than the excitation alone: the
+          // light collected back out through the aperture decays with height too
+          if (b > 0.05) {
+            var E = 0.85 - 0.6 * mols[j].op, rate = PH_MAX * Math.min(1, b * b);
+            pd += rate * (1 - E); pa += rate * E;
+          }
+        }
+        bufD[bhead] = poisson(pd + BG); bufA[bhead] = poisson(pa + BG);
+        bhead = (bhead + 1) % NB;
+      }
     }
 
     // Excitation intensity: evanescent decay from the floor inside the aperture.
@@ -219,10 +254,10 @@
     }
 
     function drawArrows() {
-      var n = 5, span = 2 * G.half + 70 * scale, x0 = G.cx - span / 2;
-      ctx.strokeStyle = rgba(C.accent, 0.85); ctx.fillStyle = rgba(C.accent, 0.85); ctx.lineWidth = compact ? 1.4 : 2;
+      var n = 3, span = 2 * G.half + 40 * scale, x0 = G.cx - span / 2;
+      ctx.strokeStyle = rgba(C.laser, 0.9); ctx.fillStyle = rgba(C.laser, 0.9); ctx.lineWidth = compact ? 1.6 : 2.6;
       for (var i = 0; i < n; i++) {
-        var x = x0 + span * (i + 0.5) / n, y1 = H - 4, y2 = G.glassTop + 5, ah = compact ? 4 : 6;
+        var x = x0 + span * (i + 0.5) / n, y1 = H - 4, y2 = G.glassTop + 5, ah = compact ? 5 : 8;
         ctx.beginPath(); ctx.moveTo(x, y1); ctx.lineTo(x, y2 + ah); ctx.stroke();
         ctx.beginPath(); ctx.moveTo(x - ah * 0.8, y2 + ah); ctx.lineTo(x + ah * 0.8, y2 + ah); ctx.lineTo(x, y2); ctx.closePath(); ctx.fill();
       }
@@ -268,7 +303,7 @@
 
     function drawLabels() {
       var ft = G.filmTop, gt = G.glassTop, cx = G.cx, half = G.half;
-      ctx.font = "11px " + C.font; ctx.textBaseline = "alphabetic";
+      ctx.font = G.fs + "px " + C.font; ctx.textBaseline = "alphabetic";
       ctx.textAlign = "left";
       ctx.strokeStyle = rgba(C.bg, 0.8); ctx.lineWidth = 1;
       ctx.beginPath();
@@ -278,9 +313,9 @@
       ctx.stroke();
       ctx.fillStyle = rgba(C.bg, 0.95); ctx.fillText("Aluminium film, 100 nm", 22, ft + G.filmT / 2 + 4);
       ctx.fillStyle = rgba(C.muted, 1); ctx.fillText("Fused silica", 10, H - 12);
-      ctx.fillStyle = rgba(C.accent, 1); ctx.textAlign = "right"; ctx.fillText("Excitation", W - 10, H - 12);
+      ctx.fillStyle = rgba(C.laser, 1); ctx.textAlign = "right"; ctx.fillText("532 nm excitation", W - 10, H - 12);
       ctx.textAlign = "right"; ctx.fillStyle = rgba(C.muted, 1);
-      ctx.fillText("Dye-labelled enzyme, freely diffusing · " + fmtConc(conc()), W - 10, 16);
+      ctx.fillText("Dye-labelled enzyme, freely diffusing · " + fmtConc(conc()), W - 10, G.fs + 5);
       // aperture dimension line
       var yd = ft - 12;
       ctx.strokeStyle = rgba(C.muted, 0.9); ctx.lineWidth = 1;
@@ -301,7 +336,7 @@
       ctx.stroke();
       ctx.textAlign = "left"; ctx.fillStyle = rgba(C.bg, 0.95);
       ctx.fillText("L ≈ " + Math.round(decayLength(d)) + " nm", xb + 6, gt - Math.max(L / 2, 6) + 4);
-      ctx.fillText("observation volume", xb, ft + 18);
+      ctx.fillText("observation volume", xb, ft + G.fs + 7);
       ctx.strokeStyle = rgba(C.bg, 0.7);
       ctx.beginPath(); ctx.moveTo(cx + half + 2, ft + 14); ctx.lineTo(xb - 3, ft + 14); ctx.stroke();
       // passivation note on the film, left of the aperture
@@ -309,18 +344,51 @@
       ctx.fillText("PEG-2k (~5 nm) on every surface", cx - half - 9, gt - 6);
     }
 
+    // Donor counts upward, acceptor downward from a shared baseline: the
+    // classic burst display. Empty while the volume is empty; a burst each
+    // time an enzyme wanders through, coloured by its conformation.
+    function drawTrace() {
+      if (!traceCv) return;
+      var c2 = tctx, w = TW, h = TH, fs = Math.max(10, Math.round(G.fs * 0.9));
+      var L = Math.round(fs * 3.4), R = 12, T = 8, B = Math.round(fs * 1.9);
+      var pw = w - L - R, ph = h - T - B;
+      if (pw <= 0 || ph <= 0) return;
+      var y0 = T + ph / 2, hh = ph / 2 - 2, YMAX = 50, dx = pw / (NB - 1);
+      c2.clearRect(0, 0, w, h);
+      c2.strokeStyle = rgba(C.border, 1); c2.lineWidth = 1; c2.strokeRect(L + 0.5, T + 0.5, pw, ph);
+      c2.strokeStyle = rgba(C.muted, 0.6); c2.beginPath(); c2.moveTo(L, y0 + 0.5); c2.lineTo(L + pw, y0 + 0.5); c2.stroke();
+      function trace(buf, sign, rgb) {
+        c2.beginPath();
+        for (var j = 0; j < NB; j++) {
+          var v = buf[(bhead + j) % NB];
+          var vx = L + j * dx, vy = y0 - sign * Math.min(v, YMAX) / YMAX * hh;
+          if (j === 0) c2.moveTo(vx, vy); else c2.lineTo(vx, vy);
+        }
+        c2.strokeStyle = rgba(rgb, 0.95); c2.lineWidth = 1.3; c2.lineJoin = "round"; c2.stroke();
+      }
+      trace(bufD, 1, C.donor);
+      trace(bufA, -1, C.acceptor);
+      c2.font = fs + "px " + C.font; c2.textBaseline = "middle"; c2.textAlign = "right"; c2.fillStyle = rgba(C.muted, 1);
+      c2.fillText(String(YMAX), L - 5, T + 4); c2.fillText("0", L - 5, y0); c2.fillText(String(YMAX), L - 5, T + ph - 4);
+      c2.save(); c2.translate(fs * 0.9, T + ph / 2); c2.rotate(-Math.PI / 2); c2.textAlign = "center"; c2.fillText("Photons / bin", 0, 0); c2.restore();
+      c2.textAlign = "left"; c2.textBaseline = "alphabetic";
+      c2.fillStyle = rgba(C.donor, 1); c2.fillText("Donor", L + 7, T + fs + 2);
+      c2.fillStyle = rgba(C.acceptor, 1); c2.fillText("Acceptor", L + 7, T + ph - 6);
+      c2.fillStyle = rgba(C.muted, 1); c2.textAlign = "center"; c2.fillText("Time \u2192", L + pw / 2, h - 5);
+    }
+
     function draw() {
       ctx.clearRect(0, 0, W, H);
       var gt = G.glassTop, ft = G.filmTop, cx = G.cx, half = G.half, fT = G.filmT;
       ctx.fillStyle = rgba(C.accent, 0.10); ctx.fillRect(0, gt, W, H - gt);
       var gl = ctx.createLinearGradient(0, H, 0, gt);
-      gl.addColorStop(0, rgba(C.accent, 0)); gl.addColorStop(1, rgba(C.accent, 0.35));
+      gl.addColorStop(0, rgba(C.laser, 0)); gl.addColorStop(1, rgba(C.laser, 0.45));
       ctx.fillStyle = gl; ctx.fillRect(cx - half - 40 * scale, gt, 2 * half + 80 * scale, H - gt);
       drawArrows();
       var eg = ctx.createLinearGradient(0, gt, 0, ft);
       for (var k = 0; k <= 10; k++) {
         var f = k / 10;
-        eg.addColorStop(f, rgba(C.amber, 0.85 * Math.exp(-(f * fT) / G.L)));
+        eg.addColorStop(f, rgba(C.laser, 0.85 * Math.exp(-(f * fT) / G.L)));
       }
       ctx.fillStyle = eg; ctx.fillRect(cx - half, ft, 2 * half, fT);
       var mg = ctx.createLinearGradient(0, ft, 0, gt);
@@ -332,6 +400,7 @@
       drawPassivation();
       for (var i = 0; i < mols.length; i++) drawMol(mols[i]);
       if (!compact) drawLabels();
+      drawTrace();
     }
 
     function updateReadouts() {
@@ -368,9 +437,12 @@
     refreshColors();
     fit();
     syncCount();
-    for (var i = 0; i < 40; i++) step();
+    for (var i = 0; i < NB; i++) step();   // fills the photon trace before anything is shown
     draw();
     updateReadouts();
+    // Hook for tools/gif/capture.html: advance n simulation steps and redraw,
+    // synchronously, so frames can be captured without the animation clock.
+    canvas._captureFrame = function (n) { n = n || 2; for (var k = 0; k < n; k++) step(); draw(); };
 
     if (slA) slA.addEventListener("input", function () {
       var v = parseFloat(slA.value); if (!isNaN(v)) d = v;
@@ -392,7 +464,8 @@
       }, { threshold: 0.05 }).observe(canvas);
     }
     if (window.ResizeObserver) {
-      new ResizeObserver(function () { fit(); syncCount(); draw(); }).observe(canvas);
+      var ro = new ResizeObserver(function () { fit(); syncCount(); draw(); });
+      ro.observe(canvas); if (traceCv) ro.observe(traceCv);
     } else {
       window.addEventListener("resize", function () { fit(); syncCount(); draw(); });
     }

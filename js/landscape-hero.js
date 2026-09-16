@@ -24,6 +24,8 @@
   var slider = document.getElementById("heroTemp");
   var sliderVal = document.getElementById("heroTempVal");
   var hint = document.getElementById("heroHint");
+  var fscale = parseFloat(root.getAttribute("data-font-scale")) || 1;
+  var FS = 11;   // label size, set from the canvas width in fit()
 
   // ---------- Model ----------
   // U(x) = (x^2 - 1)^2 - EPS*x : wells near x = -1 (open conformation, dyes
@@ -149,6 +151,7 @@
     dpr = Math.min(window.devicePixelRatio || 1, cvL.clientWidth < 600 ? 1.5 : 2);   // fewer pixels on phones
     WL = cvL.clientWidth; HL = cvL.clientHeight;
     WT = cvT.clientWidth; HT = cvT.clientHeight;
+    FS = Math.round(Math.max(11, Math.min(15, WL / 60)) * fscale);
     cvL.width = Math.round(WL * dpr); cvL.height = Math.round(HL * dpr);
     cvT.width = Math.round(WT * dpr); cvT.height = Math.round(HT * dpr);
     ctxL.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -173,7 +176,7 @@
   XCLAMP = Math.min(XCLAMP, XR - 0.02, -XL - 0.02);
   function drawLandscape(E) {
     var ctx = ctxL, w = WL, h = HL;
-    var L = 40, R = 14, T = 22, B = 30;
+    var L = Math.round(FS * 3.6), R = 14, T = 22, B = Math.round(FS * 2.7);
     var pw = w - L - R, ph = h - T - B;
     if (pw <= 0 || ph <= 0) return;
     function sx(v) { return L + (v - XL) / (XR - XL) * pw; }
@@ -205,12 +208,12 @@
     ctx.beginPath(); ctx.moveTo(L + 0.5, T); ctx.lineTo(L + 0.5, T + ph + 0.5); ctx.lineTo(L + pw, T + ph + 0.5); ctx.stroke();
 
     // labels
-    ctx.fillStyle = rgba(C.muted, 1); ctx.font = "11px " + FONT; ctx.textAlign = "center"; ctx.textBaseline = "alphabetic";
-    ctx.fillText("Open", sx(-1), T + ph + 15);
-    ctx.fillText("Closed", sx(1), T + ph + 15);
+    ctx.fillStyle = rgba(C.muted, 1); ctx.font = FS + "px " + FONT; ctx.textAlign = "center"; ctx.textBaseline = "alphabetic";
+    ctx.fillText("Open", sx(-1), T + ph + FS + 4);
+    ctx.fillText("Closed", sx(1), T + ph + FS + 4);
     ctx.fillText("Reaction coordinate", L + pw / 2, h - 5);
-    ctx.font = "13px " + FONT; ctx.fillText("‡", sx(0), sy(U(0)) - 8);
-    ctx.save(); ctx.translate(11, T + ph / 2); ctx.rotate(-Math.PI / 2); ctx.font = "11px " + FONT; ctx.fillText("Free energy", 0, 0); ctx.restore();
+    ctx.font = (FS + 2) + "px " + FONT; ctx.fillText("‡", sx(0), sy(U(0)) - 8);
+    ctx.save(); ctx.translate(FS, T + ph / 2); ctx.rotate(-Math.PI / 2); ctx.font = FS + "px " + FONT; ctx.fillText("Free energy", 0, 0); ctx.restore();
 
     // thermal-energy scale bar beside the folded well
     var kx = sx(1.42), ky0 = sy(U(1)), ky1 = sy(U(1) + kT);
@@ -220,7 +223,7 @@
     ctx.moveTo(kx - 3, ky0); ctx.lineTo(kx + 3, ky0);
     ctx.moveTo(kx - 3, ky1); ctx.lineTo(kx + 3, ky1);
     ctx.stroke();
-    ctx.font = "10px " + FONT; ctx.textAlign = "left"; ctx.fillStyle = rgba(C.muted, 1);
+    ctx.font = (FS - 1) + "px " + FONT; ctx.textAlign = "left"; ctx.fillStyle = rgba(C.muted, 1);
     ctx.fillText("kBT", kx + 6, (ky0 + ky1) / 2 + 3);
 
     // trail
@@ -288,7 +291,7 @@
   // ---------- Trace panel ----------
   function drawTrace() {
     var ctx = ctxT, w = WT, h = HT;
-    var L = 40, R = 14, T = 12, B = 22, GAP = 10;
+    var L = Math.round(FS * 3.6), R = 14, T = 12, B = FS * 2, GAP = 10;
     var pw = w - L - R, inner = h - T - B - GAP;
     if (pw <= 0 || inner <= 0) return;
     var hI = Math.round(inner * 0.42), hE = inner - hI;
@@ -334,15 +337,16 @@
     polyline(bufE, yE, hE, 1, C.accent, 1.4);
 
     // labels
-    ctx.fillStyle = rgba(C.muted, 1); ctx.font = "10px " + FONT; ctx.textAlign = "right"; ctx.textBaseline = "middle";
+    ctx.fillStyle = rgba(C.muted, 1); ctx.font = (FS - 1) + "px " + FONT; ctx.textAlign = "right"; ctx.textBaseline = "middle";
     ctx.fillText("1", L - 5, yE + 1);
     ctx.fillText("0.5", L - 5, yE + hE / 2);
     ctx.fillText("0", L - 5, yE + hE);
-    ctx.save(); ctx.translate(11, yE + hE / 2); ctx.rotate(-Math.PI / 2); ctx.textAlign = "center"; ctx.fillText("FRET efficiency", 0, 0); ctx.restore();
-    ctx.save(); ctx.translate(11, yI + hI / 2); ctx.rotate(-Math.PI / 2); ctx.textAlign = "center"; ctx.fillText("Photons", 0, 0); ctx.restore();
+    ctx.save(); ctx.translate(FS, yE + hE / 2); ctx.rotate(-Math.PI / 2); ctx.textAlign = "center"; ctx.fillText("FRET efficiency", 0, 0); ctx.restore();
+    ctx.save(); ctx.translate(FS, yI + hI / 2); ctx.rotate(-Math.PI / 2); ctx.textAlign = "center"; ctx.fillText("Photons", 0, 0); ctx.restore();
     ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
-    ctx.fillStyle = rgba(C.donor, 1); ctx.fillText("Donor", L + 6, yI + 11);
-    ctx.fillStyle = rgba(C.acceptor, 1); ctx.fillText("Acceptor", L + 44, yI + 11);
+    ctx.fillStyle = rgba(C.donor, 1); ctx.fillText("Donor", L + 6, yI + FS);
+    var dw = ctx.measureText("Donor").width;
+    ctx.fillStyle = rgba(C.acceptor, 1); ctx.fillText("Acceptor", L + 6 + dw + 8, yI + FS);
     ctx.fillStyle = rgba(C.muted, 1); ctx.textAlign = "center"; ctx.fillText("Time →", L + pw / 2, h - 6);
   }
 
@@ -382,6 +386,13 @@
     if (p && visible && rafId === null) rafId = requestAnimationFrame(tick);
   }
   function prefill(count) { for (var i = 0; i < count; i++) { stepPhysics(); lastE = sample(); } }
+  // Hook for tools/gif/capture.html: n ticks of physics (two steps each, as on
+  // screen) and one render, synchronously, without the animation clock.
+  cvL._captureFrame = function (n) {
+    n = n || 1;
+    for (var k = 0; k < n; k++) { stepPhysics(); lastE = sample(); stepPhysics(); lastE = sample(); }
+    render();
+  };
 
   // ---------- Wire up ----------
   refreshColors();
