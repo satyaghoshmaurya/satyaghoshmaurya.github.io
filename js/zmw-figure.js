@@ -151,7 +151,8 @@
     // sits in the evanescent volume, so a visit shows as a burst.
     var traceCv = q("[data-zmw-trace]"), tctx = traceCv ? traceCv.getContext("2d") : null;
     var TW = 0, TH = 0;
-    var NB = 240, bufD = new Float32Array(NB), bufA = new Float32Array(NB), bhead = 0;
+    var NB = parseInt(canvas.getAttribute("data-zmw-bins"), 10) || 240;   // trace window, bins
+    var bufD = new Float32Array(NB), bufA = new Float32Array(NB), bhead = 0;
     var PH_MAX = 140, BG = 1.2;  // photons per bin at the floor, so a typical visit fills most of the panel; background per channel
 
     function conc() { return Math.pow(10, logc); }
@@ -224,25 +225,27 @@
       // hole this size is empty nearly always, and that is the whole point of
       // it: whoever is inside is alone. A molecule outside may not enter while
       // another is in; it is reflected at the mouth until the hole is free.
-      var occupant = -1;
-      for (var k = 0; k < mols.length; k++) if (mols[k].y >= G.filmTop) { occupant = k; break; }
+      // The top quarter is the lip: a molecule may poke in there and turn back
+      // without claiming the hole. Below the lip the hole is single-occupancy.
+      var deep = G.filmTop + 24 * scale, occupant = -1;
+      for (var k = 0; k < mols.length; k++) if (mols[k].y >= deep) { occupant = k; break; }
       for (var i = 0; i < mols.length; i++) {
         var m = mols[i];
         // hindered diffusion near a wall: within a few nanometres of the floor a
-        // protein's mobility is roughly halved, so a molecule that reaches the
+        // protein's mobility drops severalfold, so a molecule that reaches the
         // lit layer lingers there, and a visit is a burst rather than a blip
-        var sm = field(m.x, m.y) > 0.45 ? s * 0.5 : s;
+        var sm = field(m.x, m.y) > 0.45 ? s * 0.35 : s;
         var nx = m.x + sm * gauss(), ny = m.y + sm * gauss();
         if (!ok(nx, m.y)) nx = m.x - (nx - m.x);
         if (!ok(nx, m.y)) nx = m.x;
         if (!ok(nx, ny)) ny = m.y - (ny - m.y);
         if (!ok(nx, ny)) ny = m.y;
-        if (m.y < G.filmTop && ny >= G.filmTop && occupant !== -1 && occupant !== i) {
+        if (m.y < deep && ny >= deep && occupant !== -1 && occupant !== i) {
           ny = m.y - (ny - m.y);
           if (!ok(nx, ny)) ny = m.y;
         }
-        if (occupant === i && ny < G.filmTop) occupant = -1;
-        else if (occupant === -1 && ny >= G.filmTop) occupant = i;
+        if (occupant === i && ny < deep) occupant = -1;
+        else if (occupant === -1 && ny >= deep) occupant = i;
         m.x = nx; m.y = ny;
         if (Math.random() < 0.012) m.open = m.open ? 0 : 1;
         m.op += (m.open - m.op) * 0.1;
@@ -468,6 +471,7 @@
     // Hook for tools/gif/capture.html: advance n simulation steps and redraw,
     // synchronously, so frames can be captured without the animation clock.
     canvas._captureFrame = function (n) { n = n || 2; for (var k = 0; k < n; k++) step(); draw(); };
+    canvas._resetTrace = function () { for (var k = 0; k < NB; k++) { bufD[k] = 0; bufA[k] = 0; } bhead = 0; };
 
     if (slA) slA.addEventListener("input", function () {
       var v = parseFloat(slA.value); if (!isNaN(v)) d = v;

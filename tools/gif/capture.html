@@ -77,7 +77,7 @@
           '<span class="mono" data-zmw-conc-val></span>' +
           '<button type="button" data-zmw-play>Play</button>' +
         '</div>' +
-        '<canvas class="fig-canvas" data-figure="zmw" style="height:380px" data-zmw-speed="' + (Q.get("speed") || "1") + '" data-font-scale="' + FSCALE + '"></canvas>' +
+        '<canvas class="fig-canvas" data-figure="zmw" style="height:380px" data-zmw-speed="' + (Q.get("speed") || "1") + '" data-zmw-bins="' + (Q.get("bins") || "240") + '" data-font-scale="' + FSCALE + '"></canvas>' +
         '<canvas class="fig-canvas fig-canvas-trace" data-zmw-trace style="height:170px"></canvas>' +
         '<figcaption class="fig-caption">' +
           '<strong class="mono" data-zmw-out-l></strong><strong class="mono" data-zmw-out-v></strong>' +
@@ -132,6 +132,9 @@
       document.title = "no hook";
       return;
     }
+    // start the photon trace empty, so every burst in the loop is a visit
+    // that happens on screen rather than history scrolled in from before
+    if (Q.get("fresh") === "1" && hookCanvas._resetTrace) hookCanvas._resetTrace();
     var total = COLS * ROWS;
     for (var i = 0; i < total; i++) {
       hookCanvas._captureFrame(EVERY);

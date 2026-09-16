@@ -36,10 +36,13 @@ JOBS = {
     # the hole holds one molecule at a time, so visits are rare and short; a
     # longer loop and faster diffusion make several fit, and each take is
     # judged by counting the bursts in its final trace
-    "zmw": dict(cols=6, rows=15, fw=1000, src=(700, 550), ms=120, hold=0,
-                extra="&d=120&c=1.0&speed=2.0&every=2&fscale=1.5", min_bursts=3, attempts=6,
+    # 100 frames of four steps each fill a 400-bin trace exactly, so the whole
+    # loop's history is on the panel at the end and every burst shown happened
+    # on screen
+    "zmw": dict(cols=10, rows=10, fw=1000, src=(700, 550), ms=120, hold=0,
+                extra="&d=120&c=1.3&speed=4.5&every=4&bins=400&fscale=1.5&fresh=1", min_bursts=3, max_bursts=6, attempts=12,
                 name="zmw-120nm.gif",
-                note="enzymes diffusing through a 120 nm aperture at 10 nM, with photon bursts"),
+                note="enzymes diffusing through a 120 nm aperture at 20 nM, one at a time, with photon bursts"),
 }
 
 
@@ -130,31 +133,51 @@ def count_bursts(frame, src):
     trace_top = 380 * k
     y0 = int(trace_top + (8 + 133 / 2) * k)
     hh = int(133 / 2 * k)
-    x0, x1 = int(51 * fw / src_w), int(688 * fw / src_w)
+    # skip the columns under the "Donor" label at the panel's top left: its five
+    # letters read as five tall green runs and were being counted as bursts
+    fs = 15
+    x0, x1 = int((51 + 7 + fs * 3.6) * fw / src_w), int(688 * fw / src_w)
     px = frame.load()
     heights = []
     for x in range(x0, x1):
-        top = None
+        # donor rises above the baseline, acceptor drops below it; a burst from a
+        # closed enzyme is nearly all acceptor, so both sides are read
+        up = 0
         for y in range(y0 - hh, y0):
             r, g, b = px[x, y]
             if g > r + 20 and g > b + 20:
-                top = y
+                up = y0 - y
                 break
-        heights.append(0 if top is None else y0 - top)
-    # a burst is a run of at least four columns rising past 30 percent of the
-    # axis: blips from a molecule grazing the layer do not count
-    thresh = hh * 0.30
-    runs, run = 0, 0
+        down = 0
+        for y in range(y0 + hh, y0, -1):
+            r, g, b = px[x, y]
+            if r > g + 40 and r > b + 40:
+                down = y - y0
+                break
+        heights.append(max(up, down))
+    # a burst is a visit that clearly reaches the floor: the fill rises past
+    # half the axis, and stays above a fifth of it for at least five columns,
+    # so one jagged burst is counted once and a grazing blip not at all
+    high, low = hh * 0.50, hh * 0.20
+    # one stay at the floor is one burst even where its jagged signal dips
+    # below the threshold for a few bins, so gaps shorter than GAP columns are
+    # bridged; separate visits are parted by far longer empty stretches
+    GAP = int(25 * fw / 1000)
+    segs, run, peak, gap = [], 0, 0, 0
     for h in heights:
-        if h > thresh:
+        if h > low:
+            if run == 0 or gap >= GAP:
+                if run >= 5 and peak > high:
+                    segs.append(peak)
+                run, peak = 0, 0
             run += 1
-        else:
-            if run >= 4:
-                runs += 1
-            run = 0
-    if run >= 4:
-        runs += 1
-    return runs
+            peak = max(peak, h)
+            gap = 0
+        elif run:
+            gap += 1
+    if run >= 5 and peak > high:
+        segs.append(peak)
+    return len(segs)
 
 
 def slice_to_gif(shot, cfg, cols, rows, fw, fh, out_path):
@@ -227,8 +250,9 @@ def main():
                       % (attempt, len(frames), nc, held, "  accepted" if ok else ""))
             else:
                 nb = count_bursts(frames[-1], cfg["src"])
-                ok = len(frames) >= cols * rows - 2 and nb >= cfg.get("min_bursts", 0)
-                score = nb * 100 + len(frames)
+                lo, hi = cfg.get("min_bursts", 0), cfg.get("max_bursts", 99)
+                ok = len(frames) >= cols * rows - 2 and lo <= nb <= hi
+                score = -abs(nb - (lo + hi) / 2.0) * 100 + len(frames)
                 print("   attempt %d: %2d frames, %d bursts in the final trace%s"
                       % (attempt, len(frames), nb, "  accepted" if ok else ""))
             if best is None or score > best:
