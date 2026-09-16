@@ -25,12 +25,12 @@ CHROME = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
 
 # frames = COLS * ROWS, sampled every MS milliseconds of page time
 JOBS = {
-    "hero": dict(cols=6, rows=8, fw=600, ms=120, sw=None, extra="&kT=0.68&every=1",
+    "hero": dict(cols=5, rows=10, fw=900, ms=120, sw=None, min_frames=26, extra="&kT=0.68&every=1",
                  name="hero-transition-path.gif",
                  note="protein crossing its barrier, with the photon traces below"),
     # the aperture is a narrow column in a wide canvas, so the frame is cropped
     # to it: otherwise the evanescent layer is a sliver nobody can see on a slide
-    "zmw": dict(cols=6, rows=8, fw=600, ms=120, sw=455, extra="&d=120&sx=135&sw=455&every=1",
+    "zmw": dict(cols=5, rows=10, fw=900, ms=120, sw=555, min_frames=30, extra="&d=120&sx=165&sw=555&every=1",
                 name="zmw-120nm.gif",
                 note="enzymes diffusing through a 120 nm aperture, zoomed on the hole"),
 }
@@ -38,8 +38,8 @@ JOBS = {
 
 def capture(fig, cfg, shot):
     cols, rows, fw, ms = cfg["cols"], cfg["rows"], cfg["fw"], cfg["ms"]
-    src_h = 540 if fig == "hero" else 340
-    src_w = 720 if fig == "hero" else 820
+    src_h = 620 if fig == "hero" else 400
+    src_w = 900 if fig == "hero" else 1000
     fh = round(fw * src_h / (cfg.get("sw") or src_w))
     url = ("file:///" + SITE.replace("\\", "/") + "/tools/gif/capture.html"
            + "?fig=%s&cols=%d&rows=%d&fw=%d&ms=%d%s" % (fig, cols, rows, fw, ms, cfg["extra"]))
@@ -58,7 +58,7 @@ def capture(fig, cfg, shot):
     return cols, rows, fw, fh
 
 
-def slice_to_gif(shot, cols, rows, fw, fh, out_path, ms):
+def slice_to_gif(shot, cols, rows, fw, fh, out_path, ms, slow_barrier=False):
     sheet = Image.open(shot).convert("RGB")
     frames = []
     for i in range(cols * rows):
@@ -84,9 +84,17 @@ def slice_to_gif(shot, cols, rows, fw, fh, out_path, ms):
     if len(uniq) != len(frames):
         print("   dropped %d duplicate frames" % (len(frames) - len(uniq)))
     frames = uniq
+    # The crossing itself lasts only a few frames however long the loop is, so
+    # hold the frames where the protein is actually on the barrier. The physics
+    # is untouched; those frames simply stay on screen longer, as slow motion.
+    dur = ms
+    if slow_barrier and len(frames) > 3:
+        xs = walker_xs(frames)
+        dur = [420 if 0.33 < x < 0.67 else ms for x in xs]
+        print("   holding %d barrier frames" % sum(1 for d in dur if d != ms))
     pal = [f.convert("P", palette=Image.ADAPTIVE, colors=255) for f in frames]
     pal[0].save(out_path, save_all=True, append_images=pal[1:],
-                duration=ms, loop=0, optimize=False, disposal=1)
+                duration=dur, loop=0, optimize=False, disposal=1)
     check = Image.open(out_path)
     kept = getattr(check, "n_frames", 1)
     if kept != len(frames):
@@ -101,6 +109,33 @@ def frames_of(path):
         im.seek(i)
         out.append(im.convert("RGB").copy())
     return out
+
+
+def walker_xs(frames):
+    """Horizontal position of the protein in the landscape panel, 0 to 1.
+
+    Tracks colour, not darkness. The walker carries vivid green and red dyes;
+    everything else in the panel is neutral (the black curve, grey text) or pale
+    (the blue wells, the amber barrier band). Finding the darkest column instead
+    just locks onto the steep black wall of the potential and never moves.
+    """
+    xs = []
+    for f in frames:
+        c = f.crop((40, 20, f.width - 20, int(f.height * 0.55)))
+        w, h = c.size
+        px = c.load()
+        best = (0, -1)
+        for x in range(0, w, 3):
+            tot = 0
+            for y in range(0, h, 3):
+                r, g, b = px[x, y]
+                sat = max(r, g, b) - min(r, g, b)
+                if sat > 70:
+                    tot += sat
+            if tot > best[1]:
+                best = (x, tot)
+        xs.append(best[0] / w)
+    return xs
 
 
 def walker_span(frames):
@@ -133,17 +168,28 @@ def main():
         cand = os.path.join(tempfile.gettempdir(), "cand_%s.gif" % fig)
         shot = os.path.join(tempfile.gettempdir(), "capture_%s.png" % fig)
         best = None
-        for attempt in range(1, 9):
+        for attempt in range(1, 7):
             if os.path.exists(shot):
                 os.remove(shot)
             cols, rows, fw, fh = capture(fig, cfg, shot)
-            slice_to_gif(shot, cols, rows, fw, fh, cand, cfg["ms"])
+            slice_to_gif(shot, cols, rows, fw, fh, cand, cfg["ms"], slow_barrier=(fig == "hero"))
             fr = frames_of(cand)
-            span = walker_span(fr) if fig == "hero" else 1.0
-            ok = len(fr) >= 12 and span >= (0.35 if fig == "hero" else 0.0)
-            score = len(fr) + span * 100
-            print("   attempt %d: %2d frames, crossing span %.2f%s"
-                  % (attempt, len(fr), span, "  accepted" if ok else ""))
+            enough = len(fr) >= cfg.get("min_frames", 12)
+            if fig == "hero":
+                # insist on a whole crossing: start in one well, end in the other,
+                # with several frames actually on the barrier in between
+                xs = walker_xs(fr)
+                span = max(xs) - min(xs)
+                on_barrier = sum(1 for x in xs if 0.33 < x < 0.67)
+                whole = min(xs) < 0.35 and max(xs) > 0.65 and on_barrier >= 3
+                ok = enough and whole
+                score = len(fr) + span * 100 + on_barrier * 5
+                print("   attempt %d: %2d frames, span %.2f, %d on the barrier%s"
+                      % (attempt, len(fr), span, on_barrier, "  accepted" if ok else ""))
+            else:
+                ok = enough
+                score = len(fr)
+                print("   attempt %d: %2d frames%s" % (attempt, len(fr), "  accepted" if ok else ""))
             if best is None or score > best:
                 best = score
                 shutil.copyfile(cand, final)

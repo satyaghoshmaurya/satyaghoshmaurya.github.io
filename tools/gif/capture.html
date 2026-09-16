@@ -43,7 +43,7 @@
   var srcW, srcH, FH, sources = [];
 
   if (FIG === "hero") {
-    srcW = 720;
+    srcW = 900;
     stage.style.width = srcW + "px";
     stage.innerHTML =
       '<figure class="landscape-hero" id="landscapeHero">' +
@@ -60,12 +60,12 @@
           '<span id="heroHint"></span>' +
         '</figcaption>' +
       '</figure>';
-    document.getElementById("landscapeCanvas").style.height = "310px";
-    document.getElementById("traceCanvas").style.height = "230px";
+    document.getElementById("landscapeCanvas").style.height = "360px";
+    document.getElementById("traceCanvas").style.height = "260px";
     sources = ["landscapeCanvas", "traceCanvas"];
-    srcH = 540;
+    srcH = 620;
   } else {
-    srcW = 820;
+    srcW = 1000;
     stage.style.width = srcW + "px";
     stage.innerHTML =
       '<figure class="fig-card" id="zmwFigure">' +
@@ -82,9 +82,9 @@
           '<strong class="mono" data-zmw-out-n></strong><strong class="mono" data-zmw-out-nc></strong>' +
         '</figcaption>' +
       '</figure>';
-    document.querySelector('[data-figure="zmw"]').style.height = "340px";
+    document.querySelector('[data-figure="zmw"]').style.height = "400px";
     sources = ['[data-figure="zmw"]'];
-    srcH = 340;
+    srcH = 400;
   }
 
   var CW = SW || srcW;
