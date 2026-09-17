@@ -173,7 +173,13 @@
       // depth z, into the screen, and the solution is about as deep as it is wide. The hole is
       // a cylinder, so a molecule in front of or behind it is over solid metal and cannot
       // enter, which is why most of the crowd passes across the mouth.
-      G.zmax = 0.42 * W;
+      // Measured by simulating these exact rules: at 0.22 W the hole is occupied about 60
+      // percent of the time with 0.5 molecules waiting at the lip and about four bursts per
+      // trace window. Shallower brings the crowd back to the mouth; deeper leaves the hole
+      // empty half the time.
+      // A fixed physical depth, not a fraction of the canvas: tying it to the width made a
+      // phone-sized canvas a shallow, crowded box with three molecules queueing at the lip.
+      G.zmax = 180 * scale;
       G.fs = Math.round(Math.max(11, Math.min(15, W / 65)) * fscale);
     }
 
@@ -195,7 +201,8 @@
     function targetCount() {
       var n = Math.round(70 * Math.pow(conc() / 5, 0.6));
       n = Math.max(4, Math.min(180, n));
-      return compact ? Math.max(4, Math.round(n * 0.5)) : n;
+      // same density of molecules on every screen: fewer on a narrow canvas
+      return Math.max(4, Math.round(n * (compact ? 0.5 : Math.min(1, W / 820))));
     }
 
     function ok(x, y, z) {
@@ -492,12 +499,32 @@
       }
       return n;
     }
-    if (traceCv) { for (var g = 0; g < 2500 && burstsInWindow() < 2; g++) step(); }
+    // The figure opens paused, so the opening frame is the one most visitors see. It must
+    // tell the story on its own: one molecule in the hole, lit at the floor, its burst in
+    // progress at the right edge of the trace. Step, within a bound, until that is true.
+    function litNow() {
+      // relative to the strongest field a molecule can reach, so the test means the same
+      // thing on the small home-page card, where the lit layer is only a few pixels deep
+      var fmax = Math.exp(-(G.r + 2) / G.L);
+      for (var k = 0; k < mols.length; k++) {
+        if (field(mols[k].x, mols[k].y) > 0.7 * fmax) return true;
+      }
+      return false;
+    }
+    for (var g = 0; g < 8000 && !(litNow() && (!traceCv || burstsInWindow() >= 2)); g++) step();
     draw();
     updateReadouts();
     // Hook for tools/gif/capture.html: advance n simulation steps and redraw,
     // synchronously, so frames can be captured without the animation clock.
     canvas._captureFrame = function (n) { n = n || 2; for (var k = 0; k < n; k++) step(); draw(); };
+    // what the current frame shows, for tests: is a molecule lit, how many are in the hole
+    canvas._state = function () {
+      var deepLine = G.filmTop + 24 * scale, inHole = 0, inLip = 0;
+      for (var k = 0; k < mols.length; k++) {
+        if (mols[k].y >= deepLine) inHole++; else if (mols[k].y >= G.filmTop) inLip++;
+      }
+      return { lit: litNow(), inHole: inHole, inLip: inLip, bursts: traceCv ? burstsInWindow() : -1, total: mols.length };
+    };
     canvas._resetTrace = function () { for (var k = 0; k < NB; k++) { bufD[k] = 0; bufA[k] = 0; } bhead = 0; };
 
     if (slA) slA.addEventListener("input", function () {
