@@ -1641,3 +1641,16 @@ a.atlas-link:focus-visible {
   color: var(--text-muted);
   margin-top: -0.3rem;
 }
+
+/* ---- Future Directions questions; conference abstracts (2026-09-17) ---- */
+.fd-question {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin: -0.2rem 0 0.6rem;
+}
+
+.pub-abstract .pub-title {
+  font-size: 0.98rem;
+}
