@@ -89,7 +89,7 @@
         </p>
         <figure class="fig-card">
           <div class="fig-static">
-            <img src="assets/img/research/landscape.png" alt="Two-well conformational free-energy landscape with a schematic protein crossing the barrier between open and closed states" width="1440" height="590" loading="lazy">
+            <img src="assets/img/research/landscape.png" alt="Two-well conformational free-energy landscape with a schematic protein crossing the barrier between open and closed states" width="1440" height="547" loading="lazy">
           </div>
           <figcaption class="fig-caption">
             <span class="fig-note">Two conformations, two wells; the transition path is the brief crossing of the barrier between them. A still from the interactive figure on the home page.</span>
@@ -139,13 +139,50 @@
           </figcaption>
         </figure>
         <p>
-          We utilize <strong>Zero-Mode Waveguides (ZMWs)</strong> — sub-wavelength circular nano-apertures fabricated in thin metallic films (aluminum/gold) on fused quartz coverslips:
+          We utilize <strong>Zero-Mode Waveguides (ZMWs)</strong> — sub-wavelength circular nano-apertures milled into a thin aluminium film on glass or quartz coverslips:
         </p>
         <ul>
           <li><strong>Volume Confinement:</strong> Light propagating into apertures narrower than the optical cutoff wavelength decays exponentially as an evanescent wave, confining the effective observation volume to zeptoliters (V<sub>obs</sub> ~ 10<sup>−21</sup> L).</li>
           <li><strong>Single molecules at high concentration:</strong> Keeps the number of molecules inside the observation volume near one even when the solution holds far more than a confocal volume could tolerate, so freely diffusing, dye-labelled enzymes can be watched one at a time.</li>
           <li><strong>Plasmonic Field Enhancement:</strong> Localized surface plasmon resonances boost excitation rates and enhance radiative decay, accelerating fluorescence emission for ultra-fast photon statistics.</li>
         </ul>
+
+        <figure class="fig-card" id="zmwDevice">
+          <div class="fig-bar">
+            <span class="fig-title">The device</span>
+          </div>
+          <div class="fig-static fig-static-full">
+            <img src="assets/img/research/zmw-device.jpg" alt="Left: scanning electron micrograph of four apertures, each about 120 nanometres across, milled into an aluminium film; scale bar 500 nanometres. Right: simulated excitation field in a cross-section of one aperture in a 100 nanometre aluminium film, concentrated at the glass interface at the base of the hole." width="1800" height="593" loading="lazy">
+          </div>
+          <figcaption class="fig-caption">
+            <span class="fig-note">Left, apertures about 120 nm across that I mill with a focused ion beam into a 100 nm aluminium film on glass (scanning electron micrograph; scale bar 500 nm). Right, a finite-difference time-domain simulation of the excitation field in one aperture. The light does not travel up the hole; it stays at the base, and that is what confines the observation to a volume a thousand times smaller than a confocal focus.</span>
+          </figcaption>
+        </figure>
+
+        <div class="fig-pair">
+          <figure class="fig-card">
+            <div class="fig-bar">
+              <span class="fig-title">What it buys: photons</span>
+            </div>
+            <div class="fig-static">
+              <img src="assets/img/research/zmw-vs-confocal-trace.png" alt="Photon counts per millisecond over twenty seconds for the same freely diffusing, dye-labelled enzyme: in a 120 nanometre waveguide bursts reach several thousand counts, in an ordinary confocal volume a few hundred" width="1137" height="603" loading="lazy">
+            </div>
+            <figcaption class="fig-caption">
+              <span class="fig-note">The same dye-labelled enzyme, freely diffusing, recorded in a 120 nm waveguide (blue) and in an ordinary confocal volume (orange). Bursts in the aperture reach thousands of counts per millisecond, above a steady background from the metal, where confocal bursts reach a few hundred. Unpublished data, Haran lab.</span>
+            </figcaption>
+          </figure>
+          <figure class="fig-card">
+            <div class="fig-bar">
+              <span class="fig-title">Why it is brighter</span>
+            </div>
+            <div class="fig-static">
+              <img src="assets/img/research/zmw-lifetime.png" alt="Fluorescence decay curves on a logarithmic scale: the decay measured in the waveguide is markedly faster than the decay measured in confocal free diffusion" width="900" height="605" loading="lazy">
+            </div>
+            <figcaption class="fig-caption">
+              <span class="fig-note">Fluorescence decays in the aperture (blue) and in confocal free diffusion (orange). The metal shortens the excited-state lifetime, one signature of how it reshapes the dye's emission; with the concentrated field at the floor, this is where the extra photons come from. Unpublished data, Haran lab.</span>
+            </figcaption>
+          </figure>
+        </div>
 
         <h3>A second route to more photons: plasmonic nanorods in a confocal volume</h3>
         <p>

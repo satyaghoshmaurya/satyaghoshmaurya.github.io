@@ -1613,3 +1613,31 @@ a.atlas-link:focus-visible {
     height: 130px;
   }
 }
+
+/* ---- Instrument figures and side-by-side data panels (2026-09-17) ---- */
+.fig-static-full img {
+  max-width: 100%;
+}
+
+.fig-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1.2rem 0;
+}
+
+.fig-pair .fig-card {
+  margin: 0;
+}
+
+@media (max-width: 720px) {
+  .fig-pair {
+    grid-template-columns: 1fr;
+  }
+}
+
+.contact-permanent {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  margin-top: -0.3rem;
+}
