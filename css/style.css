@@ -1654,3 +1654,9 @@ a.atlas-link:focus-visible {
 .pub-abstract .pub-title {
   font-size: 0.98rem;
 }
+
+.pub-note {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 0.35rem 0 0;
+}
