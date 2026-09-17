@@ -1660,3 +1660,39 @@ a.atlas-link:focus-visible {
   color: var(--text-muted);
   margin: 0.35rem 0 0;
 }
+
+/* ---- Paintings are shown whole, at their own proportions (2026-09-18) ----
+   The photo gallery crops to 4:3, which suits photographs and ruins a painting
+   that is three times as wide as it is tall. */
+.gallery-paintings {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.4rem;
+  margin: 1.2rem 0 2.4rem;
+}
+
+.gallery-paintings .gallery-item {
+  aspect-ratio: auto;
+  background: #ffffff;
+}
+
+.gallery-paintings .gallery-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.gallery-paintings .painting-square {
+  max-width: 500px;
+}
+
+.gallery-paintings .gallery-caption {
+  position: static;
+  background: var(--bg-alt);
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  font-size: 0.82rem;
+  font-weight: 400;
+  padding: 0.55rem 0.8rem;
+}

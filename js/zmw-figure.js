@@ -169,6 +169,11 @@
       G.L = decayLength(d) * scale;                // evanescent intensity decay length, px
       G.r = compact ? 1.8 : 2.4;                   // molecule radius when drawn as a dot
       G.top = 6;
+      // The drawing is a cross-section of a three-dimensional world. Each molecule also has a
+      // depth z, into the screen, and the solution is about as deep as it is wide. The hole is
+      // a cylinder, so a molecule in front of or behind it is over solid metal and cannot
+      // enter, which is why most of the crowd passes across the mouth.
+      G.zmax = 0.42 * W;
       G.fs = Math.round(Math.max(11, Math.min(15, W / 65)) * fscale);
     }
 
@@ -193,28 +198,30 @@
       return compact ? Math.max(4, Math.round(n * 0.5)) : n;
     }
 
-    function ok(x, y) {
+    function ok(x, y, z) {
       if (x < G.r || x > W - G.r || y < G.top) return false;
+      if (Math.abs(z) > G.zmax) return false;
       if (y < G.filmTop) return true;
-      if (Math.abs(x - G.cx) > G.half - G.r) return false;
+      var dx = x - G.cx, R = G.half - G.r;
+      if (dx * dx + z * z > R * R) return false;   // outside the cylinder: solid metal
       if (y > G.glassTop - G.r - 2) return false;
       return true;
     }
 
     function spawn() {
-      var m = { x: W / 2, y: G.top + 10, open: Math.random() < 0.5 ? 1 : 0, op: 0 };
+      var m = { x: W / 2, y: G.top + 10, z: (Math.random() * 2 - 1) * G.zmax, open: Math.random() < 0.5 ? 1 : 0, op: 0 };
       m.op = m.open;
       for (var i = 0; i < 60; i++) {
         var x = G.r + Math.random() * (W - 2 * G.r);
         var y = G.top + Math.random() * (G.filmTop - G.top);   // newcomers appear in the bulk, never inside the hole
-        if (ok(x, y)) { m.x = x; m.y = y; break; }
+        if (ok(x, y, m.z)) { m.x = x; m.y = y; break; }
       }
       return m;
     }
 
     function syncCount() {
       var keep = [];
-      for (var i = 0; i < mols.length; i++) if (ok(mols[i].x, mols[i].y)) keep.push(mols[i]);
+      for (var i = 0; i < mols.length; i++) if (ok(mols[i].x, mols[i].y, mols[i].z)) keep.push(mols[i]);
       mols = keep;
       var n = targetCount();
       while (mols.length < n) mols.push(spawn());
@@ -237,18 +244,20 @@
         // protein's mobility drops severalfold, so a molecule that reaches the
         // lit layer lingers there, and a visit is a burst rather than a blip
         var sm = field(m.x, m.y) > 0.45 ? s * 0.35 : s;
-        var nx = m.x + sm * gauss(), ny = m.y + sm * gauss();
-        if (!ok(nx, m.y)) nx = m.x - (nx - m.x);
-        if (!ok(nx, m.y)) nx = m.x;
-        if (!ok(nx, ny)) ny = m.y - (ny - m.y);
-        if (!ok(nx, ny)) ny = m.y;
+        var nx = m.x + sm * gauss(), ny = m.y + sm * gauss(), nz = m.z + sm * gauss();
+        if (!ok(nx, m.y, m.z)) nx = m.x - (nx - m.x);
+        if (!ok(nx, m.y, m.z)) nx = m.x;
+        if (!ok(nx, ny, m.z)) ny = m.y - (ny - m.y);
+        if (!ok(nx, ny, m.z)) ny = m.y;
+        if (!ok(nx, ny, nz)) nz = m.z - (nz - m.z);
+        if (!ok(nx, ny, nz)) nz = m.z;
         if (m.y < deep && ny >= deep && occupant !== -1 && occupant !== i) {
           ny = m.y - (ny - m.y);
-          if (!ok(nx, ny)) ny = m.y;
+          if (!ok(nx, ny, nz)) ny = m.y;
         }
         if (occupant === i && ny < deep) occupant = -1;
         else if (occupant === -1 && ny >= deep) occupant = i;
-        m.x = nx; m.y = ny;
+        m.x = nx; m.y = ny; m.z = nz;
         if (Math.random() < 0.012) m.open = m.open ? 0 : 1;
         m.op += (m.open - m.op) * 0.1;
       }
@@ -311,7 +320,11 @@
       var E = 0.85 - 0.6 * m.op;
       var vis = Math.max(0, Math.min(1, (b - 0.03) / 0.2));
       var bb = Math.min(1.3, b);
-      var s0 = compact ? 3.5 : 5.5;
+      // depth cue: molecules far in front of or behind the plane of the hole are drawn
+      // smaller and fainter, so the eye reads them as not above the hole
+      var near = 1 - Math.min(1, Math.abs(m.z) / G.zmax);
+      var s0 = (compact ? 3.5 : 5.5) * (0.7 + 0.4 * near);
+      var base = 0.14 + 0.34 * near;
       var s = s0 + (compact ? 6 : 9) * Math.min(1, bb);
       if (vis > 0) {
         var R = s * 1.7;
@@ -319,7 +332,7 @@
         g.addColorStop(0, rgba(C.donor, 0.4 * bb * vis)); g.addColorStop(1, rgba(C.donor, 0));
         ctx.fillStyle = g; ctx.beginPath(); ctx.arc(m.x, m.y, R, 0, Math.PI * 2); ctx.fill();
       }
-      drawEnzymeCartoon(ctx, m.x, m.y, s, m.op, 0.3 + 0.7 * vis, E, vis === 0);
+      drawEnzymeCartoon(ctx, m.x, m.y, s, m.op, base + (1 - base) * vis, E, vis === 0);
     }
 
     function drawLabels() {
@@ -428,6 +441,7 @@
       ctx.fillStyle = rgba(C.text, 0.8);
       ctx.fillRect(0, ft, cx - half, 2); ctx.fillRect(cx + half, ft, W - cx - half, 2);
       drawPassivation();
+      mols.sort(function (a, b) { return Math.abs(b.z) - Math.abs(a.z); });   // far ones first
       for (var i = 0; i < mols.length; i++) drawMol(mols[i]);
       if (!compact) drawLabels();
       drawTrace();
@@ -468,6 +482,17 @@
     fit();
     syncCount();
     for (var i = 0; i < NB; i++) step();   // fills the photon trace before anything is shown
+    // A paused figure should open on a trace worth looking at: keep stepping, within a
+    // bound, until the window holds at least two bursts. Costs a few milliseconds.
+    function burstsInWindow() {
+      var n = 0, inside = false;
+      for (var k = 0; k < NB; k++) {
+        var v = bufD[(bhead + k) % NB] + bufA[(bhead + k) % NB];
+        if (v > 40 && !inside) { n++; inside = true; } else if (v < 8) inside = false;
+      }
+      return n;
+    }
+    if (traceCv) { for (var g = 0; g < 2500 && burstsInWindow() < 2; g++) step(); }
     draw();
     updateReadouts();
     // Hook for tools/gif/capture.html: advance n simulation steps and redraw,
