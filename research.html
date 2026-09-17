@@ -119,13 +119,13 @@
             <div class="fig-controls">
               <label class="fig-slider">
                 <span>Aperture</span>
-                <input type="range" min="50" max="200" step="10" value="100" data-zmw-aperture aria-label="Aperture diameter in nanometres">
-                <span class="mono" data-zmw-aperture-val>100 nm</span>
+                <input type="range" min="50" max="200" step="10" value="120" data-zmw-aperture aria-label="Aperture diameter in nanometres">
+                <span class="mono" data-zmw-aperture-val>120 nm</span>
               </label>
               <label class="fig-slider">
                 <span>Concentration</span>
-                <input type="range" min="-0.3" max="2" step="0.1" value="0.7" data-zmw-conc aria-label="Enzyme concentration, logarithmic scale">
-                <span class="mono" data-zmw-conc-val>5 nM</span>
+                <input type="range" min="-0.3" max="2" step="0.1" value="1.3" data-zmw-conc aria-label="Enzyme concentration, logarithmic scale">
+                <span class="mono" data-zmw-conc-val>20 nM</span>
               </label>
               <button type="button" class="hero-btn hero-btn-primary" data-zmw-play>Play</button>
             </div>
@@ -133,8 +133,8 @@
           <canvas class="fig-canvas" data-figure="zmw" role="img" aria-label="Cross-section of a nanoaperture in an aluminium film on glass. Dye-labelled enzymes diffuse freely in and out of the aperture and light up only in the evanescent volume near the floor, so about one molecule at a time is seen."></canvas>
           <canvas class="fig-canvas fig-canvas-trace" data-zmw-trace role="img" aria-label="Donor and acceptor photon counts per time bin from the observation volume: a burst each time an enzyme diffuses through"></canvas>
           <figcaption class="fig-caption">
-            <span>Decay length: <strong class="mono" data-zmw-out-l>&asymp; 14 nm</strong></span>
-            <span>Observation volume: <strong class="mono" data-zmw-out-v>&asymp; 113 zL</strong></span>
+            <span>Decay length: <strong class="mono" data-zmw-out-l>&asymp; 18 nm</strong></span>
+            <span>Observation volume: <strong class="mono" data-zmw-out-v>&asymp; 200 zL</strong></span>
             <span class="fig-note">Light entering from below cannot propagate through an aperture narrower than its cutoff, so it decays evanescently from the glass floor and defines a zeptolitre observation volume. The dye-labelled enzyme diffuses freely: many molecules are in solution, but the volume is so small that it holds about one at a time, and only that one is excited and seen. Nothing is tethered; every surface is passivated with PEG-2k, about 5 nm thick, so nothing sticks. The decay length is computed for 532 nm excitation in a 100 nm aluminium film; the green is that laser, from the glass below into the thin lit layer. The trace beneath counts donor (green, upward) and acceptor (red, downward) photons per bin from whatever is in the volume, so each visit by an enzyme appears as a burst, as in a confocal transit. Schematic, not to scale.</span>
           </figcaption>
         </figure>

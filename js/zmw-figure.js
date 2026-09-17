@@ -138,14 +138,16 @@
     var outL = q("[data-zmw-out-l]"), outV = q("[data-zmw-out-v]");
     var outN = q("[data-zmw-out-n]"), outNc = q("[data-zmw-out-nc]");
 
-    var d = 100;            // aperture diameter, nm
-    var logc = Math.log10(5);   // log10 of enzyme concentration in nM (default 5 nM)
+    var d = 120;            // aperture diameter, nm (the apertures we mill)
+    var logc = Math.log10(20);  // log10 of enzyme concentration in nM (default 20 nM)
     var playing = false, rafId = null, visible = true;
     var scale = compact ? 0.62 : 1;
     var W = 0, H = 0, dpr = 1;
     var G = {};
     var mols = [];
-    var speed = parseFloat(canvas.getAttribute("data-zmw-speed")) || 1;
+    // Diffusion is fast on purpose: it is a visualisation, and at a calm pace
+    // almost nothing reaches the floor within one trace window.
+    var speed = parseFloat(canvas.getAttribute("data-zmw-speed")) || (compact ? 3 : 4.5);
     var fscale = parseFloat(canvas.getAttribute("data-font-scale")) || 1;
     // Optional photon trace: donor and acceptor counts per bin from whatever
     // sits in the evanescent volume, so a visit shows as a burst.
@@ -445,7 +447,7 @@
       if (outNc) outNc.textContent = "≈ " + fmtN(Nc);
     }
 
-    var lastFrame = 0, FRAME_MS = 30;   // draw at about 30 fps, two simulation steps per drawn frame
+    var lastFrame = 0, FRAME_MS = 30;   // draw at about 30 fps, one simulation step per drawn frame
     function tick(now) {
       rafId = null;
       if (!playing || !visible) return;
@@ -453,7 +455,7 @@
       now = now || performance.now();
       if (now - lastFrame < FRAME_MS) return;
       lastFrame = now;
-      step(); step();
+      step();
       draw();
     }
     function setPlaying(p) {
