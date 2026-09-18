@@ -1696,3 +1696,41 @@ a.atlas-link:focus-visible {
   font-weight: 400;
   padding: 0.55rem 0.8rem;
 }
+
+/* ---- The atlas is a work in progress and the site says so (2026-09-18) ----
+   A quiet label beside the heading, and a status paragraph that says what
+   exists and what is still ahead, so nobody reads the project as finished. */
+.wip-tag {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.5rem;
+  padding: 0.12rem 0.55rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-alt);
+  color: var(--text-muted);
+  font-family: var(--font-body, inherit);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.feature-card h3 .wip-tag {
+  font-size: 0.62rem;
+}
+
+.atlas-status {
+  margin: 1rem 0 0.2rem;
+  padding: 0.7rem 1rem;
+  border-left: 3px solid var(--border);
+  background: var(--bg-alt);
+  font-size: 0.95rem;
+}
+
+.atlas-status-hi {
+  margin-top: 0;
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+}
