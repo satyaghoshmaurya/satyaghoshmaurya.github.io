@@ -1,0 +1,63 @@
+#!/bin/sh
+# Refuse to commit private files or very large images.
+#
+# Install into a clone with:
+#     cp tools/hooks/pre-commit .git/hooks/pre-commit
+# Hooks are not part of the repository, so this has to be done once per clone.
+# To commit anyway, when you are certain: git commit --no-verify
+
+fail=0
+
+# Working notes and raw source material. .gitignore already hides these, but a
+# "git add -f" or a rename can get around it, so check the staged list itself.
+private='(^|/)(PLAN|CURATION|GEMINI|FUTURE_DIRECTIONS_DRAFT|RUNBOOK|WHERE_THINGS_LIVE)\.md$|(^|/)_atlas_inbox/|(^|/)_archive_|(^|/)_presentation/'
+
+staged=$(git diff --cached --name-only --diff-filter=AM)
+
+for f in $staged; do
+  if printf '%s\n' "$f" | grep -Eq "$private"; then
+    echo "BLOCKED  $f"
+    echo "         This is a private working file and must not be published."
+    fail=1
+  fi
+done
+
+# Images large enough to slow the site down. 3 MB is far beyond anything the
+# pages need; a photograph for the site should be a few hundred KB.
+for f in $staged; do
+  case "$f" in
+    *.jpg|*.jpeg|*.png|*.gif|*.webp|*.tif|*.tiff|*.bmp)
+      [ -f "$f" ] || continue
+      size=$(wc -c < "$f")
+      if [ "$size" -gt 3145728 ]; then
+        echo "BLOCKED  $f"
+        echo "         $((size / 1048576)) MB. Resize it before publishing."
+        fail=1
+      fi
+      ;;
+  esac
+done
+
+# Jekyll refusing underscore folders is what keeps _atlas_inbox unpublished.
+for f in $staged; do
+  if [ "$f" = ".nojekyll" ]; then
+    echo "BLOCKED  .nojekyll"
+    echo "         This would publish the _atlas_inbox photographs. See RUNBOOK part 1."
+    fail=1
+  fi
+done
+
+# The gmail address is deliberately kept off the public pages.
+if git diff --cached -- '*.html' | grep -q '^+.*satyaghoshmaurya@gmail'; then
+  echo "BLOCKED  a page now contains the gmail address."
+  echo "         The public address is satyaghosh@alum.iisc.ac.in. See RUNBOOK part 6."
+  fail=1
+fi
+
+if [ "$fail" -ne 0 ]; then
+  echo ""
+  echo "Commit refused. Nothing was lost; your changes are still staged."
+  exit 1
+fi
+
+exit 0
