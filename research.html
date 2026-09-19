@@ -80,6 +80,33 @@
         So I watch one molecule at a time, and try to watch it fast enough to catch the event itself. That takes three things working as one instrument. Single-molecule FRET reports the distance. Nanophotonic structures, zero-mode waveguides and plasmonic antennas, make each molecule bright enough to follow through a microsecond. Inference photon by photon extracts the trajectory from arrival times instead of from binned averages. Without the photons there is nothing for the statistics to work on, and without the statistics the photons are only noise.
       </p>
 
+      <p>
+        How fast a molecule can be watched is set by how fast its photons arrive, and that is not only a matter of instrumentation. It decides whether a measurement and a simulation are describing the same event or merely the same molecule.
+      </p>
+
+      <figure class="fig-card" id="timescaleFigure">
+        <div class="fig-bar">
+          <span class="fig-title">Where the measurement now reaches</span>
+          <div class="fig-controls">
+            <label class="fig-slider">
+              <span>Photon rate</span>
+              <input type="range" min="4.4" max="6.9" step="0.02" value="6.48" data-ts-rate aria-label="Detected photon rate during a burst, logarithmic scale">
+              <span class="mono" data-ts-rate-val>3.0 MHz</span>
+            </label>
+          </div>
+        </div>
+        <canvas class="fig-canvas fig-canvas-timescales" data-figure="timescales" role="img" aria-label="A logarithmic time axis from femtoseconds to a hundred seconds. Molecular events are marked along the top, from a bond vibrating at ten femtoseconds through a transition path at one to ten microseconds to a pore assembling over seconds. Below, three bars: all-atom simulation reaching from the femtosecond integration step to about ten microseconds routinely and a millisecond on specialised hardware; ordinary confocal single-molecule FRET, which cannot resolve faster than about half a millisecond; and the plasmon-enhanced measurement in a waveguide, whose edge moves left as the photon rate is raised until it overlaps the simulation window."></canvas>
+        <figcaption class="fig-caption">
+          <span>Time resolution: <strong class="mono" data-ts-out-res>&asymp; 8 &micro;s</strong></span>
+          <span>Transition path, 1&ndash;10 &micro;s: <strong data-ts-out-gap>yes, resolved</strong></span>
+          <span class="fig-note">Resolution here is the time needed to collect enough photons to call a conformational state, taken as 25, so it falls as one over the photon rate. The amber band is the event we are after, the transition path at one to ten microseconds. It has long been inside what an all-atom simulation can produce, but an ordinary confocal measurement collects some tens of thousands of photons per second during a burst, which by the same rule is about half a millisecond, two decades too slow to see it. Drag the slider to the roughly three million per second we detect in a plasmonic waveguide and the green edge crosses into the band. Event durations are order-of-magnitude values from the literature; the transition path is what we measure. Schematic.</span>
+        </figcaption>
+      </figure>
+
+      <p>
+        Until recently the two did not meet. All-atom molecular dynamics could produce microseconds of trajectory, while an ordinary single-molecule measurement could not resolve much below half a millisecond, so a simulated transition path could be compared against a measured <em>rate</em> but never against a measured path. Raising the photon rate closes that gap from the experimental side. The events that matter, the microsecond crossings, now fall inside both windows at once, and the same quantity can be computed and observed rather than inferred.
+      </p>
+
       <hr class="rule">
 
       <!-- Research Pillar 1 -->
@@ -386,6 +413,7 @@
   </footer>
 </div>
 
+<script src="js/timescales-figure.js"></script>
 <script src="js/zmw-figure.js"></script>
 <script src="js/plasmonic-figure.js"></script>
 <script src="js/clya-figure.js"></script>

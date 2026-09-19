@@ -1870,3 +1870,17 @@ a.atlas-link:focus-visible {
 #record .cv-timeline {
   margin-bottom: 1.4rem;
 }
+
+/* The timescale figure is a chart, not a scene: it needs less height than the
+   animated figures, and more of it on a phone, where the rows stack labels. */
+.fig-canvas-timescales {
+  display: block;
+  width: 100%;
+  height: 320px;
+}
+
+@media (max-width: 580px) {
+  .fig-canvas-timescales {
+    height: 360px;
+  }
+}
