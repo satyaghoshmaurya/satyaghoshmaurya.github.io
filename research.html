@@ -73,24 +73,18 @@
         My work sits at the intersection of single-molecule biophysics, nanophotonics, and statistical mechanics — building optical instrumentation to resolve how individual biomolecules overcome free-energy barriers and function in crowded environments.
       </p>
 
-      <div class="card">
-        <h3>The Core Scientific Motivation</h3>
-        <p>
-          Conventional bulk biophysical assays record the synchronized average of billions of molecules. In doing so, they wash away transient intermediate states, rare barrier-crossing trajectories, and dynamic heterogeneity. Yet, it is precisely these fleeting, non-equilibrium transitions that dictate biological function, misfolding diseases, and enzymatic catalysis.
-        </p>
-        <p>
-          By pairing <strong>single-molecule Förster Resonance Energy Transfer (smFRET)</strong> with <strong>nanophotonic zero-mode waveguides</strong> and <strong>Bayesian trajectory analysis</strong>, my research directly captures these elusive molecular events with nanometer spatial sensitivity and microsecond temporal resolution.
-        </p>
-      </div>
+      <p>
+        A bulk experiment averages over billions of molecules at once. The average is smooth and reproducible, and it hides the things I most want to see: the short-lived intermediate, the rare crossing, the molecule that does not behave like its neighbours. A rate constant says how often something happens. It never says what happens while it is happening.
+      </p>
+      <p>
+        So I watch one molecule at a time, and try to watch it fast enough to catch the event itself. That takes three things working as one instrument. Single-molecule FRET reports the distance. Nanophotonic structures, zero-mode waveguides and plasmonic antennas, make each molecule bright enough to follow through a microsecond. Inference photon by photon extracts the trajectory from arrival times instead of from binned averages. Without the photons there is nothing for the statistics to work on, and without the statistics the photons are only noise.
+      </p>
 
       <hr class="rule">
 
       <!-- Research Pillar 1 -->
       <section id="folding">
         <h2>1. Transition Paths of Protein Conformational Change</h2>
-        <p>
-          Proteins work by switching between conformations, and each spends almost all of its time settled in one meta-stable free-energy well or another. The crossing itself, the <strong>transition path</strong>, lasts only microseconds (τ<sub>tp</sub> ~ 1–10 µs), yet it is where the mechanism of the change is decided. An enzyme opening and closing over its substrates is our current test case; the same measurement applies to any protein whose function rides on a conformational switch.
-        </p>
         <figure class="fig-card">
           <div class="fig-static">
             <img src="assets/img/research/landscape.png" alt="Two-well conformational free-energy landscape with a schematic protein crossing the barrier between open and closed states" width="1440" height="547" loading="lazy">
@@ -99,6 +93,9 @@
             <span class="fig-note">Two conformations, two wells; the transition path is the brief crossing of the barrier between them. A still from the interactive figure on the home page.</span>
           </figcaption>
         </figure>
+        <p>
+          Proteins work by switching between conformations, and each spends almost all of its time settled in one meta-stable free-energy well or another. The crossing itself, the <strong>transition path</strong>, lasts only microseconds (τ<sub>tp</sub> ~ 1–10 µs), yet it is where the mechanism of the change is decided. An enzyme opening and closing over its substrates is our current test case; the same measurement applies to any protein whose function rides on a conformational switch.
+        </p>
         <p>
           In the <strong>Gilad Haran Lab</strong> at the Weizmann Institute of Science, we develop plasmonic-enhanced smFRET methodologies that boost photon emission rates to directly track individual protein molecules as they traverse the barrier.
         </p>
@@ -114,9 +111,6 @@
       <!-- Research Pillar 2 -->
       <section id="zmw">
         <h2>2. Zero-Mode Waveguides &amp; Plasmonic Nanophotonics</h2>
-        <p>
-          A historical bottleneck in single-molecule fluorescence microscopy has been the diffraction limit: standard confocal illumination requires sub-nanomolar fluorophore concentrations (below 1 nM) to isolate individual diffraction-limited spots. However, physiological macromolecular interactions, weak protein complexes, and enzymatic reactions operate in the micromolar regime (1–100 µM).
-        </p>
         <figure class="fig-card" id="zmwFigure">
           <div class="fig-bar">
             <span class="fig-title">Inside a zero-mode waveguide</span>
@@ -142,6 +136,9 @@
             <span class="fig-note">Light entering from below cannot propagate through an aperture narrower than its cutoff, so it decays evanescently from the glass floor and defines a zeptolitre observation volume. The dye-labelled enzyme diffuses freely: many molecules are in solution, but the volume is so small that it holds about one at a time, and only that one is excited and seen. The drawing is a slice through a three-dimensional solution: molecules drawn fainter are in front of or behind the hole, over solid metal, which is why most of them pass across the mouth without entering. Nothing is tethered; every surface is passivated with PEG-2k, about 5 nm thick, so nothing sticks. The decay length is computed for 532 nm excitation in a 100 nm aluminium film; the green is that laser, from the glass below into the thin lit layer. The trace beneath counts donor (green, upward) and acceptor (red, downward) photons per bin from whatever is in the volume, so each visit by an enzyme appears as a burst, as in a confocal transit. Schematic, not to scale.</span>
           </figcaption>
         </figure>
+        <p>
+          A historical bottleneck in single-molecule fluorescence microscopy has been the diffraction limit: standard confocal illumination requires sub-nanomolar fluorophore concentrations (below 1 nM) to isolate individual diffraction-limited spots. However, physiological macromolecular interactions, weak protein complexes, and enzymatic reactions operate in the micromolar regime (1–100 µM).
+        </p>
         <p>
           We utilize <strong>Zero-Mode Waveguides (ZMWs)</strong> — sub-wavelength circular nano-apertures milled into a thin aluminium film on glass or quartz coverslips:
         </p>
@@ -218,8 +215,19 @@
       <!-- Research Pillar 3 -->
       <section id="bayesian">
         <h2>3. Photon-by-Photon Inference &amp; Single-Molecule Image Analysis</h2>
+        <figure class="fig-card" id="photonStream">
+          <div class="fig-bar">
+            <span class="fig-title">What the data actually are</span>
+          </div>
+          <div class="fig-static fig-static-full">
+            <img src="assets/img/research/photon-stream.png" alt="Top: two rows of vertical ticks, one photon each, red for the acceptor detector and green for the donor, across 125 microseconds of a single burst. Bottom: the FRET efficiency computed as a fifteen-photon moving average, moving from the open level at 0.44 to the closed level at 0.66, with the crossing marked as 23 photons in 7.65 microseconds." width="1600" height="755" loading="lazy">
+          </div>
+          <figcaption class="fig-caption">
+            <span class="fig-note">One adenylate kinase molecule, 384 photons, 125 microseconds. Every tick above is a single photon: an arrival time and which detector caught it, and nothing else. Below, the FRET efficiency from a moving average over fifteen photons, with the open and closed levels marked. The shaded strip is one crossing between them, and it contains 23 photons and lasts 7.65 microseconds. Bin this into milliseconds and the crossing disappears into one point. Unpublished data, Haran lab.</span>
+          </figcaption>
+        </figure>
         <p>
-          Single-molecule data are photon-limited. Binning photon arrival times into millisecond histograms throws away exactly the microsecond events we care about, so the analysis has to work with every photon.
+          Single-molecule data are photon-limited, and the figure above is the reason the analysis has to be built around that. A microsecond crossing is a few tens of photons. Binning arrival times into millisecond histograms averages exactly the event away, so every method I use works from the photon record itself.
         </p>
 
         <div class="card">
@@ -255,9 +263,6 @@
       <!-- Research Pillar 4 -->
       <section id="membrane">
         <h2>4. Membrane Biophysics &amp; Pore-Forming Toxins (ClyA)</h2>
-        <p>
-          During my doctoral research at the Indian Institute of Science (IISc) with Prof. Rahul Roy, in a long collaboration with Prof. K. G. Ayappa's group, I investigated how bacterial pore-forming toxins breach mammalian and bacterial cell membranes.
-        </p>
         <figure class="fig-card" id="clyaPainting">
           <div class="fig-bar">
             <span class="fig-title">The assembly pathway of Cytolysin A</span>
@@ -269,6 +274,9 @@
             <span class="fig-note">Water-soluble monomers bind the membrane, switch to the protomer conformation, and grow through protomer&ndash;protomer contacts into arcs and finally leaky pores. Hand-painted by Satyaghosh Maurya.</span>
           </figcaption>
         </figure>
+        <p>
+          During my doctoral research at the Indian Institute of Science (IISc) with Prof. Rahul Roy, in a long collaboration with Prof. K. G. Ayappa's group, I investigated how bacterial pore-forming toxins breach mammalian and bacterial cell membranes.
+        </p>
         <p>
           Using single-molecule tracking and total internal reflection fluorescence (TIRF) microscopy on model supported lipid bilayers (SLBs):
         </p>
