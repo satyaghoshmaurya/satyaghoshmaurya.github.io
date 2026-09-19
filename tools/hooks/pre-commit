@@ -47,12 +47,9 @@ for f in $staged; do
   fi
 done
 
-# The gmail address is deliberately kept off the public pages.
-if git diff --cached -- '*.html' | grep -q '^+.*satyaghoshmaurya@gmail'; then
-  echo "BLOCKED  a page now contains the gmail address."
-  echo "         The public address is satyaghosh@alum.iisc.ac.in. See RUNBOOK part 6."
-  fail=1
-fi
+# (The gmail address used to be blocked here. Satya made it public on the
+# contact page on 2026-09-20, alongside the IISc alumni address, so the
+# check was removed rather than left to be overridden every time.)
 
 if [ "$fail" -ne 0 ]; then
   echo ""

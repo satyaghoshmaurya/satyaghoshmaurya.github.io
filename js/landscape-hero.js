@@ -194,21 +194,25 @@
     for (i = 0; i <= STEPS; i++) { v = XL + (XR - XL) * i / STEPS; ctx.lineTo(sx(v), sy(Math.min(U(v), YH))); }
     ctx.lineTo(sx(XR), sy(YL));
     ctx.closePath();
-    ctx.fillStyle = rgba(C.accent, 0.08);
+    ctx.fillStyle = rgba(C.accent, 0.13);
     ctx.fill();
     ctx.beginPath();
     for (i = 0; i <= STEPS; i++) {
       v = XL + (XR - XL) * i / STEPS; yy = sy(Math.min(U(v), YH));
       if (i === 0) ctx.moveTo(sx(v), yy); else ctx.lineTo(sx(v), yy);
     }
-    ctx.strokeStyle = rgba(C.text, 0.85); ctx.lineWidth = 1.8; ctx.lineJoin = "round"; ctx.stroke();
+    // the curve carries the whole figure, so it is drawn at full strength and
+    // scales with the canvas: a thin line disappears when the still is shown small
+    ctx.strokeStyle = rgba(C.text, 1);
+    ctx.lineWidth = Math.max(2.2, Math.min(4.2, w / 330));
+    ctx.lineJoin = "round"; ctx.lineCap = "round"; ctx.stroke();
 
     // axes
-    ctx.strokeStyle = rgba(C.border, 1); ctx.lineWidth = 1;
+    ctx.strokeStyle = rgba(C.text, 0.45); ctx.lineWidth = Math.max(1, Math.min(2, w / 700));
     ctx.beginPath(); ctx.moveTo(L + 0.5, T); ctx.lineTo(L + 0.5, T + ph + 0.5); ctx.lineTo(L + pw, T + ph + 0.5); ctx.stroke();
 
     // labels
-    ctx.fillStyle = rgba(C.muted, 1); ctx.font = FS + "px " + FONT; ctx.textAlign = "center"; ctx.textBaseline = "alphabetic";
+    ctx.fillStyle = rgba(C.text, 0.78); ctx.font = FS + "px " + FONT; ctx.textAlign = "center"; ctx.textBaseline = "alphabetic";
     ctx.fillText("Open", sx(-1), T + ph + FS + 4);
     ctx.fillText("Closed", sx(1), T + ph + FS + 4);
     ctx.fillText("Reaction coordinate", L + pw / 2, h - 5);

@@ -24,16 +24,23 @@ OUT = os.path.join(M.SITE, "assets", "img", "research", "landscape.png")
 CFG = dict(cols=6, rows=6, fw=1440, src=(1000, 650),
            extra="&kT=0.55&every=3&fscale=1.1")
 
+# The home page shows the same figure in a card about 350 px wide. Downscaling
+# the big still by four makes its labels illegible, so the card gets its own
+# render: a smaller frame with the type scaled up to suit it.
+OUT_CARD = os.path.join(M.SITE, "assets", "img", "research", "landscape-card.png")
+CFG_CARD = dict(cols=6, rows=6, fw=760, src=(1000, 650),
+                extra="&kT=0.55&every=3&fscale=2.4")
 
-def main():
+
+def render(cfg, out):
     shot = os.path.join(tempfile.gettempdir(), "capture_still.png")
     best = None
     for attempt in range(1, 7):
         if os.path.exists(shot):
             os.remove(shot)
-        cols, rows, fw, fh = M.capture("hero", CFG, shot, M.DSF)
+        cols, rows, fw, fh = M.capture("hero", cfg, shot, M.DSF)
         if not os.path.exists(shot):
-            cols, rows, fw, fh = M.capture("hero", CFG, shot, 1)
+            cols, rows, fw, fh = M.capture("hero", cfg, shot, 1)
         sheet = Image.open(shot).convert("RGB")
         frames = [sheet.crop(((i % cols) * fw, (i // cols) * fh,
                               (i % cols) * fw + fw, (i // cols) * fh + fh))
@@ -50,8 +57,14 @@ def main():
     land_h = round(frame.width * 380 / 1000)       # the landscape canvas only
     still = frame.crop((0, 0, frame.width, land_h))
     still = still.convert("P", palette=Image.ADAPTIVE, colors=128)
-    still.save(OUT, optimize=True)
-    print("wrote %s  %dx%d  %.0f KB" % (OUT, still.width, still.height, os.path.getsize(OUT) / 1024))
+    still.save(out, optimize=True)
+    print("wrote %s  %dx%d  %.0f KB" % (out, still.width, still.height,
+                                        os.path.getsize(out) / 1024))
+
+
+def main():
+    render(CFG, OUT)
+    render(CFG_CARD, OUT_CARD)
 
 
 if __name__ == "__main__":

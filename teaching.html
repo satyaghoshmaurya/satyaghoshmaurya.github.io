@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Teaching &amp; Mentoring — Dr. Satyaghosh Maurya</title>
-<meta name="description" content="How I teach: core chemical engineering courses, electives built from my own research, a low-cost measurement laboratory, and how I mentor students.">
+<meta name="description" content="Teaching statement, core chemical engineering courses, proposed graduate electives, laboratory development and research supervision.">
 <!-- Canonical, social preview and structured data -->
 <link rel="canonical" href="https://satyaghoshmaurya.github.io/teaching.html">
 <meta property="og:site_name" content="Dr. Satyaghosh Maurya">
 <meta property="og:locale" content="en_GB">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Teaching &amp; Mentoring — Dr. Satyaghosh Maurya">
-<meta property="og:description" content="How I teach: core chemical engineering courses, electives built from my own research, a low-cost measurement laboratory, and how I mentor students.">
+<meta property="og:description" content="Teaching statement, core chemical engineering courses, proposed graduate electives, laboratory development and research supervision.">
 <meta property="og:url" content="https://satyaghoshmaurya.github.io/teaching.html">
 <meta property="og:image" content="https://satyaghoshmaurya.github.io/assets/img/og-card.png">
 <meta property="og:image:width" content="1200">
@@ -19,7 +19,7 @@
 <meta property="og:image:alt" content="Portrait of Satyaghosh Maurya beside a two-well conformational free-energy landscape">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Teaching &amp; Mentoring — Dr. Satyaghosh Maurya">
-<meta name="twitter:description" content="How I teach: core chemical engineering courses, electives built from my own research, a low-cost measurement laboratory, and how I mentor students.">
+<meta name="twitter:description" content="Teaching statement, core chemical engineering courses, proposed graduate electives, laboratory development and research supervision.">
 <meta name="twitter:image" content="https://satyaghoshmaurya.github.io/assets/img/og-card.png">
 
 <link rel="icon" href="favicon.ico" sizes="32x32">
@@ -70,65 +70,84 @@
     <div class="content">
       <h1>Teaching &amp; Mentoring</h1>
       <p class="lede">
-        I teach the way I work: derive the result on the board, simulate it in a few lines of code, then measure it. A student who has done all three trusts the equation for the right reason, and knows what it costs to check.
+        I am an experimentalist. I build optical instruments and measure what single molecules do with them, and that is the position I teach from: a result earns belief when a measurement agrees with it.
       </p>
 
-      <!-- ============ How I teach ============ -->
-      <section id="approach">
-        <h2>Derive, simulate, measure</h2>
+      <!-- ============ Statement ============ -->
+      <section id="statement">
+        <h2>Teaching statement</h2>
         <p>
-          Most engineering courses stop after the derivation. The equation is proved, the boundary conditions are applied, and the student never sees the quantity it predicts. I want the loop closed inside the course, because that is where the judgement lives: which term you may drop, how much noise hides the effect you predicted, and when the model is simply wrong.
+          A student who has never watched a prediction meet a measurement has been taught to trust authority rather than evidence. Most engineering courses stop at the derivation. The equation is proved, boundary conditions are applied, and the quantity it predicts is never seen. I teach in the other direction wherever the subject allows it, beginning with something measured and reaching the theory as the explanation of it.
         </p>
         <p>
-          Barrier crossing is my worked example, and I would use it in a core course and in an elective alike. On the board, Kramers' escape rate, derived as the chemical engineer's Arrhenius prefactor with friction in it. In a notebook, a Langevin particle in a double well, run until the histogram of waiting times matches the formula. Then the measurement: single molecules of an enzyme opening and closing, timed photon by photon, with the crossing rate falling as the solvent gets thicker exactly as the derivation says. The same hour covers a classical result, a numerical method, and data a student can argue with.
+          The crossing of an activation barrier is my standing example, and it belongs as much to reaction engineering as to my own research. I would open with an observation: an enzyme opens and closes at a rate that falls as the solvent is made more viscous. The Arrhenius expression, as a first course presents it, does not account for that. The derivation then has a purpose, and Kramers' result arrives as the Arrhenius expression with the friction of the surroundings in its prefactor. Only afterwards does a short simulation of a particle in a double well come in, as the cheapest way to see why the expression takes the form it does. The same hour has covered a classical result, a numerical method, and data the class is entitled to argue with.
         </p>
-        <figure class="fig-static-full">
-          <img src="assets/img/research/landscape.png" alt="A two-well free-energy landscape with a molecule at the top of the barrier between the wells" width="1440" height="547" loading="lazy">
-          <figcaption>
-            <span>The picture behind the worked example: two conformations, two wells, and the brief crossing between them. It appears in the Kramers lecture, in the simulation students write, and in the measurement they then analyse.</span>
+        <figure class="fig-card">
+          <div class="fig-bar">
+            <span class="fig-title">The standing example</span>
+          </div>
+          <div class="fig-static fig-static-full">
+            <img src="assets/img/research/landscape.png" alt="A two-well free-energy landscape with a schematic protein at the top of the barrier separating the open and closed conformations" width="1440" height="547" loading="lazy">
+          </div>
+          <figcaption class="fig-caption">
+            <span class="fig-note">Two conformations, two free-energy wells, and the brief crossing between them. The same picture serves the derivation of Kramers' escape rate, the simulation the class writes, and the measured data it is then compared against.</span>
           </figcaption>
         </figure>
         <p>
-          Two habits follow from this. Computation is part of the course, not a separate elective: every major result gets a short Python or MATLAB notebook, and students are expected to read and modify code, not only run it. And assessment is built so that it cannot be short-circuited. In a large class I can generate a different dataset for every student from their roll number using the same simulation code, so the analysis must be their own and marking stays automatic. In a graduate elective, students write a referee report on a paper whose real reviews were published, then compare the two.
+          Computation belongs inside a course rather than beside it, and as an instrument rather than a subject. A graduating chemical engineer should be able to read a piece of analysis code, change it, run it on real data, and defend what they conclude from the output. That is a different skill from writing a program, and it is the one that a research group or an industrial laboratory actually needs.
+        </p>
+        <p>
+          Assessment should ask for judgement, and should be built so that it cannot be short-circuited. In a large class each student can be issued a different dataset, generated from their roll number by the same simulation code used in lectures, which makes the analysis necessarily their own and keeps marking automatic. In a graduate class, a productive exercise is to write a referee report on a paper whose reviews were published openly, and then read the reviews the paper actually received.
         </p>
       </section>
 
       <hr class="rule">
 
-      <!-- ============ Core courses ============ -->
+      <!-- ============ Courses ============ -->
       <section id="core-courses">
-        <h2>Core courses I am ready to teach</h2>
+        <h2>Courses I am prepared to teach</h2>
         <p>
-          These are the chemical engineering courses I can take from the first week of a semester, and they are the ones departments most often need staffed.
+          Core courses in a chemical engineering curriculum, which I can take from the beginning of a semester.
         </p>
-        <ul class="course-list">
-          <li>
-            <strong>Chemical Engineering Mathematics.</strong>
-            Linear algebra, ordinary and partial differential equations, numerical methods, probability and stochastic processes.
-            <span class="course-note">Taught as a teaching assistant at the Indian Institute of Science, August to December 2017.</span>
-          </li>
-          <li>
-            <strong>Transport Phenomena.</strong>
-            Momentum, heat and mass transfer; diffusion and convection; transport in porous and crowded media; transport at interfaces and in biological systems.
-          </li>
-          <li>
-            <strong>Chemical Engineering Thermodynamics.</strong>
-            Classical and statistical thermodynamics, phase and reaction equilibria, molecular interactions, and the thermodynamics of biological assembly.
-          </li>
-          <li>
-            <strong>Chemical Reaction Engineering.</strong>
-            Kinetics, reactor design, residence-time distributions, catalysis, and enzyme and biochemical reaction networks.
-          </li>
-          <li>
-            <strong>Numerical Methods and Computational Modelling.</strong>
-            Numerical solution of engineering problems in Python and MATLAB, stochastic simulation, and fitting models to data.
-          </li>
-          <li>
-            <strong>An undergraduate laboratory course</strong>, including the instrumentation, calibration and error analysis that students usually meet only in passing.
-          </li>
-        </ul>
+
+        <div class="course-entry">
+          <h3>Chemical Engineering Mathematics</h3>
+          <p class="course-meta">Undergraduate core. Taught as a teaching assistant at the Indian Institute of Science, August to December 2017.</p>
+          <p>Linear algebra, ordinary and partial differential equations, numerical methods, probability, and an introduction to stochastic processes.</p>
+        </div>
+
+        <div class="course-entry">
+          <h3>Transport Phenomena</h3>
+          <p class="course-meta">Undergraduate core, with a graduate extension.</p>
+          <p>Momentum, heat and mass transfer; diffusion and convection; transport in porous and crowded media; transport at interfaces and in biological systems, where my own measurements lie.</p>
+        </div>
+
+        <div class="course-entry">
+          <h3>Chemical Engineering Thermodynamics</h3>
+          <p class="course-meta">Undergraduate core, with a graduate extension in statistical thermodynamics.</p>
+          <p>Classical thermodynamics, phase and reaction equilibria, molecular interactions, and the statistical basis of free energy, carried through to the assembly of biological structures.</p>
+        </div>
+
+        <div class="course-entry">
+          <h3>Chemical Reaction Engineering</h3>
+          <p class="course-meta">Undergraduate core.</p>
+          <p>Kinetics, reactor design and analysis, residence-time distributions, catalysis, and enzyme and biochemical reaction networks.</p>
+        </div>
+
+        <div class="course-entry">
+          <h3>Numerical Methods and Computational Modelling</h3>
+          <p class="course-meta">Undergraduate or first-year graduate.</p>
+          <p>Numerical solution of engineering problems in Python and MATLAB, stochastic simulation, parameter estimation, and the honest reporting of uncertainty.</p>
+        </div>
+
+        <div class="course-entry">
+          <h3>Undergraduate laboratory</h3>
+          <p class="course-meta">Undergraduate core.</p>
+          <p>Any of the standard unit-operations and reaction-engineering experiments, taught with the instrumentation, calibration and error analysis that a laboratory course usually leaves implicit.</p>
+        </div>
+
         <p class="course-aside">
-          Where a department runs a first-year biology or biophysics course for engineering students, I am glad to take it. My research sits on that boundary and I have taught practical microscopy to a mixed audience of biologists, physicists and engineers.
+          Where a department offers a first course in biology or biophysics for engineering students, I am glad to take it. My research sits on that boundary, and I have taught practical microscopy to a mixed class of biologists, physicists and engineers.
         </p>
       </section>
 
@@ -136,49 +155,49 @@
 
       <!-- ============ Electives ============ -->
       <section id="electives">
-        <h2>Courses I would build</h2>
-        <p class="lede">
-          Three electives that only somebody with my particular training would offer. Each one teaches a piece of core chemical engineering through the research I do, and each can be taught with my own data and code.
+        <h2>Elective courses I would develop</h2>
+        <p>
+          Three graduate electives that follow from my research and that I could teach from my own data and code. Each is built on a piece of core chemical engineering rather than beside it.
         </p>
 
-        <div class="card">
+        <div class="course-entry">
           <h3>Crossing Barriers: rare events from reactors to proteins</h3>
-          <p class="fd-question">Why does anything ever get over an activation barrier?</p>
+          <p class="course-meta">Proposed graduate elective. Prerequisites: differential equations, undergraduate thermodynamics and kinetics.</p>
           <p>
-            Random walks, the Langevin and Fokker&ndash;Planck equations, first-passage times, Kramers theory, transition paths and committors, nucleation, and Gillespie simulation. The case studies run from a catalytic reaction and a nucleating crystal to a protein changing conformation and a pore-forming toxin assembling on a membrane, each with measured data. The unifying idea is a shared equation rather than a loose analogy, and the destination is the physics behind the Arrhenius prefactor that a reaction engineering course takes on faith.
+            Random walks; the Langevin and Fokker&ndash;Planck equations; first-passage times; Kramers' theory in its low- and high-friction limits; transition paths and committors; classical nucleation theory; stochastic simulation by the Gillespie algorithm. Case studies are taken from catalysis, from crystal nucleation, from the conformational change of an enzyme, and from the assembly of a pore-forming toxin, each accompanied by measured data. The course exists to supply what a first reaction engineering course leaves as an assertion, namely where the Arrhenius prefactor comes from and why rates depend on the medium.
           </p>
         </div>
 
-        <div class="card">
+        <div class="course-entry">
           <h3>Inference from Noisy Data: Bayesian methods for experimentalists</h3>
-          <p class="fd-question">What may I honestly claim from this measurement?</p>
+          <p class="course-meta">Proposed graduate elective. Prerequisites: probability and programming in Python or MATLAB.</p>
           <p>
-            One loop, taught three times over: write a forward model, write a noise model, infer the parameters. Students apply it to photon arrival streams with hidden Markov models and Gibbs sampling, to images with Poisson counting statistics, and to a remote-sensing problem where the signal is smaller than a pixel. It ends with simulation-based inference, where the model can be simulated but not written down. Much of it can be taught from code I have written and use, and it fills the gap that most departments are now trying to fill with a statistics or machine-learning course.
+            A single procedure taught until it is second nature: state a forward model, state a noise model, infer the parameters, and report what the data do and do not constrain. Maximum likelihood, Bayesian estimation, Markov chain Monte Carlo, hidden Markov models for time series, and model selection. Applications are drawn from photon arrival streams, from images limited by counting statistics, and from a remote-sensing problem in which the quantity of interest is smaller than a pixel. The course closes on simulation-based inference, for models that can be simulated but not written down.
           </p>
         </div>
 
-        <div class="card">
+        <div class="course-entry">
           <h3>Soft Interfaces: colloids, polymer brushes and membranes</h3>
-          <p class="fd-question">What holds a suspension together, and what makes it fail?</p>
+          <p class="course-meta">Proposed graduate elective, open to senior undergraduates. Prerequisites: thermodynamics.</p>
           <p>
-            Intermolecular and surface forces, colloidal stability and its steric counterpart, the mushroom-to-brush transition in grafted polymers, supported lipid bilayers, surface passivation, and nanoparticle stability in biological fluids. A five-minute demonstration makes the theory visible: a pinch of salt turns a gold colloid from red to blue, while the polymer-coated batch beside it stays red. The course connects directly to formulation in pharmaceuticals, food, paints and agrochemicals, and to my own work on crowded membranes.
+            Intermolecular and surface forces; electrostatic and steric stabilisation of colloids; grafted polymer layers and the transition from mushroom to brush; supported lipid bilayers; surface passivation; the stability of nanoparticles in biological fluids. A demonstration that takes five minutes makes the theory visible, as a pinch of salt turns a gold colloid from red to blue while a polymer-coated sample beside it does not change. The subject matter carries directly into formulation in the pharmaceutical, food, paint and agrochemical industries, and into my own measurements on crowded membranes.
           </p>
         </div>
       </section>
 
       <hr class="rule">
 
-      <!-- ============ Teaching laboratory ============ -->
+      <!-- ============ Laboratory ============ -->
       <section id="laboratory">
-        <h2>A build, measure and model laboratory</h2>
+        <h2>Laboratory development</h2>
         <p>
-          The instrument I want to build for research, a single-molecule measurement that runs on an inexpensive camera instead of a photon counter, has a teaching version. Students build a simple optical instrument, characterise it honestly, and then model what they measured.
+          The instrument I want to build for research, a single-molecule measurement that runs on an inexpensive camera rather than a photon-counting detector, has a teaching counterpart. I would like to add to an undergraduate laboratory a sequence in which students build a simple instrument, characterise it honestly, and then model what they have measured.
         </p>
         <p>
-          A phone or single-board camera becomes a colorimeter and fluorimeter, which teaches the Beer&ndash;Lambert law, calibration curves, and the meaning of a detection limit far better than a sealed commercial box. A microcontroller with humidity and gas sensors driving a relay turns process control from a block diagram into a loop students can tune badly and then tune well. A capacitive probe in a column of grain teaches dielectric mixing and transport in porous media, with a result that matters to anyone who has stored a harvest.
+          A camera module and a light-emitting diode make a colorimeter and a fluorimeter, which teach the Beer&ndash;Lambert law, the construction of a calibration curve, and the meaning of a limit of detection far more convincingly than a sealed commercial instrument. A microcontroller reading humidity and gas sensors and driving a relay turns process control from a block diagram into a loop that a student can tune badly and then tune well. A capacitive probe in a column of grain teaches dielectric mixing and transport in a porous medium, and produces a number that matters to anyone who has stored a harvest.
         </p>
         <p>
-          The appeal is that it scales. Parts cost little, so a large class can build in groups rather than watch a demonstration, and the measurements accumulate into an open dataset that students can publish. It is also the honest version of experiential learning: students meet calibration drift, a bad ground, and a fit that will not converge, which is what measurement is actually like.
+          The approach scales to a large class, since the components are inexpensive enough for every group to build rather than watch. It is also the honest form of experimental teaching, because students meet calibration drift, a poor electrical ground, and a fit that refuses to converge, which is what measurement is actually like. Results accumulated across cohorts can be published as an open dataset, which gives students a first taste of authorship.
         </p>
       </section>
 
@@ -186,36 +205,34 @@
 
       <!-- ============ Mentoring ============ -->
       <section id="mentoring">
-        <h2>Mentoring</h2>
+        <h2>Research supervision</h2>
         <p>
-          During my doctoral work and since, I have supervised two junior graduate students, two project assistants and seven summer interns, and I am currently designing a two-month master's project that climbs from bench fluorimetry to single-molecule confocal measurement in eight weeks. Mentoring at that range, from a summer student who has never held a pipette to a graduate student building an instrument, has taught me that the structure matters more than the pep talk.
+          During my doctoral work and since, I have supervised two junior graduate students, two project assistants and seven summer interns, and I am presently designing a two-month master's project that moves from bench fluorimetry to single-molecule confocal measurement over eight weeks. Supervising across that range, from a student who has not held a pipette to one building an instrument, has persuaded me that structure matters more than encouragement.
         </p>
-        <p>What I put in place for anyone who joins me:</p>
-        <ul>
-          <li><strong>A first month that is deliberately taught.</strong> Laser and chemical safety, Python and version control, and how to organise data so that a result can be found again in two years.</li>
-          <li><strong>A written plan per student</strong>, with what they will learn as well as what they will produce, revisited each term. It makes drift visible early, when it can still be fixed.</li>
-          <li><strong>Weekly one-to-one meetings, and writing from the first year.</strong> A student who writes only at the end of a doctorate has been taught to dread it.</li>
-          <li><strong>Shared, reviewed analysis code.</strong> Analysis is read by somebody else before a result is believed. This catches more errors than any amount of care alone.</li>
-          <li><strong>Explicit training in using computational and AI tools well</strong>, with verification and provenance expected. These tools are already in every student's workflow and in mine; pretending otherwise teaches nothing.</li>
-        </ul>
+        <p>
+          A new student's first month is taught rather than left to osmosis: laser and chemical safety, programming and version control, and a scheme for organising data so that a result can be found again two years later. Each student has a written plan that records what they are to learn as well as what they are to produce, revised each term, which makes drift visible while it can still be corrected. I meet students individually every week, and expect writing from the first year, because a student who writes only at the end of a doctorate has been taught to dread it.
+        </p>
+        <p>
+          Analysis code is shared and read by someone else before a result is believed, which catches more errors than any amount of individual care. I also expect students to use computational and machine-learning tools deliberately, with verification and a record of provenance, since those tools are already in every student's work and in mine, and pretending otherwise teaches nothing.
+        </p>
       </section>
 
       <hr class="rule">
 
-      <!-- ============ Indian classroom ============ -->
+      <!-- ============ Indian institutions ============ -->
       <section id="classroom">
-        <h2>Teaching in an Indian classroom</h2>
+        <h2>Teaching in Indian institutions</h2>
         <p>
-          I did my bachelor's degree at the National Institute of Technology, Durgapur, and my master's and doctorate at the Indian Institute of Science, so the classroom I am preparing for is one I have sat in. Three things follow.
+          I took my bachelor's degree at the National Institute of Technology, Durgapur, and my master's and doctorate at the Indian Institute of Science, so the classroom I am preparing for is one in which I have sat. Three practical matters follow.
         </p>
         <p>
-          <strong>Students arrive with very different preparation</strong>, particularly in programming and probability. Short bridge sessions in the first weeks, run as optional but strongly encouraged, cost little and prevent the quiet loss of students who could otherwise have done the course.
+          Students arrive with markedly different preparation, particularly in programming and probability. Short bridge sessions in the opening weeks, offered to all and pressed on those who need them, cost very little and prevent the quiet loss of students who would otherwise have done well.
         </p>
         <p>
-          <strong>Language is a real barrier, not a sentimental one.</strong> At institutes in the Hindi belt I would offer tutorials and problem sessions bilingually. I write technical material in Hindi already, for the bilingual biodiversity atlas I run outside the laboratory, and I have found that explaining a mechanism to somebody without the vocabulary for it sharpens my own account of it.
+          Language is a practical barrier and not a sentimental one. At institutions in the Hindi-speaking states I would conduct tutorials and problem sessions bilingually. I write technical material in Hindi already, for a bilingual biodiversity atlas I maintain outside the laboratory, and explaining a mechanism to a reader without the vocabulary for it has sharpened my own account of it more than once.
         </p>
         <p>
-          <strong>Access matters at the margin.</strong> Summer projects are where many students first see research, and the ones from state universities and smaller colleges rarely get the chance. I intend to keep a share of my summer places for them.
+          Summer projects are where many students first encounter research, and students from state universities and smaller colleges rarely get the opportunity. I intend to reserve a share of summer positions for them.
         </p>
       </section>
 
@@ -223,22 +240,32 @@
 
       <!-- ============ Record ============ -->
       <section id="record">
-        <h2>Teaching record</h2>
-        <ul class="course-list">
-          <li>
-            <strong>Teaching Assistant, Chemical Engineering Mathematics.</strong>
-            Department of Chemical Engineering, Indian Institute of Science, Bangalore. August to December 2017.
-          </li>
-          <li>
-            <strong>Teaching Assistant, Bangalore Microscopy Course.</strong>
-            National Centre for Biological Sciences, Bangalore. September 2018. A hands-on international course, teaching practical fluorescence microscopy to graduate students and postdoctoral researchers from biology, physics and engineering.
-          </li>
-          <li>
-            <strong>Supervision.</strong> Two junior graduate students, two project assistants and seven summer interns.
-          </li>
-        </ul>
+        <h2>Teaching experience</h2>
+        <div class="cv-timeline">
+          <div class="cv-item">
+            <div class="cv-when">Sep 2018</div>
+            <div class="cv-what">
+              <strong>Teaching Assistant, Bangalore Microscopy Course</strong>
+              <span>National Centre for Biological Sciences, Bangalore. A hands-on international course in practical fluorescence microscopy, for graduate students and postdoctoral researchers from biology, physics and engineering.</span>
+            </div>
+          </div>
+          <div class="cv-item">
+            <div class="cv-when">Aug &ndash; Dec 2017</div>
+            <div class="cv-what">
+              <strong>Teaching Assistant, Chemical Engineering Mathematics</strong>
+              <span>Department of Chemical Engineering, Indian Institute of Science, Bangalore.</span>
+            </div>
+          </div>
+          <div class="cv-item">
+            <div class="cv-when">2016 &ndash; present</div>
+            <div class="cv-what">
+              <strong>Research supervision</strong>
+              <span>Two junior graduate students, two project assistants and seven summer interns.</span>
+            </div>
+          </div>
+        </div>
         <p class="course-aside">
-          The longer aim is a course I have wanted to teach for years, on the dynamics that molecules, cells, ecosystems and societies turn out to share. I would earn it first, by teaching the core of the discipline well.
+          In the longer term I would like to teach a course on the dynamics that molecules, cells, ecosystems and populations turn out to share. It is a course to be earned by first teaching the core of the discipline well.
         </p>
         <p>
           <a class="btn-outline" href="assets/cv/Satyaghosh_Maurya_CV.pdf" target="_blank" rel="noopener">Download CV (PDF)</a>
