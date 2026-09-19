@@ -62,7 +62,8 @@ for name, text in sorted(html.items()):
             if frag and frag not in anchors[name]:
                 problems.append("%s: link to #%s, which is not on this page" % (name, frag))
             continue
-        path = os.path.normpath(os.path.join(ROOT, target))
+        # a leading slash means the site root, not the filesystem root
+        path = os.path.normpath(os.path.join(ROOT, target.lstrip("/")))
         if not os.path.exists(path):
             problems.append("%s: points at %s, which does not exist" % (name, target))
         elif frag and target.endswith(".html"):
