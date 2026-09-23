@@ -147,7 +147,7 @@
     var mols = [];
     // Diffusion is fast on purpose: it is a visualisation, and at a calm pace
     // almost nothing reaches the floor within one trace window.
-    var speed = parseFloat(canvas.getAttribute("data-zmw-speed")) || (compact ? 3 : 4.5);
+    var speed = parseFloat(canvas.getAttribute("data-zmw-speed")) || (compact ? 4 : 6);
     var fscale = parseFloat(canvas.getAttribute("data-font-scale")) || 1;
     // Optional photon trace: donor and acceptor counts per bin from whatever
     // sits in the evanescent volume, so a visit shows as a burst.
@@ -173,10 +173,10 @@
       // depth z, into the screen, and the solution is about as deep as it is wide. The hole is
       // a cylinder, so a molecule in front of or behind it is over solid metal and cannot
       // enter, which is why most of the crowd passes across the mouth.
-      // Measured by simulating these exact rules: at 0.22 W the hole is occupied about 60
-      // percent of the time with 0.5 molecules waiting at the lip and about four bursts per
-      // trace window. Shallower brings the crowd back to the mouth; deeper leaves the hole
-      // empty half the time.
+      // Measured by simulating these rules (scratch sim_zmw2.py, 2026-09-23): with the
+      // lit-layer occupancy rule at speed 6 the hole column holds about 1.9 molecules on
+      // average, the lit layer is entered about six times a second, and a trace window
+      // shows about seven bursts.
       // A fixed physical depth, not a fraction of the canvas: tying it to the width made a
       // phone-sized canvas a shallow, crowded box with three molecules queueing at the lip.
       G.zmax = 180 * scale;
@@ -237,20 +237,22 @@
 
     function step() {
       var s = (compact ? 2.5 : 3.6) * speed;
-      // The aperture holds one molecule at a time. At nanomolar concentration a
-      // hole this size is empty nearly always, and that is the whole point of
-      // it: whoever is inside is alone. A molecule outside may not enter while
-      // another is in; it is reflected at the mouth until the hole is free.
-      // The top quarter is the lip: a molecule may poke in there and turn back
-      // without claiming the hole. Below the lip the hole is single-occupancy.
-      var deep = G.filmTop + 24 * scale, occupant = -1;
-      for (var k = 0; k < mols.length; k++) if (mols[k].y >= deep) { occupant = k; break; }
+      // The lit layer at the floor holds one molecule at a time, and that is the
+      // whole point of the aperture: whoever is seen is alone. The rest of the
+      // hole is open. Molecules wander in and out of the column freely, and only
+      // when one is already lit is a second turned back, at the top of the glow,
+      // where it reads as the spot being taken. An earlier version turned them
+      // back at a line just under the mouth, and a crowd bouncing off an
+      // invisible plane made the hole look sealed.
+      var fLit = 0.15, occupant = -1;
+      for (var k = 0; k < mols.length; k++) if (field(mols[k].x, mols[k].y) >= fLit) { occupant = k; break; }
       for (var i = 0; i < mols.length; i++) {
         var m = mols[i];
+        var f0 = field(m.x, m.y);
         // hindered diffusion near a wall: within a few nanometres of the floor a
         // protein's mobility drops severalfold, so a molecule that reaches the
         // lit layer lingers there, and a visit is a burst rather than a blip
-        var sm = field(m.x, m.y) > 0.45 ? s * 0.35 : s;
+        var sm = f0 > 0.45 ? s * 0.35 : s;
         var nx = m.x + sm * gauss(), ny = m.y + sm * gauss(), nz = m.z + sm * gauss();
         if (!ok(nx, m.y, m.z)) nx = m.x - (nx - m.x);
         if (!ok(nx, m.y, m.z)) nx = m.x;
@@ -258,12 +260,14 @@
         if (!ok(nx, ny, m.z)) ny = m.y;
         if (!ok(nx, ny, nz)) nz = m.z - (nz - m.z);
         if (!ok(nx, ny, nz)) nz = m.z;
-        if (m.y < deep && ny >= deep && occupant !== -1 && occupant !== i) {
+        var f1 = field(nx, ny);
+        if (f0 < fLit && f1 >= fLit && occupant !== -1 && occupant !== i) {
           ny = m.y - (ny - m.y);
           if (!ok(nx, ny, nz)) ny = m.y;
+          f1 = field(nx, ny);
         }
-        if (occupant === i && ny < deep) occupant = -1;
-        else if (occupant === -1 && ny >= deep) occupant = i;
+        if (occupant === i && f1 < fLit) occupant = -1;
+        else if (occupant === -1 && f1 >= fLit) occupant = i;
         m.x = nx; m.y = ny; m.z = nz;
         if (Math.random() < 0.012) m.open = m.open ? 0 : 1;
         m.op += (m.open - m.op) * 0.1;
@@ -511,7 +515,14 @@
       }
       return false;
     }
-    for (var g = 0; g < 8000 && !(litNow() && (!traceCv || burstsInWindow() >= 2)); g++) step();
+    // ...and, since the hole used to read as sealed, at least one more molecule in the
+    // column above the lit one, so the opening frame shows the hole being visited
+    function columnCount() {
+      var n = 0;
+      for (var k = 0; k < mols.length; k++) if (mols[k].y >= G.filmTop) n++;
+      return n;
+    }
+    for (var g = 0; g < 8000 && !(litNow() && columnCount() >= 2 && (!traceCv || burstsInWindow() >= 2)); g++) step();
     draw();
     updateReadouts();
     // Hook for tools/gif/capture.html: advance n simulation steps and redraw,
@@ -519,9 +530,12 @@
     canvas._captureFrame = function (n) { n = n || 2; for (var k = 0; k < n; k++) step(); draw(); };
     // what the current frame shows, for tests: is a molecule lit, how many are in the hole
     canvas._state = function () {
-      var deepLine = G.filmTop + 24 * scale, inHole = 0, inLip = 0;
+      // inHole: molecules anywhere in the hole column; inLip: in the lit layer, which
+      // the rules hold to at most one
+      var inHole = 0, inLip = 0;
       for (var k = 0; k < mols.length; k++) {
-        if (mols[k].y >= deepLine) inHole++; else if (mols[k].y >= G.filmTop) inLip++;
+        if (mols[k].y >= G.filmTop) inHole++;
+        if (field(mols[k].x, mols[k].y) >= 0.15) inLip++;
       }
       return { lit: litNow(), inHole: inHole, inLip: inLip, bursts: traceCv ? burstsInWindow() : -1, total: mols.length };
     };

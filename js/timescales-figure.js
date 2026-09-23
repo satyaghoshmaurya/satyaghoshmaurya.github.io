@@ -65,7 +65,7 @@
     { lo: 1e0,   hi: 1e2,   label: "pore assembles" }
   ];
 
-  var ROWS = ["All-atom simulation", "Confocal smFRET", "Plasmonic waveguide"];
+  var ROWS = ["All-atom simulation", "Confocal smFRET", "Plasmon-enhanced"];
 
   var TP_LO = 1e-6, TP_HI = 1e-5;   // the transition path: the event we are after
   var MD_STEP = 1e-15;      // the integration step of an all-atom simulation
@@ -73,6 +73,7 @@
   var MD_SPECIAL = 1e-3;    // specialised hardware and enhanced sampling
   var CONFOCAL_RATE = 5e4;  // photons per second during a burst, ordinary confocal
   var N_PHOTONS = 25;       // photons needed before a state can be called
+  var TARGET_RATE = 1e7;    // photons per second the nanorod work is aiming for
   var T0 = 1e-15, T1 = 1e2; // axis limits
 
   function resolution(rate) { return N_PHOTONS / rate; }
@@ -258,6 +259,20 @@
       var rlab = fmtTime(res);
       var rw = ctx.measureText(rlab).width;
       ctx.fillText(rlab, Math.min(G.right - rw, rx + 5), y3 - 6);
+
+      // where the nanorod work is aiming: a dashed mark at ten million per second
+      var tx = x(resolution(TARGET_RATE));
+      ctx.save();
+      ctx.setLineDash([2, 3]);
+      ctx.strokeStyle = rgba(C.green, 0.85); ctx.lineWidth = 1.2;
+      ctx.beginPath(); ctx.moveTo(tx, y3 - 5); ctx.lineTo(tx, y3 + G.barH + 6); ctx.stroke();
+      ctx.restore();
+      if (!G.narrow) {
+        ctx.font = (G.fs - 2) + "px " + C.font;
+        ctx.fillStyle = rgba(C.green, 0.9);
+        ctx.textAlign = "right"; ctx.textBaseline = "top";
+        ctx.fillText("10 MHz target", tx - 4, y3 + G.barH + 4);
+      }
 
       // does the measurement reach the event?
       if (!G.narrow) {

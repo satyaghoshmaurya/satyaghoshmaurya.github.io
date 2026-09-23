@@ -71,7 +71,7 @@
   // pNuc: chance per contact-frame that two bound monomers pair up.
   // pDiss: chance per frame that a dimer falls apart.
   // pAct: chance per frame that a dimer locks into a stable nucleus.
-  var P = { pNuc: 0.015, pDiss: 0.004, pAct: 0.0015 };
+  var P = { pNuc: 0.015, pDiss: 0.004, pAct: 0.002 };   // pAct raised 2026-09-23 so the first nucleus comes within about ten seconds of a monomer-only start
 
   function Figure(canvas) {
     var ctx = canvas.getContext("2d");
@@ -84,7 +84,10 @@
     var playing = false, rafId = null, visible = true;
     var W = 0, H = 0, dpr = 1, G = {};
     var sol = [], ents = [], pores = 0, frames = 0, nucleated = false;
-    var N_SOL = 16, MAX_BOUND = 40;
+    // The cap limits free monomers on the membrane, not subunits in arcs. Counting arc
+    // subunits could deadlock the figure: several arcs each short of a ring, the cap
+    // reached, no monomer able to bind, and nothing left that could merge.
+    var N_SOL = 16, MAX_BOUND = 24;
 
     function geom() {
       G.glassTop = H - 26;
@@ -113,7 +116,7 @@
       sol = []; ents = []; pores = 0; frames = 0; nucleated = false;
       for (var i = 0; i < N_SOL; i++) sol.push(spawnSol(false));
     }
-    function boundCount() { var c = 0; for (var i = 0; i < ents.length; i++) if (!ents[i].inserted) c += ents[i].n; return c; }
+    function boundCount() { var c = 0; for (var i = 0; i < ents.length; i++) if (!ents[i].inserted && ents[i].n === 1) c++; return c; }
     function largest() { var m = 0; for (var i = 0; i < ents.length; i++) if (ents[i].n > m) m = ents[i].n; return m; }
     function growingCount() { var c = 0; for (var i = 0; i < ents.length; i++) if (ents[i].act && !ents[i].inserted) c++; return c; }
     function nearestNucleus(x) {
@@ -138,7 +141,7 @@
         if (m.y < G.top) m.y = 2 * G.top - m.y;
         if (m.y >= G.memTop - 12) {
           if (boundCount() < MAX_BOUND) {
-            ents.push({ n: 1, x: m.x, inserted: false, act: false });
+            ents.push({ n: 1, x: m.x, inserted: false, act: false, age: 0 });
             sol.splice(i, 1);
             sol.push(spawnSol(true));
           } else {
@@ -151,6 +154,7 @@
       for (i = 0; i < ents.length; i++) {
         e = ents[i];
         if (e.inserted) continue;
+        if (e.n === 1 && e.age < 60) e.age++;   // the protomer transition, see drawEntity
         var s = 2.6 / Math.sqrt(e.n);
         if (e.n === 1) {
           var nuc = nearestNucleus(e.x);
@@ -166,8 +170,8 @@
         var r = Math.random();
         if (r < P.pDiss) {
           ents.splice(i, 1);
-          ents.push({ n: 1, x: e.x - 7, inserted: false, act: false });
-          ents.push({ n: 1, x: e.x + 7, inserted: false, act: false });
+          ents.push({ n: 1, x: e.x - 7, inserted: false, act: false, age: 60 });
+          ents.push({ n: 1, x: e.x + 7, inserted: false, act: false, age: 60 });
         } else if (r < P.pDiss + P.pAct) {
           e.act = true;
           nucleated = true;
@@ -228,9 +232,17 @@
     function drawEntity(e) {
       var mt = G.memTop, k;
       if (e.n === 1) {
-        roundRect(ctx, e.x - 3, mt - 16, 6, 24, 3);
+        // The monomer-to-protomer transition of the painting on this page: the
+        // water-soluble form lands lying along the bilayer, then swings upright
+        // over about a second as it converts to the membrane-inserted protomer.
+        var up = Math.min(1, (e.age === undefined ? 60 : e.age) / 50);
+        var ang = (1 - up) * Math.PI / 2;
+        ctx.save();
+        ctx.translate(e.x, mt - 4); ctx.rotate(ang);
+        roundRect(ctx, -3, -12, 6, 24, 3);
         ctx.fillStyle = rgba(C.toxin, 0.85); ctx.fill();
         ctx.strokeStyle = rgba(C.text, 0.45); ctx.lineWidth = 0.8; ctx.stroke();
+        ctx.restore();
         return;
       }
       var R = 7 + 1.9 * e.n;
@@ -315,9 +327,20 @@
     refreshColors();
     fit();
     reset();
-    for (var i = 0; i < 1500; i++) step();   // an assembled population is visible even while paused
+    // The figure opens on what the experiment opens on: monomers in solution above a
+    // clean bilayer. Nothing is pre-assembled; press Play and the whole sequence runs,
+    // lag included. (It used to open on a pre-run population of pores, which showed the
+    // end of the story before the start.)
     draw();
     updateReadouts();
+
+    // Hooks for tools and tests: advance n steps synchronously, read the state, restart.
+    canvas._captureFrame = function (n) { n = n || 2; for (var k = 0; k < n; k++) step(); draw(); updateReadouts(); };
+    canvas._state = function () {
+      return { frames: frames, soluble: sol.length, bound: boundCount(), largest: largest(),
+               pores: pores, nucleated: nucleated, growing: growingCount() };
+    };
+    canvas._reset = function () { reset(); draw(); updateReadouts(); };
 
     if (btnReset) btnReset.addEventListener("click", function () { reset(); draw(); updateReadouts(); });
     if (btn) btn.addEventListener("click", function () { setPlaying(!playing); });

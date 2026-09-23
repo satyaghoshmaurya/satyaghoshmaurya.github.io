@@ -1884,3 +1884,93 @@ a.atlas-link:focus-visible {
     height: 360px;
   }
 }
+
+/* ---- Future Directions: the laboratory as one process (2026-09-23) ----
+   A process-flow schematic as inline SVG, so it takes the page's colours in
+   both themes, and a staged list under each direction. The SVG keeps a
+   minimum width and scrolls sideways on a phone rather than shrinking its
+   type past reading. */
+.fd-flow-wrap {
+  overflow-x: auto;
+  padding: 0.6rem 0.4rem;
+  background: var(--bg);
+}
+
+.fd-flow {
+  display: block;
+  width: 100%;
+  min-width: 680px;
+  height: auto;
+  font-family: var(--font-body);
+}
+
+.fd-flow rect {
+  fill: var(--bg-alt);
+  stroke: var(--border);
+  stroke-width: 1.2;
+}
+
+.fd-flow .fd-out rect {
+  fill: var(--accent-light);
+  stroke: var(--accent);
+}
+
+.fd-flow .fd-t {
+  font-size: 14px;
+  font-weight: 600;
+  fill: var(--text);
+}
+
+.fd-flow .fd-s {
+  font-size: 12px;
+  fill: var(--text-muted);
+}
+
+.fd-flow .fd-lab {
+  font-size: 11.5px;
+  font-style: italic;
+  fill: var(--text-muted);
+}
+
+.fd-flow .fd-arr {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.8;
+}
+
+.fd-flow .fd-recycle {
+  stroke-dasharray: 5 4;
+}
+
+.fd-flow .fd-arrhead {
+  fill: var(--accent);
+}
+
+.fd-flow-hint {
+  display: none;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+@media (max-width: 720px) {
+  .fd-flow-hint {
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+}
+
+.fd-steps {
+  margin: 0.8rem 0 0.2rem;
+  padding-left: 1.4rem;
+}
+
+.fd-steps > li {
+  margin-bottom: 0.55rem;
+  line-height: 1.6;
+}
+
+.fd-steps > li::marker {
+  color: var(--text-muted);
+  font-weight: 600;
+}

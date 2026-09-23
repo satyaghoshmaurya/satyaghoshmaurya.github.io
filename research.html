@@ -90,7 +90,7 @@
           <div class="fig-controls">
             <label class="fig-slider">
               <span>Photon rate</span>
-              <input type="range" min="4.4" max="6.9" step="0.02" value="6.48" data-ts-rate aria-label="Detected photon rate during a burst, logarithmic scale">
+              <input type="range" min="4.4" max="7" step="0.02" value="6.48" data-ts-rate aria-label="Detected photon rate during a burst, logarithmic scale">
               <span class="mono" data-ts-rate-val>3.0 MHz</span>
             </label>
           </div>
@@ -99,7 +99,7 @@
         <figcaption class="fig-caption">
           <span>Time resolution: <strong class="mono" data-ts-out-res>&asymp; 8 &micro;s</strong></span>
           <span>Transition path, 1&ndash;10 &micro;s: <strong data-ts-out-gap>yes, resolved</strong></span>
-          <span class="fig-note">Resolution here is the time needed to collect enough photons to call a conformational state, taken as 25, so it falls as one over the photon rate. The amber band is the event we are after, the transition path at one to ten microseconds. It has long been inside what an all-atom simulation can produce, but an ordinary confocal measurement collects some tens of thousands of photons per second during a burst, which by the same rule is about half a millisecond, two decades too slow to see it. Drag the slider to the roughly three million per second we detect in a plasmonic waveguide and the green edge crosses into the band. Event durations are order-of-magnitude values from the literature; the transition path is what we measure. Schematic.</span>
+          <span class="fig-note">Resolution here is the time needed to collect enough photons to call a conformational state, taken as 25, so it falls as one over the photon rate. The amber band is the event we are after, the transition path at one to ten microseconds. It has long been inside what an all-atom simulation can produce, but an ordinary confocal measurement collects some tens of thousands of photons per second during a burst, which by the same rule is about half a millisecond, two decades too slow to see it. Drag the slider to the roughly three million per second we detect in a plasmonic waveguide and the green edge crosses into the band. The dashed mark at ten million per second is what the nanorod work is aiming for. Event durations are order-of-magnitude values from the literature; the transition path is what we measure. Schematic.</span>
         </figcaption>
       </figure>
 
@@ -356,37 +356,128 @@
         <p class="lede">
           Chemical engineering at the scale of one molecule: a protein treated as the smallest chemical process there is, with its own reaction kinetics, transport and energy balance, and the photonic devices that make those quantities measurable, first at the frontier and then cheaply enough to spread.
         </p>
+        <p>
+          I think of the laboratory as one process rather than four projects. Devices are made, photons are measured, trajectories are inferred, and the product goes to three places: the kinetics and the transport that are the science, and an affordable instrument that is the reach. A recycle stream closes the loop, because what the science asks for, and what a cheap instrument can afford, decide what gets built next.
+        </p>
+
+        <figure class="fig-card" id="fdFlow">
+          <div class="fig-bar">
+            <span class="fig-title">The laboratory as one process</span>
+          </div>
+        <div class="fd-flow-wrap">
+          <svg class="fd-flow" viewBox="0 0 960 340" role="img" aria-labelledby="fdFlowTitle fdFlowDesc">
+            <title id="fdFlowTitle">The laboratory as one process</title>
+            <desc id="fdFlowDesc">Three stages in a line, make, measure and infer, feed three outputs: kinetics, transport and reach. A dashed recycle stream runs from all three outputs back to the making of devices, labelled what to build next and how cheaply to build it.</desc>
+            <defs>
+              <marker id="fdArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 z" class="fd-arrhead"/>
+              </marker>
+            </defs>
+
+            <g class="fd-blk">
+              <rect x="20" y="30" width="180" height="78" rx="8"/>
+              <text x="36" y="54" class="fd-t">Make</text>
+              <text class="fd-s"><tspan x="36" y="74">apertures and antennas,</tspan><tspan x="36" dy="16">milled now, imprinted next</tspan></text>
+            </g>
+            <g class="fd-blk">
+              <rect x="250" y="30" width="180" height="78" rx="8"/>
+              <text x="266" y="54" class="fd-t">Measure</text>
+              <text class="fd-s"><tspan x="266" y="74">one molecule at a time,</tspan><tspan x="266" dy="16">megahertz photon rates</tspan></text>
+            </g>
+            <g class="fd-blk">
+              <rect x="480" y="30" width="180" height="78" rx="8"/>
+              <text x="496" y="54" class="fd-t">Infer</text>
+              <text class="fd-s"><tspan x="496" y="74">the trajectory, photon</tspan><tspan x="496" dy="16">by photon, no binning</tspan></text>
+            </g>
+
+            <g class="fd-blk fd-out">
+              <rect x="740" y="8" width="180" height="64" rx="8"/>
+              <text x="756" y="31" class="fd-t">Kinetics</text>
+              <text class="fd-s"><tspan x="756" y="50">the crossing itself, and</tspan><tspan x="756" dy="14">what the fuel pays for</tspan></text>
+            </g>
+            <g class="fd-blk fd-out">
+              <rect x="740" y="98" width="180" height="64" rx="8"/>
+              <text x="756" y="121" class="fd-t">Transport</text>
+              <text class="fd-s"><tspan x="756" y="140">friction where bulk</tspan><tspan x="756" dy="14">viscosity stops applying</tspan></text>
+            </g>
+            <g class="fd-blk fd-out">
+              <rect x="740" y="188" width="180" height="64" rx="8"/>
+              <text x="756" y="211" class="fd-t">Reach</text>
+              <text class="fd-s"><tspan x="756" y="230">a camera-based reader for</tspan><tspan x="756" dy="14">classrooms and clinics</tspan></text>
+            </g>
+
+            <path class="fd-arr" d="M200 69 H248" marker-end="url(#fdArrow)"/>
+            <text x="225" y="128" class="fd-lab" text-anchor="middle">devices</text>
+            <path class="fd-arr" d="M430 69 H478" marker-end="url(#fdArrow)"/>
+            <text x="455" y="128" class="fd-lab" text-anchor="middle">photons</text>
+
+            <path class="fd-arr" d="M660 69 H700 V40 H738" marker-end="url(#fdArrow)"/>
+            <path class="fd-arr" d="M660 69 H700 V130 H738" marker-end="url(#fdArrow)"/>
+            <path class="fd-arr" d="M660 69 H700 V220 H738" marker-end="url(#fdArrow)"/>
+            <text x="700" y="27" class="fd-lab" text-anchor="middle">trajectories</text>
+
+            <path class="fd-arr fd-recycle" d="M920 40 H942 V304 H110 V110" marker-end="url(#fdArrow)"/>
+            <path class="fd-arr fd-recycle" d="M920 130 H942"/>
+            <path class="fd-arr fd-recycle" d="M920 220 H942"/>
+            <text x="420" y="296" class="fd-lab" text-anchor="middle">what to build next, and how cheaply to build it</text>
+          </svg>
+        </div>
+          <figcaption class="fig-caption">
+            <span class="fd-flow-hint">Drag sideways to see the whole process.</span>
+            <span class="fig-note">A process-flow view of the four directions. The main line is the postdoctoral work as it stands: nanoapertures and plasmonic antennas, a photon rate of millions per second from one molecule, and inference that works from each photon's arrival time. The three products are the directions below. The dashed stream is the engineering discipline of the place: a device is specified by what the measurement needs and what a replicated chip can cost, not by what a cleanroom happens to be able to make.</span>
+          </figcaption>
+        </figure>
 
         <div class="card">
           <h3>Reaction engineering of a single molecule</h3>
           <p class="fd-question">What happens during the crossing itself?</p>
           <p>
-            A conformational change is a unimolecular reaction, and a transition-path time is its residence-time distribution in the barrier region. With photon rates high enough to resolve microseconds, I want to measure what rate constants cannot: the shape of the barrier, the friction along the reaction coordinate, and, for machines that burn ATP, whether the fuel drives the crossing or only resets the machine for the next one. These are the activation, transport and efficiency questions of reaction engineering, asked of one molecule.
+            A conformational change is a unimolecular reaction, and a transition-path time is its residence-time distribution in the barrier region. With photon rates high enough to resolve microseconds, the crossing can be measured rather than inferred from the rate, and the activation, transport and efficiency questions of reaction engineering can be asked of one molecule.
           </p>
+          <ol class="fd-steps">
+            <li>The base is in hand. A photon-by-photon estimator of the transition-path time, validated against simulated ground truth, has been applied to adenylate kinase in zero-mode waveguides across a series of solvent viscosities. The manuscript is in preparation.</li>
+            <li>The measurement now resolves the same microseconds that an all-atom simulation can produce, as the <a href="#timescaleFigure">timescale figure</a> above shows. The next step is the direct comparison that this permits: measured and simulated distributions of transition-path times for the same crossing, which turns the time from a number into a test of the barrier's shape and of the friction along the reaction coordinate.</li>
+            <li>Then a fuelled machine. Timing the crossing with and without its fuel asks whether the fuel drives the crossing or only resets the machine for the next one. That is the energy balance of one molecule, and the efficiency question of reaction engineering put where it can be measured.</li>
+          </ol>
         </div>
 
         <div class="card">
           <h3>Transport and friction in crowded, complex media</h3>
           <p class="fd-question">When does bulk viscosity stop being the right number?</p>
           <p>
-            Inside a cell a protein moves through a crowded, structured, non-Newtonian fluid, and bulk rheology says little about the friction a nanometre-scale domain feels as it swings shut. By timing barrier crossings across solvents, crowders and condensed phases, I want to find the length scale at which continuum transport breaks down, and how the surroundings set the pace of a molecular machine.
+            Inside a cell a protein moves through a crowded, structured, non-Newtonian fluid, and bulk rheology says little about the friction a nanometre-scale domain feels as it swings shut. Timing the crossing across solvents, crowders and condensed phases is a way to find the length scale at which continuum transport breaks down.
           </p>
+          <ol class="fd-steps">
+            <li>The viscosity series already gives a friction term for the crossing. The first step repeats it in crowders of different architecture, flexible and branched polymers and small proteins at cellular volume fractions, to find the scale at which the bulk viscosity stops predicting the friction a swinging domain feels.</li>
+            <li>The second step is interpretation, and the theory has just moved. Makarov and Sollich have shown that a rough energy landscape, whether frozen or fluctuating in time, can give the same apparent diffusivity, and have re-derived the bounds on roughness that an experiment can infer (<a href="https://doi.org/10.1073/pnas.2516241123" target="_blank" rel="noopener"><i>PNAS</i> 2026</a>). The temperature and viscosity dependence of the transition-path time is the measurement that can separate the two, since roughness enters as a squared ratio of energy to temperature while solvent friction enters linearly through the viscosity.</li>
+            <li>Where it leads is a transport coefficient for the crowded interior of a cell, measured on one molecule and usable in models of intracellular kinetics. The crowded-membrane measurements of my doctorate, in which a grafted polymer layer set the friction on a surface, are the two-dimensional version of the same question.</li>
+          </ol>
         </div>
 
         <div class="card">
           <h3>Nanophotonic devices, engineered to be made</h3>
           <p class="fd-question">Can the device leave the cleanroom?</p>
           <p>
-            Zero-mode waveguides and plasmonic antennas are my measurement platform, and an engineering problem in their own right: electromagnetic design, nanofabrication, surface passivation, colloidal synthesis and bioconjugation, and the mass transfer of molecules into a zeptolitre volume. I want design rules for the photon budget, and fabrication routes such as nanoimprinting and self-assembly that scale from one hand-milled chip to many. The same toolkit reaches beyond biology, to quantum emitters coupled through plasmonic cavities, a collaborative direction I have begun to explore.
+            Zero-mode waveguides and plasmonic antennas are my measurement platform, and an engineering problem in their own right: electromagnetic design, nanofabrication, surface passivation, colloidal synthesis and bioconjugation, and the mass transfer of molecules into a zeptolitre volume.
           </p>
+          <ol class="fd-steps">
+            <li>Today each aperture is milled one at a time by a focused ion beam, about half a second apiece, so that an array of two hundred by two hundred is five and a half hours of beam time, and every chip carries the cost of the instrument that made it. The apertures shown on this page were made that way.</li>
+            <li>Khelidj and co-workers have demonstrated a replication route: sol-gel nanoimprint from a reusable master, followed by vapour-phase etching, giving waveguide arrays with up to eight-fold brightness enhancement and sub-millisecond resolution without a lithography step for every batch (<a href="https://doi.org/10.1002/smll.202510587" target="_blank" rel="noopener"><i>Small</i> 2026</a>). Adapting that route, with the colloidal nanorod conjugate as its bottom-up counterpart, is the first engineering project of the laboratory: a process with a yield and a cost per chip, rather than a fabrication.</li>
+            <li>From there, design rules for the photon budget written as a specification, covering aperture diameter, film thickness, undercut, passivation and the transport of molecules into the aperture. The same toolkit reaches beyond biology, to quantum emitters coupled through plasmonic cavities, a collaborative direction I have begun to explore.</li>
+          </ol>
         </div>
 
         <div class="card">
           <h3>Frugal single-molecule science and diagnostics</h3>
           <p class="fd-question">Can every college laboratory do single-molecule FRET?</p>
           <p>
-            A plasmonic structure that makes a molecule many times brighter changes which detector you need. Fast kinetics that today demand single-photon counters and a research microscope could be read with an inexpensive CMOS camera. I want to build that instrument, and the open inference software beside it: for teaching and research where a confocal microscope is out of reach, and for diagnostics that read what a molecule is doing, and not only whether it is present, from a small sample.
+            A plasmonic structure that makes a molecule many times brighter changes which detector is needed. Fast kinetics that today demand single-photon counters and a research microscope could be read with an inexpensive camera, and the inference software beside it can be open.
           </p>
+          <ol class="fd-steps">
+            <li>Byagathvalli, Challita and Bhamla define frugal science not as cheaper components but as a different design approach to the same physics, and make the case for it as chemical engineering (<a href="https://doi.org/10.1021/acs.iecr.1c02868" target="_blank" rel="noopener"><i>Ind. Eng. Chem. Res.</i> 2021</a>). The design approach here is to move the expense out of the detector and into the nanostructure. A molecule made many times brighter by a plasmonic structure can be followed by an ordinary CMOS camera at kilohertz frame rates, where today it needs a photon-counting detector and a research microscope.</li>
+            <li>The first instrument is therefore a camera-based plasmonic microscope built around a laser diode and a replicated chip from the device direction. It is inexpensive by design, which makes it the instrument a new laboratory can start with, and the photon-counting instrument can follow.</li>
+            <li>Where it leads: the same instrument in an <a href="teaching.html#laboratory">undergraduate teaching laboratory</a>, and, with a clinical partner, a diagnostic that reads what a molecule is doing rather than only whether it is present, from a small sample.</li>
+          </ol>
         </div>
 
         <p>
@@ -394,6 +485,7 @@
         </p>
 
       </section>
+
 
     </div>
   </main>
