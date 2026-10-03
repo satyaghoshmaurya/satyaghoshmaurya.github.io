@@ -1974,3 +1974,44 @@ a.atlas-link:focus-visible {
   color: var(--text-muted);
   font-weight: 600;
 }
+
+/* ---- Plain-language layer and home-page plan (2026-10-03) ---- */
+.fd-plain {
+  background: var(--accent-light);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-sm);
+  padding: 0.55rem 0.85rem;
+  margin: 0 0 0.9rem;
+}
+
+.plan-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0.6rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem 1.4rem;
+}
+.plan-list li {
+  border-top: 2px solid var(--accent);
+  padding-top: 0.55rem;
+}
+.plan-list strong {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 1.08rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+.plan-list span {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+@media (max-width: 640px) {
+  .plan-list { grid-template-columns: 1fr; }
+}
+
+.next-card {
+  margin-top: 2rem;
+}
+.card > h3:first-child { margin-top: 0; }

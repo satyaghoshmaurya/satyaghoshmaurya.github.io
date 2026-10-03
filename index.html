@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dr. Satyaghosh Maurya — Biophysics &amp; Nanophotonics</title>
+<title>Dr. Satyaghosh Maurya — Chemical Engineer, Single-Molecule Biophysics</title>
 <meta name="description" content="Dr. Satyaghosh Maurya, chemical engineer by training (B.Tech NIT Durgapur, M.E. and Ph.D. IISc Bangalore) and postdoctoral researcher in single-molecule biophysics and nanophotonics at the Weizmann Institute of Science (Gilad Haran Lab).">
 <meta name="author" content="Satyaghosh Maurya">
 
@@ -112,6 +112,7 @@
     <nav class="site-nav" id="siteNav" aria-label="Primary">
       <a href="index.html" class="active" aria-current="page">About</a>
       <a href="research.html">Research</a>
+      <a href="future.html">Future Directions</a>
       <a href="teaching.html">Teaching</a>
       <a href="publications.html">Publications</a>
       <a href="cv.html">CV</a>
@@ -143,7 +144,7 @@
           <h1>Dr. Satyaghosh Maurya</h1>
           <p class="lede">I watch single proteins change shape, and time the moment they do.</p>
           <p>
-            I am a postdoctoral researcher in the <a href="https://www.weizmann.ac.il/chembiophys/cfharan/home" target="_blank" rel="noopener">Gilad Haran Lab</a> at the Weizmann Institute of Science. Proteins work by switching between conformations: an enzyme closes over its substrates and opens again, a transporter flips between inward- and outward-facing states. Each spends almost all of its time settled in one conformation or the other, and only microseconds actually crossing between them.
+            I am a chemical engineer and a postdoctoral researcher in the <a href="https://www.weizmann.ac.il/chembiophys/cfharan/home" target="_blank" rel="noopener">Gilad Haran Lab</a> at the Weizmann Institute of Science. Proteins are the working machines of a cell, and they work by changing shape: an enzyme closes over the molecules it acts on, then opens again. A protein spends almost all its time resting in one shape or the other. The switch itself is over in a few millionths of a second.
           </p>
           <p class="hero-cta"><a href="research.html">Read the research &rarr;</a></p>
           <p class="hero-links">
@@ -174,20 +175,20 @@
             <span>Transitions: <strong id="heroReadoutN" class="mono">0</strong></span>
             <span>Last transition path: <strong id="heroReadoutTP" class="mono">&ndash;</strong></span>
             <span class="hero-hint" id="heroHint">Paused so the text can be read first. Press Play to watch it live.</span>
-          <span class="landscape-hero-note">A schematic two-domain protein diffusing on its conformational free-energy landscape (overdamped Langevin dynamics); the donor and acceptor photon counts and FRET efficiency below are computed from the same trajectory. Amber marks completed transition paths, the stretch between leaving one well and arriving in the other. Representational, not measured data.</span>
+          <span class="landscape-hero-note">A cartoon protein jiggling between its closed and open shapes, the two valleys of its energy landscape. Below are the green and red photons its two dyes would give off, and E<sub>FRET</sub>, the share of red, which tells the shapes apart. Amber marks each crossing, the transition path. Simulated, not measured data.</span>
           </figcaption>
         </figure>
       </div>
         <div class="hero-about">
           <h2>About</h2>
               <p>
-                That crossing, the transition path, is where the mechanism lives. It is chemical reaction engineering at the scale of one molecule: a conformational change is a unimolecular reaction, the two conformations are wells on a potential, and the crossing is the barrier passage that rate theory, from Arrhenius to Kramers, has always described from the outside. A transition-path time measures that passage directly, reporting on the shape and roughness of the barrier in a way that rates, which only count how often crossings happen, cannot.
+                That brief switch, called the <strong>transition path</strong>, is where the mechanism of the change is decided, and it is what I try to catch. Seen through a chemical engineer&rsquo;s eyes, a protein changing shape is a chemical reaction carried out by one molecule. Reaction engineering has long measured how <em>often</em> such reactions happen. Timing the switch itself shows <em>how</em> it happens: how high and how rough the barrier is, and what slows the molecule down on its way over.
               </p>
               <p>
-                The obstacle is photons. A single FRET pair yields a few hundred photons per millisecond at best, so a microsecond crossing leaves a photon or two, too few for conventional smFRET to time. We fabricate zero-mode waveguides and plasmonic nanostructures that confine light to a zeptolitre volume, through which single molecules diffuse, and accelerate their emission; the photon stream is then treated as the noisy process data it is and fitted photon by photon with maximum-likelihood and Bayesian methods.
+                The difficulty is light. I follow a protein through two dyes attached to it, which glow green or red depending on how far apart they are (a method called single-molecule FRET). In an ordinary microscope a switch lasting a few microseconds gives off only a photon or two, too few to time it. So we make each molecule many times brighter with metal nanostructures, tiny holes in an aluminium film called zero-mode waveguides and gold nanorods, and read the stream of light one photon at a time with statistics built for exactly that.
               </p>
               <p>
-                I trained as a chemical engineer, at NIT Durgapur and then at the Indian Institute of Science, where my Ph.D. followed pore-forming toxins assembling on membranes and proteins diffusing through grafted polymer layers: nucleation and growth, and transport at an interface, watched one molecule at a time. That training is the lens for everything above.
+                I trained as a chemical engineer at NIT Durgapur and the Indian Institute of Science, Bangalore. My Ph.D. followed bacterial toxins assembling into pores on membranes, and proteins moving through crowded polymer layers on a membrane surface: nucleation and growth, and transport at an interface, watched one molecule at a time. That training shapes how I see everything above.
               </p>
         </div>
       </section>
@@ -195,6 +196,18 @@
     </div>
 
     <div class="content">
+
+      <hr class="rule">
+
+      <h2>What my laboratory will do</h2>
+      <p class="lede">Chemical engineering at the scale of one molecule, in four directions.</p>
+      <ul class="plan-list">
+        <li><strong>Reaction engineering of a single molecule</strong><span>Time a protein&rsquo;s change of shape while it happens, and compare it directly with computer simulations of the same molecule.</span></li>
+        <li><strong>Transport in crowded media</strong><span>Measure how much the crowded inside of a cell slows a protein down, and where the textbook idea of viscosity stops working.</span></li>
+        <li><strong>Devices engineered to be made</strong><span>Turn the light-concentrating nanostructures from one-off cleanroom pieces into chips that can be copied cheaply.</span></li>
+        <li><strong>Frugal single-molecule science</strong><span>A low-cost microscope that follows single molecules, for college teaching laboratories and, with clinical partners, diagnostics.</span></li>
+      </ul>
+      <p class="hero-cta"><a href="future.html">The research plan &rarr;</a></p>
 
       <hr class="rule">
 
@@ -220,44 +233,44 @@
 
       <hr class="rule">
 
-      <h2>Core Research Themes</h2>
-      <p class="lede">Bridging single-molecule optics, nanophotonics, statistical inference, and membrane biophysics.</p>
+      <h2>Research</h2>
+      <p class="lede">What I work on now at the Weizmann Institute, and what I did for my doctorate.</p>
 
       <div class="pillars-grid">
         <div class="pillar-card">
-          <canvas class="pillar-figure" data-figure="zmw" data-compact role="img" aria-label="Zero-mode waveguide with dye-labelled enzymes diffusing freely in and out of the evanescent volume"></canvas>
-          <h3>Zero-Mode Waveguides &amp; Nanophotonics</h3>
-          <p>
-            Overcoming the optical diffraction and concentration barrier using metallic nano-apertures (ZMWs) to study single-molecule interactions at micromolar, physiological concentrations.
-          </p>
-          <a href="research.html#zmw" class="pillar-link">Explore methods →</a>
-        </div>
-
-        <div class="pillar-card">
           <img src="assets/img/research/landscape-card.png" alt="Two-well conformational free-energy landscape with a schematic protein crossing the barrier" width="760" height="289" loading="lazy">
-          <h3>Transition Paths of Conformational Change</h3>
+          <h3>Timing how proteins change shape</h3>
           <p>
-            Timing the microsecond crossings between protein conformations, starting with an enzyme opening and closing, with plasmon-enhanced smFRET and photon-by-photon analysis.
+            How long does an enzyme take to switch between its open and closed shapes? The crossing lasts microseconds. Measuring it directly, rather than inferring it from how often it happens, is the core of my postdoctoral work.
           </p>
-          <a href="research.html#folding" class="pillar-link">Read more →</a>
+          <a href="research.html#folding" class="pillar-link">Transition paths &rarr;</a>
         </div>
 
         <div class="pillar-card">
-          <img src="assets/img/research/clya-assembly-wide.jpg" alt="Hand-painted schematic of Cytolysin A monomers binding a membrane and assembling into pores" loading="lazy">
-          <h3>Membrane Biophysics &amp; Pore Formation</h3>
+          <canvas class="pillar-figure" data-figure="zmw" data-compact role="img" aria-label="Zero-mode waveguide with dye-labelled enzymes diffusing freely in and out of the lit volume at the bottom of the hole"></canvas>
+          <h3>Making single molecules brighter</h3>
           <p>
-            Dissecting the oligomerization pathway, conformational plasticity, and cholesterol stabilization of pore-forming toxins (Cytolysin A) on supported lipid bilayers.
+            Holes in an aluminium film narrower than the wavelength of light, and gold nanorods, make a molecule shine many times brighter: enough photons to follow an event that lasts a few microseconds.
           </p>
-          <a href="research.html#membrane" class="pillar-link">View discoveries →</a>
+          <a href="research.html#zmw" class="pillar-link">Waveguides and nanorods &rarr;</a>
         </div>
 
         <div class="pillar-card">
           <div class="pillar-figure pillar-formula">P(θ | D) ∝ P(D | θ) · P(θ)</div>
-          <h3>Photon-by-Photon Inference &amp; Image Analysis</h3>
+          <h3>Reading the data one photon at a time</h3>
           <p>
-            H<sup>2</sup>MM, the photon-by-photon hidden Markov method developed in the Gilad Haran Lab, recovers conformational states, rates and transition-path times straight from photon arrival times, with no binning. From my Ph.D.: single-particle tracking and photobleaching-step counting on TIRF movies to measure mobility and oligomer size.
+            Each photon arrives with a time and a colour, and nothing else. Statistical methods built for this, such as the H<sup>2</sup>MM method developed in the Haran lab, recover the protein&rsquo;s changes of shape straight from the photon stream. In my Ph.D. the same care went into tracking single molecules in microscope movies.
           </p>
-          <a href="research.html#bayesian" class="pillar-link">View methods →</a>
+          <a href="research.html#bayesian" class="pillar-link">Analysis methods &rarr;</a>
+        </div>
+
+        <div class="pillar-card">
+          <img src="assets/img/research/clya-assembly-wide.jpg" alt="Hand-painted schematic of Cytolysin A monomers binding a membrane and assembling into pores" loading="lazy">
+          <h3>How bacterial toxins punch holes in membranes</h3>
+          <p>
+            My Ph.D.: watching single molecules of the toxin Cytolysin A land on a membrane and assemble, piece by piece, into pores, and how cholesterol and crowding on the membrane change that.
+          </p>
+          <a href="research.html#membrane" class="pillar-link">Membranes and toxins &rarr;</a>
         </div>
       </div>
 
@@ -271,14 +284,14 @@
       </div>
       <hr class="rule">
 
-      <h2>Academic Trajectory</h2>
+      <h2>Education and positions</h2>
       <div class="cv-timeline">
         <div class="cv-item">
           <div class="cv-when">Dec 2022 – present</div>
           <div class="cv-what">
             <strong>Postdoctoral Researcher</strong>
             <span>Weizmann Institute of Science, Rehovot, Israel — Gilad Haran Lab</span>
-            <div class="cv-details">Focus: plasmon-enhanced smFRET, zero-mode waveguides, and transition-path kinetics of protein conformational change.</div>
+            <div class="cv-details">Timing protein shape changes with single-molecule FRET, made brighter with zero-mode waveguides and gold nanorods.</div>
           </div>
         </div>
         <div class="cv-item">
