@@ -73,6 +73,15 @@
       <p class="lede">
         I study single protein molecules: how they change shape, how they move through crowded surroundings, and how they assemble. This page covers what I do now and what I did for my doctorate. My plans for my own laboratory are on the <a href="future.html">Future Directions</a> page.
       </p>
+      <nav class="page-toc" aria-label="On this page">
+        <span class="page-toc-head">On this page</span>
+        <span class="page-toc-group">Postdoctoral work, Weizmann Institute, 2022 to now:</span>
+        <a href="#folding">1. Transition paths</a>
+        <a href="#zmw">2. Brighter molecules</a>
+        <a href="#bayesian">3. Reading the data</a>
+        <span class="page-toc-group">Doctoral work, Indian Institute of Science, 2015 to 2022:</span>
+        <a href="#membrane">4. Membranes and toxins</a>
+      </nav>
 
       <p>
         A bulk experiment averages over billions of molecules at once. The average is smooth and reproducible, and it hides the things I most want to see: the short-lived intermediate, the rare crossing, the molecule that does not behave like its neighbours. A rate constant says how often something happens. It never says what happens while it is happening.
@@ -100,7 +109,8 @@
         <figcaption class="fig-caption">
           <span>Time resolution: <strong class="mono" data-ts-out-res>&asymp; 8 &micro;s</strong></span>
           <span>Transition path, 1&ndash;10 &micro;s: <strong data-ts-out-gap>yes, resolved</strong></span>
-          <span class="fig-note">Resolution here is the time needed to collect enough photons to call a conformational state, taken as 25, so it falls as one over the photon rate. The amber band is the event we are after, the transition path at one to ten microseconds. It has long been inside what an all-atom simulation can produce, but an ordinary confocal measurement collects some tens of thousands of photons per second during a burst, which by the same rule is about half a millisecond, two decades too slow to see it. Drag the slider to the roughly three million per second we detect in a plasmonic waveguide and the green edge crosses into the band. The dashed mark at ten million per second is what the nanorod work is aiming for. Event durations are order-of-magnitude values from the literature; the transition path is what we measure. Schematic.</span>
+          <span class="fig-note">The amber band is the event we are after: the transition path, one to ten microseconds. Ordinary single-molecule FRET cannot resolve anything faster than about half a millisecond. Drag the slider to the three million photons per second we detect in a waveguide and the measurement reaches into the band. Schematic.</span>
+            <details class="fig-more"><summary>More detail</summary><p>Resolution here is the time needed to collect enough photons to call a conformational state, taken as 25 photons, so it falls as one over the photon rate. An ordinary confocal measurement collects some tens of thousands of photons per second during a burst, which by this rule is about half a millisecond, two decades too slow. All-atom simulation has long reached the band from the other side. The dashed mark at ten million per second is what the nanorod work is aiming for. Event durations are order-of-magnitude values from the literature; the transition path is what we measure.</p></details>
         </figcaption>
       </figure>
 
@@ -112,6 +122,7 @@
 
       <!-- Research Pillar 1 -->
       <section id="folding">
+        <p class="eyebrow">Postdoctoral work &middot; Weizmann Institute of Science, 2022 to now</p>
         <h2>1. Transition paths: timing how proteins change shape</h2>
         <figure class="fig-card">
           <div class="fig-static">
@@ -161,7 +172,8 @@
           <figcaption class="fig-caption">
             <span>Decay length: <strong class="mono" data-zmw-out-l>&asymp; 18 nm</strong></span>
             <span>Observation volume: <strong class="mono" data-zmw-out-v>&asymp; 200 zL</strong></span>
-            <span class="fig-note">Light entering from below cannot propagate through an aperture narrower than its cutoff, so it decays evanescently from the glass floor and defines a zeptolitre observation volume. The dye-labelled enzyme diffuses freely: many molecules are in solution, but the volume is so small that it holds about one at a time, and only that one is excited and seen. The drawing is a slice through a three-dimensional solution: molecules drawn fainter are in front of or behind the hole, over solid metal, which is why most of them pass across the mouth without entering. Nothing is tethered; every surface is passivated with PEG-2k, about 5 nm thick, so nothing sticks. The decay length is computed for 532 nm excitation in a 100 nm aluminium film; the green is that laser, from the glass below into the thin lit layer. The trace beneath counts donor (green, upward) and acceptor (red, downward) photons per bin from whatever is in the volume, so each visit by an enzyme appears as a burst, as in a confocal transit. Schematic, not to scale.</span>
+            <span class="fig-note">Light enters from the glass below and cannot travel up the narrow hole, so only a thin layer at the floor is lit. Many enzymes diffuse in the solution, but the lit volume is so small that it holds about one at a time, and only that one is seen. The trace below shows a burst each time one visits. Schematic, not to scale.</span>
+            <details class="fig-more"><summary>More detail</summary><p>The drawing is a slice through a three-dimensional solution: molecules drawn fainter are in front of or behind the hole, over solid metal, which is why most of them pass across the mouth without entering. Nothing is tethered; every surface is passivated with PEG-2k, about 5 nm thick, so nothing sticks. The decay length is computed for 532 nm excitation in a 100 nm aluminium film; the green is that laser. The trace counts donor (green, upward) and acceptor (red, downward) photons per time bin from whatever is in the volume, as in a confocal transit.</p></details>
           </figcaption>
         </figure>
         <p>
@@ -232,7 +244,8 @@
           <figcaption class="fig-caption">
             <span>Burst from a free enzyme: <strong class="mono" data-pl-out-free>&asymp; 25 photons</strong></span>
             <span>On the nanorod: <strong class="mono" data-pl-out-rod>&asymp; 375 photons</strong></span>
-            <span class="fig-note">Both panels show the same diffraction-limited focal volume, about a femtolitre, with molecules diffusing through it. The donor and acceptor photon traces share one scale across the two panels, and the balance between red and green follows the conformation of whichever enzyme is in the focus. On the right the enzyme rides a PEGylated gold nanorod, held roughly 10 nm from the metal by the biotin&ndash;streptavidin stack so the dyes sit in the plasmonic hotspot without being quenched. The rod also diffuses more slowly, so its bursts last longer. Slide the enhancement to see the free-enzyme bursts shrink by comparison. Schematic, not to scale.</span>
+            <span class="fig-note">The same focal volume twice. On the left, free enzymes pass through and give small bursts; on the right, the same enzymes ride gold nanorods and give far brighter bursts on the same scale. Schematic, not to scale.</span>
+            <details class="fig-more"><summary>More detail</summary><p>Both panels show a diffraction-limited focal volume of about a femtolitre. The donor and acceptor traces share one scale across the two panels, and the balance between red and green follows the conformation of whichever enzyme is in the focus. The enzyme sits roughly 10 nm from the metal on a PEGylated rod, held by the biotin&ndash;streptavidin stack, so the dyes are in the plasmonic hotspot without being quenched. The rod diffuses more slowly, so its bursts last longer. Slide the enhancement to see the free-enzyme bursts shrink by comparison.</p></details>
           </figcaption>
         </figure>
       </section>
@@ -250,7 +263,8 @@
             <img src="assets/img/research/photon-stream.png" alt="Top: two rows of vertical ticks, one photon each, red for the acceptor detector and green for the donor, across 125 microseconds of a single burst. Bottom: the FRET efficiency computed as a fifteen-photon moving average, moving from the open level at 0.44 to the closed level at 0.66, with the crossing marked as 23 photons in 7.65 microseconds." width="1600" height="755" loading="lazy">
           </div>
           <figcaption class="fig-caption">
-            <span class="fig-note">One adenylate kinase molecule, 384 photons, 125 microseconds. Every tick above is a single photon: an arrival time and which detector caught it, and nothing else. Below, the FRET efficiency from a moving average over fifteen photons, with the open and closed levels marked. The shaded strip is one crossing between them, and it contains 23 photons and lasts 7.65 microseconds. Bin this into milliseconds and the crossing disappears into one point. Unpublished data, Haran lab.</span>
+            <span class="fig-note">One enzyme molecule, 384 photons, 125 microseconds. Every tick is a single photon with its arrival time and colour, and nothing else. The shaded strip is one crossing between the open and closed shapes: 23 photons in 7.65 microseconds. Unpublished data, Haran lab.</span>
+            <details class="fig-more"><summary>More detail</summary><p>The molecule is adenylate kinase. Below the ticks is the FRET efficiency from a moving average over fifteen photons, with the open and closed levels marked. Bin this into milliseconds and the crossing disappears into one point.</p></details>
           </figcaption>
         </figure>
         <p>
@@ -289,7 +303,8 @@
 
       <!-- Research Pillar 4 -->
       <section id="membrane">
-        <h2>4. Membranes and toxins: the doctoral work</h2>
+        <p class="eyebrow">Doctoral work &middot; Indian Institute of Science, 2015 to 2022</p>
+        <h2>4. Membranes and toxins: how bacterial pores assemble</h2>
         <figure class="fig-card" id="clyaPainting">
           <div class="fig-bar">
             <span class="fig-title">The assembly pathway of Cytolysin A</span>
@@ -359,7 +374,7 @@
   <!-- ============ SITE FOOTER ============ -->
   <footer class="site-footer">
     <div class="site-footer-inner">
-      <span class="footer-left">&copy; 2026 Satyaghosh Maurya <button type="button" class="theme-toggle-btn footer-anim" data-anim-toggle>Play all animations</button></span>
+      <span class="footer-left">&copy; 2026 Satyaghosh Maurya <span class="footer-updated">Updated October 2026</span> <button type="button" class="theme-toggle-btn footer-anim" data-anim-toggle>Play all animations</button></span>
       <span class="footer-links">
         <a href="https://scholar.google.com/citations?user=LGxS32gAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>
         <a href="https://orcid.org/0000-0003-2757-7742" target="_blank" rel="noopener">ORCID</a>

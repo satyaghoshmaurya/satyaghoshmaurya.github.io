@@ -80,12 +80,17 @@ for name, text in sorted(html.items()):
                             % (name, src.group(1) if src else tag[:60]))
 
     # the head tags that make the page shareable and findable
+    # (404.html is the not-found page: it must not be indexed or shared)
     for needed, label in ((r'<title>', "a <title>"),
                           (r'name="description"', "a meta description"),
                           (r'rel="canonical"', "a canonical link"),
                           (r'property="og:image"', "an og:image")):
+        if name == "404.html" and label in ("a canonical link", "an og:image"):
+            continue
         if not re.search(needed, text):
             problems.append("%s: missing %s" % (name, label))
+    if name == "404.html" and not re.search(r'name="robots" content="noindex"', text):
+        problems.append("404.html: missing its noindex tag")
 
     # a favicon, so the browser tab is not a blank page icon
     if not re.search(r'rel="(icon|shortcut icon)"', text):
@@ -131,6 +136,8 @@ try:
     sm = read("sitemap.xml")
     listed = set(re.findall(r"<loc>([^<]+)</loc>", sm))
     for name in pages():
+        if name == "404.html":
+            continue
         url = SITE + "/" + ("" if name == "index.html" else name)
         if url not in listed and (SITE + "/" + name) not in listed:
             problems.append("sitemap.xml does not list %s" % name)
