@@ -28,7 +28,9 @@ def rel(p):
 
 
 def pages():
-    return sorted(f for f in os.listdir(ROOT) if f.endswith(".html"))
+    # google*.html is a Search Console ownership token, not a page; it must stay but is not checked
+    return sorted(f for f in os.listdir(ROOT)
+                  if f.endswith(".html") and not f.startswith("google"))
 
 
 def read(name):
