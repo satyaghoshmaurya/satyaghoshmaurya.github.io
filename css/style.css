@@ -1117,7 +1117,7 @@ figure.gallery-item {
   flex-wrap: wrap;
   gap: 0.4rem 1.2rem;
   padding: 0.55rem 0.9rem 0.7rem;
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   color: var(--text-muted);
   border-top: 1px solid var(--border-subtle);
 }
@@ -1131,7 +1131,7 @@ figure.gallery-item {
 .landscape-hero-note,
 .fig-note {
   flex-basis: 100%;
-  font-size: 0.74rem;
+  font-size: 0.8rem;
   opacity: 0.85;
   line-height: 1.45;
 }
@@ -2019,7 +2019,7 @@ a.atlas-link:focus-visible {
 /* ---- Caption "More detail" toggles, page contents, footer date (2026-10-17) ---- */
 .fig-more {
   flex-basis: 100%;
-  font-size: 0.74rem;
+  font-size: 0.8rem;
   line-height: 1.45;
 }
 .fig-more summary {
@@ -2066,3 +2066,33 @@ a.atlas-link:focus-visible {
   margin-left: 0.6rem;
 }
 .footer-updated::before { content: "\00b7\00a0"; }
+
+/* ---- Contribution lines, small notes, print (2026-10-25) ---- */
+.pub-role {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 0.3rem 0 0.4rem;
+  padding-left: 0.7rem;
+  border-left: 2px solid var(--border);
+}
+.small-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0.5rem 0 0;
+}
+
+@media print {
+  :root { --bg: #fff; --bg-alt: #fff; --text: #000; --text-muted: #333; --border: #999; }
+  body { background: #fff; color: #000; font-size: 11pt; }
+  .site-nav, .nav-toggle, .theme-toggle-btn, .footer-anim, .skip-link,
+  .fig-controls, .hero-btn, .hero-cta, .landscape-hero-controls, .page-toc,
+  .fd-flow-hint, button { display: none !important; }
+  .site-header { border-bottom: 1px solid #999; }
+  a { color: #000; text-decoration: none; }
+  .content a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #333; }
+  .card, .fig-card, .pillar-card { border: 1px solid #999; box-shadow: none; break-inside: avoid; }
+  .cv-item, .pub, .course-entry { break-inside: avoid; }
+  h2 { break-after: avoid; }
+  .fig-more { display: none; }
+  canvas { max-height: 60mm; }
+}
