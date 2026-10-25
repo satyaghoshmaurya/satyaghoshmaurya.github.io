@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Research — Dr. Satyaghosh Maurya</title>
-<meta name="description" content="Research programme of Dr. Satyaghosh Maurya: single-molecule biophysics, nanophotonics, zero-mode waveguides, transition paths of protein conformational change, and membrane dynamics.">
+<meta name="description" content="Research of Dr. Satyaghosh Maurya: chemical engineering at the scale of one molecule. Transition paths of protein conformational change, zero-mode waveguides and plasmonic nanostructures, photon-by-photon inference, membrane transport and toxin assembly.">
 <!-- Canonical, social preview and structured data -->
 <link rel="canonical" href="https://satyaghoshmaurya.github.io/research.html">
 <meta property="og:site_name" content="Dr. Satyaghosh Maurya">
 <meta property="og:locale" content="en_GB">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Research — Dr. Satyaghosh Maurya">
-<meta property="og:description" content="Research programme of Dr. Satyaghosh Maurya: single-molecule biophysics, nanophotonics, zero-mode waveguides, transition paths of protein conformational change, and membrane dynamics.">
+<meta property="og:description" content="Research of Dr. Satyaghosh Maurya: chemical engineering at the scale of one molecule. Transition paths of protein conformational change, zero-mode waveguides and plasmonic nanostructures, photon-by-photon inference, membrane transport and toxin assembly.">
 <meta property="og:url" content="https://satyaghoshmaurya.github.io/research.html">
 <meta property="og:image" content="https://satyaghoshmaurya.github.io/assets/img/og-card.png">
 <meta property="og:image:width" content="1200">
@@ -19,7 +19,7 @@
 <meta property="og:image:alt" content="Portrait of Satyaghosh Maurya beside a two-well conformational free-energy landscape">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Research — Dr. Satyaghosh Maurya">
-<meta name="twitter:description" content="Research programme of Dr. Satyaghosh Maurya: single-molecule biophysics, nanophotonics, zero-mode waveguides, transition paths of protein conformational change, and membrane dynamics.">
+<meta name="twitter:description" content="Research of Dr. Satyaghosh Maurya: chemical engineering at the scale of one molecule. Transition paths of protein conformational change, zero-mode waveguides and plasmonic nanostructures, photon-by-photon inference, membrane transport and toxin assembly.">
 <meta name="twitter:image" content="https://satyaghoshmaurya.github.io/assets/img/og-card.png">
 
 <link rel="icon" href="favicon.ico" sizes="32x32">
@@ -75,6 +75,7 @@
       </p>
       <nav class="page-toc" aria-label="On this page">
         <span class="page-toc-head">On this page</span>
+        <a href="#chemeng">Chemical engineering, one molecule at a time</a>
         <span class="page-toc-group">Postdoctoral work, Weizmann Institute, 2022 to now:</span>
         <a href="#folding">1. Transition paths</a>
         <a href="#zmw">2. Brighter molecules</a>
@@ -89,6 +90,58 @@
       <p>
         So I watch one molecule at a time, and try to watch it fast enough to catch the event itself. That takes three things working as one instrument. Single-molecule FRET, a pair of dyes that works as a ruler a few nanometres long, reports the distance between two parts of the protein. Metal nanostructures that concentrate light, zero-mode waveguides and gold nanorods, make each molecule bright enough to follow through a microsecond. Statistical analysis, photon by photon, then reads the molecule&rsquo;s path from the arrival time of each photon rather than from averages. Without the photons there is nothing for the statistics to work on, and without the statistics the photons are only noise.
       </p>
+
+      <section id="chemeng">
+        <h2>Chemical engineering, one molecule at a time</h2>
+        <p>
+          Chemical engineering was built for the bulk. Its subjects describe reactors, columns and pipelines carrying moles of molecules at a time, and its control loops hold a process steady by averaging the fluctuations away. Every one of those subjects has a counterpart at the scale of a single molecule, and those counterparts are my work. Three things change on the way down. The average becomes a distribution. The fluctuations stop being noise to be filtered out and become the measurement itself. And the equipment shrinks to a nanostructure that still has to be designed, built and costed like any other piece of plant.
+        </p>
+        <div class="map-wrap">
+          <table class="map-table">
+            <caption>The same subjects at two scales</caption>
+            <thead>
+              <tr><th scope="col">Subject</th><th scope="col">In a plant</th><th scope="col">In one molecule</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Reaction engineering</th>
+                <td data-label="In a plant">Rate constants and conversions, averaged over moles of molecules; the residence-time distribution of a reactor.</td>
+                <td data-label="In one molecule">The time one molecule takes to cross the barrier between two shapes, and the distribution of those times: a residence-time distribution for the barrier region, measured directly (<a href="#folding">section 1</a>).</td>
+              </tr>
+              <tr>
+                <th scope="row">Transport phenomena</th>
+                <td data-label="In a plant">Viscosity, diffusivity and mass-transfer coefficients of a bulk fluid; Fick&rsquo;s and Newton&rsquo;s laws; continuum models that assume the medium is uniform.</td>
+                <td data-label="In one molecule">The friction one protein domain feels as it swings shut; the diffusion of one molecule through a crowded membrane, where the continuum assumption fails; mass transfer of molecules into a volume of a zeptolitre (<a href="#membrane">section 4</a>, <a href="future.html#d2">direction 2</a>).</td>
+              </tr>
+              <tr>
+                <th scope="row">Thermodynamics</th>
+                <td data-label="In a plant">Free energies per mole, equilibrium compositions, phase diagrams; fluctuations negligible at the scale of a vessel.</td>
+                <td data-label="In one molecule">A free-energy landscape in units of <i>k</i><sub>B</sub><i>T</i>. The molecule fluctuates across it all the time, and those fluctuations are what the measurement records.</td>
+              </tr>
+              <tr>
+                <th scope="row">Measurement and control</th>
+                <td data-label="In a plant">Sensor signals filtered, averaged and fed to a controller; the noise is removed before the number is used.</td>
+                <td data-label="In one molecule">A stream of photons, one arrival time at a time, read by inference built for counting noise: hidden Markov models and maximum likelihood (<a href="#bayesian">section 3</a>).</td>
+              </tr>
+              <tr>
+                <th scope="row">Equipment and scale-up</th>
+                <td data-label="In a plant">Reactors and columns designed to a specification, then scaled up; cost per unit of product.</td>
+                <td data-label="In one molecule">Nanoapertures and antennas designed to a photon budget, then replicated from a master so a chip has a cost per unit (<a href="#zmw">section 2</a>, <a href="future.html#d3">direction 3</a>).</td>
+              </tr>
+              <tr>
+                <th scope="row">Nucleation and growth</th>
+                <td data-label="In a plant">Crystallisation from a supersaturated solution: a lag, a rare nucleus, then growth; particle size distributions.</td>
+                <td data-label="In one molecule">A toxin assembling into a pore on a membrane: a lag, a rare stable nucleus, then rapid growth, counted one subunit at a time (<a href="#membrane">section 4</a>).</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          This is not an analogy. Kramers&rsquo; expression for a rate constant and the Stokes&ndash;Einstein relation were written for molecules and have been applied to reactors and fluids ever since. Measuring them on one molecule takes the subjects back to where they started, with instruments that did not exist when they were written, and that is what makes the work chemical engineering rather than a borrowing from physics.
+        </p>
+      </section>
+
+      <hr class="rule">
 
       <p>
         How fast a molecule can be watched is set by how fast its photons arrive, and that is not only a matter of instrumentation. It decides whether a measurement and a simulation are describing the same event or merely the same molecule.

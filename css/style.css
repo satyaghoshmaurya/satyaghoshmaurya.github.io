@@ -2140,3 +2140,69 @@ a.atlas-link:focus-visible {
   line-height: 1.5;
   margin: 0.5rem 0.2rem 0;
 }
+
+/* ---- "The same subjects at two scales" table (2026-10-25) ---- */
+.map-wrap {
+  overflow-x: auto;
+  margin: 1.1rem 0 1.2rem;
+}
+.map-table {
+  width: 100%;
+  min-width: 620px;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+.map-table caption {
+  caption-side: top;
+  text-align: left;
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  padding: 0 0 0.5rem;
+}
+.map-table th, .map-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.6rem 0.7rem;
+  border-top: 1px solid var(--border);
+}
+.map-table thead th {
+  border-top: none;
+  border-bottom: 2px solid var(--text);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+.map-table tbody th {
+  font-weight: 600;
+  width: 20%;
+  white-space: nowrap;
+}
+.map-table td:nth-child(2) { color: var(--text-muted); width: 36%; }
+.map-table td:nth-child(3) { width: 44%; }
+.map-table td:nth-child(3) a { white-space: nowrap; }
+@media (max-width: 720px) {
+  .map-table tbody th { white-space: normal; }
+}
+@media (max-width: 720px) {
+  .map-wrap { overflow-x: visible; }
+  .map-table { min-width: 0; }
+  .map-table thead { display: none; }
+  .map-table, .map-table tbody, .map-table tr, .map-table th, .map-table td { display: block; width: auto; }
+  .map-table tr { border-top: 2px solid var(--text); padding: 0.4rem 0 0.6rem; }
+  .map-table tbody th { border-top: none; padding: 0.3rem 0 0.2rem; font-family: var(--font-serif); font-size: 1.05rem; }
+  .map-table td { border-top: none; padding: 0.2rem 0 0.35rem; }
+  .map-table td::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 0.1rem;
+  }
+  .map-table td:nth-child(2), .map-table td:nth-child(3) { width: auto; }
+  .map-table td:nth-child(3) a { white-space: normal; }
+}
