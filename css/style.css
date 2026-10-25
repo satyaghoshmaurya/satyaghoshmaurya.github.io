@@ -2206,3 +2206,7 @@ a.atlas-link:focus-visible {
   .map-table td:nth-child(2), .map-table td:nth-child(3) { width: auto; }
   .map-table td:nth-child(3) a { white-space: normal; }
 }
+@media (max-width: 720px) {
+  .map-table caption { display: block; width: auto; }
+  .map-table tbody th { width: auto; }
+}
