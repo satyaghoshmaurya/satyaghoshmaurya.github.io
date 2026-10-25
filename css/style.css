@@ -2096,3 +2096,47 @@ a.atlas-link:focus-visible {
   .fig-more { display: none; }
   canvas { max-height: 60mm; }
 }
+
+/* ---- Future Directions: one schematic per direction (2026-10-25) ---- */
+.fd-fig {
+  margin: 0.9rem 0 1.1rem;
+  padding: 0.7rem 0.7rem 0.4rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.fd-fig svg {
+  display: block;
+  width: 100%;
+  max-width: 640px;
+  height: auto;
+  margin: 0 auto;
+  font-family: var(--font-body);
+}
+.fd-fig .t { font-size: 13px; fill: var(--text); }
+.fd-fig .m { font-size: 12px; fill: var(--text-muted); }
+.fd-fig .ax { stroke: var(--text-muted); stroke-width: 1.2; fill: none; }
+.fd-fig .curve { stroke: var(--text); stroke-width: 2.4; fill: none; stroke-linejoin: round; stroke-linecap: round; }
+.fd-fig .amber { stroke: #d29922; }
+.fd-fig .amberfill { fill: #d29922; opacity: 0.16; }
+.fd-fig .nextfill { fill: var(--accent-light); }
+.fd-fig .blue { stroke: var(--accent); }
+.fd-fig .muted { stroke: var(--text-muted); stroke-width: 1.6; }
+.fd-fig .dash { stroke-dasharray: 6 4; }
+.fd-fig .pt { fill: var(--accent); stroke: var(--bg); stroke-width: 1.5; }
+.fd-fig .mol { fill: #d29922; stroke: var(--text); stroke-width: 1.2; }
+.fd-fig .arr { stroke: var(--accent); stroke-width: 1.8; fill: none; }
+.fd-fig .beam { stroke: var(--accent-secondary); stroke-width: 2.4; fill: none; }
+.fd-fig .film { fill: var(--text-muted); opacity: 0.55; }
+.fd-fig .master { fill: var(--text-muted); opacity: 0.35; }
+.fd-fig .tooth { fill: var(--text-muted); opacity: 0.35; }
+.fd-fig .hole { fill: var(--bg); }
+.fd-fig .lens { fill: var(--accent-light); stroke: var(--accent); stroke-width: 1.4; }
+.fd-fig .objective { fill: var(--bg-alt); stroke: var(--text-muted); stroke-width: 1.4; }
+.fd-fig .blk rect { fill: var(--bg-alt); stroke: var(--border); stroke-width: 1.2; }
+.fd-figcap {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0.5rem 0.2rem 0;
+}
