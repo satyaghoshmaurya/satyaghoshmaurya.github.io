@@ -138,11 +138,11 @@
     var outL = q("[data-zmw-out-l]"), outV = q("[data-zmw-out-v]");
     var outN = q("[data-zmw-out-n]"), outNc = q("[data-zmw-out-nc]");
 
-    var d = 120;            // aperture diameter at the mouth, nm (the apertures we mill)
-    // Our apertures are undercut: the etch widens the hole beneath the mouth, so the
-    // floor is wider than the opening. UNDERCUT is the lateral etch per side, nm
-    // (120 nm at the mouth opens to 220 nm at the glass). Drawn as a linear flare.
-    var UNDERCUT = 50;
+    var d = 120;            // aperture diameter at the floor, nm (the apertures we mill)
+    // A milled aperture is wider at the mouth and narrows to d at the glass; TAPER is
+    // the extra radius at the mouth, nm, a drawing value. The milling continues
+    // UNDERETCH nm into the glass below the film, so the floor sits in a recess.
+    var TAPER = 50, UNDERETCH = 50;
     var logc = Math.log10(20);  // log10 of enzyme concentration in nM (default 20 nM)
     var playing = false, rafId = null, visible = true;
     var scale = compact ? 0.62 : 1;
@@ -164,13 +164,16 @@
     function conc() { return Math.pow(10, logc); }
 
     function geom() {
-      G.glassH = compact ? 22 : 34;
+      G.glassH = compact ? 50 : 104;
       G.filmT = Math.round(100 * scale);           // 100 nm aluminium film, same scale as the aperture
       G.glassTop = H - G.glassH;
       G.filmTop = G.glassTop - G.filmT;
       G.cx = W * 0.5;
       G.half = Math.min(d * scale, W * 0.42) / 2;
-      G.uc = UNDERCUT * scale * (G.half / (d * scale / 2));   // undercut in px, shrunk with the mouth on narrow canvases
+      var sh = G.half / (d * scale / 2);                   // shrink factor on narrow canvases
+      G.taper = TAPER * scale * sh;                        // extra radius at the mouth, px
+      G.rec = UNDERETCH * scale * sh;                      // depth of the recess into the glass, px
+      G.floor = G.glassTop + G.rec;                        // the aperture floor, below the film
       G.L = decayLength(d) * scale;                // evanescent intensity decay length, px
       G.r = compact ? 1.8 : 2.4;                   // molecule radius when drawn as a dot
       G.top = 6;
@@ -210,12 +213,13 @@
       return Math.max(4, Math.round(n * (compact ? 0.5 : Math.min(1, W / 820))));
     }
 
-    // Radius of the hole at depth y: the mouth radius at the film top, widening
-    // linearly by the undercut to the floor.
+    // Radius of the hole at depth y: widest at the mouth, narrowing linearly through the
+    // film to half at the glass, then straight down through the recess to the floor.
     function rAt(y) {
-      if (y <= G.filmTop) return G.half;
-      var t = Math.min(1, (y - G.filmTop) / G.filmT);
-      return G.half + G.uc * t;
+      if (y <= G.filmTop) return G.half + G.taper;
+      if (y >= G.glassTop) return G.half;
+      var t = (y - G.filmTop) / G.filmT;
+      return G.half + G.taper * (1 - t);
     }
 
     function ok(x, y, z) {
@@ -224,7 +228,7 @@
       if (y < G.filmTop) return true;
       var dx = x - G.cx, R = rAt(y) - G.r;
       if (dx * dx + z * z > R * R) return false;   // outside the cylinder: solid metal
-      if (y > G.glassTop - G.r - 2) return false;
+      if (y > G.floor - G.r - 2) return false;
       return true;
     }
 
@@ -304,14 +308,14 @@
     // Excitation intensity: evanescent decay from the floor inside the aperture.
     function field(x, y) {
       if (y < G.filmTop || Math.abs(x - G.cx) > rAt(y)) return 0;
-      return Math.exp(-(G.glassTop - y) / G.L);
+      return Math.exp(-(G.floor - y) / G.L);
     }
 
     function drawArrows() {
       var n = 3, span = 2 * G.half + 40 * scale, x0 = G.cx - span / 2;
       ctx.strokeStyle = rgba(C.laser, 0.9); ctx.fillStyle = rgba(C.laser, 0.9); ctx.lineWidth = compact ? 1.6 : 2.6;
       for (var i = 0; i < n; i++) {
-        var x = x0 + span * (i + 0.5) / n, y1 = H - 4, y2 = G.glassTop + 5, ah = compact ? 5 : 8;
+        var x = x0 + span * (i + 0.5) / n, y1 = H - 4, y2 = G.floor + (compact ? 5 : 32), ah = compact ? 5 : 8;
         ctx.beginPath(); ctx.moveTo(x, y1); ctx.lineTo(x, y2 + ah); ctx.stroke();
         ctx.beginPath(); ctx.moveTo(x - ah * 0.8, y2 + ah); ctx.lineTo(x + ah * 0.8, y2 + ah); ctx.lineTo(x, y2); ctx.closePath(); ctx.fill();
       }
@@ -329,13 +333,12 @@
     // PEG passivation on every surface: film top, aperture walls and floor.
     function drawPassivation() {
       var h = compact ? 3 : 5, sp = compact ? 5 : 7;
-      var cx = G.cx, half = G.half, ft = G.filmTop, gt = G.glassTop, x, y;
+      var cx = G.cx, half = G.half, ft = G.filmTop, fl = G.floor, rm = rAt(ft), x, y;
       ctx.strokeStyle = rgba(C.muted, 0.5); ctx.lineWidth = 1;
-      for (x = 4; x <= cx - half - 3; x += sp) curl(x, ft, 0, -1, h);
-      for (x = cx + half + 3; x <= W - 4; x += sp) curl(x, ft, 0, -1, h);
-      for (y = ft + 5; y <= gt - 5; y += sp) { curl(cx - rAt(y), y, 1, 0, h); curl(cx + rAt(y), y, -1, 0, h); }
-      var rf = rAt(gt);
-      for (x = cx - rf + 4; x <= cx + rf - 4; x += sp) curl(x, gt, 0, -1, h);
+      for (x = 4; x <= cx - rm - 3; x += sp) curl(x, ft, 0, -1, h);
+      for (x = cx + rm + 3; x <= W - 4; x += sp) curl(x, ft, 0, -1, h);
+      for (y = ft + 5; y <= fl - 5; y += sp) { curl(cx - rAt(y), y, 1, 0, h); curl(cx + rAt(y), y, -1, 0, h); }
+      for (x = cx - half + 4; x <= cx + half - 4; x += sp) curl(x, fl, 0, -1, h);
     }
 
     // The same enzyme everywhere: small and faded in the dark bulk, larger and
@@ -375,8 +378,8 @@
       ctx.fillStyle = rgba(C.laser, 1); ctx.textAlign = "right"; ctx.fillText("532 nm excitation", W - 10, H - 12);
       ctx.textAlign = "right"; ctx.fillStyle = rgba(C.muted, 1);
       ctx.fillText("Dye-labelled enzyme, freely diffusing · " + fmtConc(conc()), W - 10, G.fs + 5);
-      // aperture dimension line
-      var yd = ft - 12;
+      // aperture diameter, measured at the floor as the reference drawings do
+      var fl = G.floor, yd = fl + 8;
       ctx.strokeStyle = rgba(C.muted, 0.9); ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.moveTo(cx - half, yd); ctx.lineTo(cx + half, yd);
@@ -384,42 +387,43 @@
       ctx.moveTo(cx + half, yd - 4); ctx.lineTo(cx + half, yd + 4);
       ctx.stroke();
       ctx.textAlign = "center"; ctx.fillStyle = rgba(C.muted, 1);
-      ctx.fillText("d = " + d + " nm", cx, yd - 6);
-      // undercut: a bracket under the floor from the mouth line to the floor edge, with its
-      // label on whichever side has room (the laser label sits bottom right, the substrate
-      // label bottom left; on a narrow canvas the right side is taken)
-      var rf = rAt(gt), ub = gt + 9, ut = "undercut " + UNDERCUT + " nm", uw = ctx.measureText(ut).width;
-      var laserW = ctx.measureText("532 nm excitation").width, glassW = ctx.measureText("Glass / quartz").width;
-      var rightOk = cx + rf + 6 + uw < W - 10 - laserW - 8;
-      var leftOk = cx - rf - 6 - uw > 10 + glassW + 8;
-      if (rightOk || leftOk) {   // no room for the label (phones): no bracket either, the flare speaks for itself
-        var side = rightOk ? 1 : -1;
+      ctx.fillText("d = " + d + " nm", cx, yd + G.fs + 2);
+      // the recess: milled on into the glass below the film; a bracket on its right wall
+      var ut = "milled " + UNDERETCH + " nm into the glass", uw = ctx.measureText(ut).width;
+      var laserW = ctx.measureText("532 nm excitation").width;
+      var xr = cx + half + 6;
+      if (xr + 6 + uw < W - 10 - laserW - 8) {   // no room for the label (phones): no bracket either
         ctx.strokeStyle = rgba(C.muted, 0.9); ctx.lineWidth = 1;
         ctx.beginPath();
-        ctx.moveTo(cx + side * half, ub); ctx.lineTo(cx + side * rf, ub);
-        ctx.moveTo(cx + side * half, ub - 4); ctx.lineTo(cx + side * half, ub + 4);
-        ctx.moveTo(cx + side * rf, ub - 4); ctx.lineTo(cx + side * rf, ub + 4);
+        ctx.moveTo(xr, gt); ctx.lineTo(xr, fl);
+        ctx.moveTo(xr - 3, gt); ctx.lineTo(xr + 3, gt);
+        ctx.moveTo(xr - 3, fl); ctx.lineTo(xr + 3, fl);
         ctx.stroke();
-        ctx.fillStyle = rgba(C.muted, 1);
-        if (rightOk) { ctx.textAlign = "left"; ctx.fillText(ut, cx + rf + 6, ub + 4); }
-        else { ctx.textAlign = "right"; ctx.fillText(ut, cx - rf - 6, ub + 4); }
+        ctx.textAlign = "left"; ctx.fillStyle = rgba(C.muted, 1); ctx.fillText(ut, xr + 6, fl - 3);
       }
       // decay-length bracket on the film, right of the aperture floor
-      var xb = cx + rf + 9, L = G.L;
-      ctx.strokeStyle = rgba(C.bg, 0.9);
-      ctx.beginPath();
-      ctx.moveTo(xb, gt); ctx.lineTo(xb, gt - L);
-      ctx.moveTo(xb - 3, gt); ctx.lineTo(xb + 3, gt);
-      ctx.moveTo(xb - 3, gt - L); ctx.lineTo(xb + 3, gt - L);
-      ctx.stroke();
+      // decay length: a bracket up from the floor on the left wall of the recess, label to its left
+      var L = G.L, yT = fl - L, xl = cx - half - 6, lt = "L ≈ " + Math.round(decayLength(d)) + " nm";
+      var glassW = ctx.measureText("Glass / quartz").width, lw = ctx.measureText(lt).width;
+      if (xl - 6 - lw > 10 + glassW + 8) {
+        ctx.strokeStyle = rgba(C.muted, 0.9); ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(xl, fl); ctx.lineTo(xl, yT);
+        ctx.moveTo(xl - 3, fl); ctx.lineTo(xl + 3, fl);
+        ctx.moveTo(xl - 3, yT); ctx.lineTo(xl + 3, yT);
+        ctx.stroke();
+        ctx.textAlign = "right"; ctx.fillStyle = rgba(C.muted, 1);
+        ctx.fillText(lt, xl - 6, fl - 3);
+      }
+      // "observation volume" on the film, right of the mouth, with a leader to the wall
+      var xb = cx + rAt(ft) + 9;
       ctx.textAlign = "left"; ctx.fillStyle = rgba(C.bg, 0.95);
-      ctx.fillText("L ≈ " + Math.round(decayLength(d)) + " nm", xb + 6, gt - Math.max(L / 2, 6) + 4);
       ctx.fillText("observation volume", xb, ft + G.fs + 7);
       ctx.strokeStyle = rgba(C.bg, 0.7);
-      ctx.beginPath(); ctx.moveTo(cx + half + 2, ft + 14); ctx.lineTo(xb - 3, ft + 14); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx + rAt(ft) + 2, ft + 14); ctx.lineTo(xb - 3, ft + 14); ctx.stroke();
       // passivation note on the film, left of the aperture
       ctx.textAlign = "right"; ctx.fillStyle = rgba(C.bg, 0.95);
-      var pegX = cx - rAt(gt) - 9, pegT = "PEG-2k (~5 nm) on every surface";
+      var pegX = cx - rAt(gt - 6) - 9, pegT = "PEG-2k (~5 nm) on every surface";
       if (ctx.measureText(pegT).width > pegX - 8) pegT = "PEG-2k on every surface";
       if (ctx.measureText(pegT).width <= pegX - 8) ctx.fillText(pegT, pegX, gt - 6);
     }
@@ -468,28 +472,31 @@
 
     function draw() {
       ctx.clearRect(0, 0, W, H);
-      var gt = G.glassTop, ft = G.filmTop, cx = G.cx, half = G.half, fT = G.filmT;
-      ctx.fillStyle = rgba(C.accent, 0.10); ctx.fillRect(0, gt, W, H - gt);
-      var gl = ctx.createLinearGradient(0, H, 0, gt);
+      var gt = G.glassTop, ft = G.filmTop, cx = G.cx, half = G.half, fT = G.filmT, fl = G.floor, rm = rAt(ft);
+      // glass, with the milled recess below the film left open
+      ctx.fillStyle = rgba(C.accent, 0.10);
+      ctx.fillRect(0, gt, cx - half, H - gt); ctx.fillRect(cx + half, gt, W - cx - half, H - gt); ctx.fillRect(cx - half, fl, 2 * half, H - fl);
+      var gl = ctx.createLinearGradient(0, H, 0, fl);
       gl.addColorStop(0, rgba(C.laser, 0)); gl.addColorStop(1, rgba(C.laser, 0.45));
-      ctx.fillStyle = gl; ctx.fillRect(cx - half - 40 * scale, gt, 2 * half + 80 * scale, H - gt);
+      ctx.fillStyle = gl; ctx.fillRect(cx - half - 40 * scale, fl, 2 * half + 80 * scale, H - fl);
       drawArrows();
-      var eg = ctx.createLinearGradient(0, gt, 0, ft);
+      // the lit hole: brightest at the floor, fading up through the recess and the film
+      var hh = fl - ft;
+      var eg = ctx.createLinearGradient(0, fl, 0, ft);
       for (var k = 0; k <= 10; k++) {
         var f = k / 10;
-        eg.addColorStop(f, rgba(C.laser, 0.85 * Math.exp(-(f * fT) / G.L)));
+        eg.addColorStop(f, rgba(C.laser, 0.85 * Math.exp(-(f * hh) / G.L)));
       }
-      var rf = rAt(gt);
       ctx.fillStyle = eg;
-      ctx.beginPath(); ctx.moveTo(cx - half, ft); ctx.lineTo(cx + half, ft); ctx.lineTo(cx + rf, gt); ctx.lineTo(cx - rf, gt); ctx.closePath(); ctx.fill();
+      ctx.beginPath(); ctx.moveTo(cx - rm, ft); ctx.lineTo(cx + rm, ft); ctx.lineTo(cx + half, gt); ctx.lineTo(cx + half, fl); ctx.lineTo(cx - half, fl); ctx.lineTo(cx - half, gt); ctx.closePath(); ctx.fill();
       var mg = ctx.createLinearGradient(0, ft, 0, gt);
       mg.addColorStop(0, rgba(C.text, 0.62)); mg.addColorStop(1, rgba(C.text, 0.44));
       ctx.fillStyle = mg;
-      // the metal, with the undercut walls: wider at the floor than at the mouth
-      ctx.beginPath(); ctx.moveTo(0, ft); ctx.lineTo(cx - half, ft); ctx.lineTo(cx - rf, gt); ctx.lineTo(0, gt); ctx.closePath(); ctx.fill();
-      ctx.beginPath(); ctx.moveTo(W, ft); ctx.lineTo(cx + half, ft); ctx.lineTo(cx + rf, gt); ctx.lineTo(W, gt); ctx.closePath(); ctx.fill();
+      // the metal, with the tapered walls of a milled aperture: wider at the mouth, d at the glass
+      ctx.beginPath(); ctx.moveTo(0, ft); ctx.lineTo(cx - rm, ft); ctx.lineTo(cx - half, gt); ctx.lineTo(0, gt); ctx.closePath(); ctx.fill();
+      ctx.beginPath(); ctx.moveTo(W, ft); ctx.lineTo(cx + rm, ft); ctx.lineTo(cx + half, gt); ctx.lineTo(W, gt); ctx.closePath(); ctx.fill();
       ctx.fillStyle = rgba(C.text, 0.8);
-      ctx.fillRect(0, ft, cx - half, 2); ctx.fillRect(cx + half, ft, W - cx - half, 2);
+      ctx.fillRect(0, ft, cx - rm, 2); ctx.fillRect(cx + rm, ft, W - cx - rm, 2);
       drawPassivation();
       mols.sort(function (a, b) { return Math.abs(b.z) - Math.abs(a.z); });   // far ones first
       for (var i = 0; i < mols.length; i++) drawMol(mols[i]);
