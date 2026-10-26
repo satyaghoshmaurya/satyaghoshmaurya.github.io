@@ -473,7 +473,7 @@
       ctx.clearRect(0, 0, W, H);
       var gt = G.glassTop, ft = G.filmTop, cx = G.cx, half = G.half, fT = G.filmT, fl = G.floor, rm = rAt(ft);
       // glass, with the milled recess below the film left open
-      ctx.fillStyle = rgba(C.accent, 0.10);
+      ctx.fillStyle = rgba(C.accent, 0.16);
       var rg = rAt(gt);   // the cone's radius where it enters the glass
       ctx.beginPath(); ctx.moveTo(0, gt); ctx.lineTo(cx - rg, gt); ctx.lineTo(cx - half, fl); ctx.lineTo(cx + half, fl); ctx.lineTo(cx + rg, gt); ctx.lineTo(W, gt); ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath(); ctx.fill();
       var gl = ctx.createLinearGradient(0, H, 0, fl);
@@ -497,6 +497,11 @@
       ctx.beginPath(); ctx.moveTo(W, ft); ctx.lineTo(cx + rm, ft); ctx.lineTo(cx + rg, gt); ctx.lineTo(W, gt); ctx.closePath(); ctx.fill();
       ctx.fillStyle = rgba(C.text, 0.8);
       ctx.fillRect(0, ft, cx - rm, 2); ctx.fillRect(cx + rm, ft, W - cx - rm, 2);
+      // the milled wall through the glass: the same cone, drawn as an edge so the taper shows
+      ctx.strokeStyle = rgba(C.text, 0.45); ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      ctx.moveTo(cx - rg, gt); ctx.lineTo(cx - half, fl); ctx.lineTo(cx + half, fl); ctx.lineTo(cx + rg, gt);
+      ctx.stroke();
       drawPassivation();
       mols.sort(function (a, b) { return Math.abs(b.z) - Math.abs(a.z); });   // far ones first
       for (var i = 0; i < mols.length; i++) drawMol(mols[i]);
