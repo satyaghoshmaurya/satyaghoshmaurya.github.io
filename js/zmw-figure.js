@@ -138,7 +138,11 @@
     var outL = q("[data-zmw-out-l]"), outV = q("[data-zmw-out-v]");
     var outN = q("[data-zmw-out-n]"), outNc = q("[data-zmw-out-nc]");
 
-    var d = 120;            // aperture diameter, nm (the apertures we mill)
+    var d = 120;            // aperture diameter at the mouth, nm (the apertures we mill)
+    // Our apertures are undercut: the etch widens the hole beneath the mouth, so the
+    // floor is wider than the opening. UNDERCUT is the lateral etch per side, nm
+    // (120 nm at the mouth opens to 220 nm at the glass). Drawn as a linear flare.
+    var UNDERCUT = 50;
     var logc = Math.log10(20);  // log10 of enzyme concentration in nM (default 20 nM)
     var playing = false, rafId = null, visible = true;
     var scale = compact ? 0.62 : 1;
@@ -166,6 +170,7 @@
       G.filmTop = G.glassTop - G.filmT;
       G.cx = W * 0.5;
       G.half = Math.min(d * scale, W * 0.42) / 2;
+      G.uc = UNDERCUT * scale * (G.half / (d * scale / 2));   // undercut in px, shrunk with the mouth on narrow canvases
       G.L = decayLength(d) * scale;                // evanescent intensity decay length, px
       G.r = compact ? 1.8 : 2.4;                   // molecule radius when drawn as a dot
       G.top = 6;
@@ -205,11 +210,19 @@
       return Math.max(4, Math.round(n * (compact ? 0.5 : Math.min(1, W / 820))));
     }
 
+    // Radius of the hole at depth y: the mouth radius at the film top, widening
+    // linearly by the undercut to the floor.
+    function rAt(y) {
+      if (y <= G.filmTop) return G.half;
+      var t = Math.min(1, (y - G.filmTop) / G.filmT);
+      return G.half + G.uc * t;
+    }
+
     function ok(x, y, z) {
       if (x < G.r || x > W - G.r || y < G.top) return false;
       if (Math.abs(z) > G.zmax) return false;
       if (y < G.filmTop) return true;
-      var dx = x - G.cx, R = G.half - G.r;
+      var dx = x - G.cx, R = rAt(y) - G.r;
       if (dx * dx + z * z > R * R) return false;   // outside the cylinder: solid metal
       if (y > G.glassTop - G.r - 2) return false;
       return true;
@@ -290,7 +303,7 @@
 
     // Excitation intensity: evanescent decay from the floor inside the aperture.
     function field(x, y) {
-      if (y < G.filmTop || Math.abs(x - G.cx) > G.half) return 0;
+      if (y < G.filmTop || Math.abs(x - G.cx) > rAt(y)) return 0;
       return Math.exp(-(G.glassTop - y) / G.L);
     }
 
@@ -320,8 +333,9 @@
       ctx.strokeStyle = rgba(C.muted, 0.5); ctx.lineWidth = 1;
       for (x = 4; x <= cx - half - 3; x += sp) curl(x, ft, 0, -1, h);
       for (x = cx + half + 3; x <= W - 4; x += sp) curl(x, ft, 0, -1, h);
-      for (y = ft + 5; y <= gt - 5; y += sp) { curl(cx - half, y, 1, 0, h); curl(cx + half, y, -1, 0, h); }
-      for (x = cx - half + 4; x <= cx + half - 4; x += sp) curl(x, gt, 0, -1, h);
+      for (y = ft + 5; y <= gt - 5; y += sp) { curl(cx - rAt(y), y, 1, 0, h); curl(cx + rAt(y), y, -1, 0, h); }
+      var rf = rAt(gt);
+      for (x = cx - rf + 4; x <= cx + rf - 4; x += sp) curl(x, gt, 0, -1, h);
     }
 
     // The same enzyme everywhere: small and faded in the dark bulk, larger and
@@ -371,8 +385,18 @@
       ctx.stroke();
       ctx.textAlign = "center"; ctx.fillStyle = rgba(C.muted, 1);
       ctx.fillText("d = " + d + " nm", cx, yd - 6);
-      // decay-length bracket on the film, right of the aperture
-      var xb = cx + half + 9, L = G.L;
+      // undercut: a bracket under the floor, right corner, from the mouth line to the floor edge
+      var rf = rAt(gt), ub = gt + 9;
+      ctx.strokeStyle = rgba(C.muted, 0.9); ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(cx + half, ub); ctx.lineTo(cx + rf, ub);
+      ctx.moveTo(cx + half, ub - 4); ctx.lineTo(cx + half, ub + 4);
+      ctx.moveTo(cx + rf, ub - 4); ctx.lineTo(cx + rf, ub + 4);
+      ctx.stroke();
+      ctx.textAlign = "left"; ctx.fillStyle = rgba(C.muted, 1);
+      ctx.fillText("undercut " + UNDERCUT + " nm", cx + rf + 6, ub + 4);
+      // decay-length bracket on the film, right of the aperture floor
+      var xb = cx + rf + 9, L = G.L;
       ctx.strokeStyle = rgba(C.bg, 0.9);
       ctx.beginPath();
       ctx.moveTo(xb, gt); ctx.lineTo(xb, gt - L);
@@ -386,7 +410,7 @@
       ctx.beginPath(); ctx.moveTo(cx + half + 2, ft + 14); ctx.lineTo(xb - 3, ft + 14); ctx.stroke();
       // passivation note on the film, left of the aperture
       ctx.textAlign = "right"; ctx.fillStyle = rgba(C.bg, 0.95);
-      ctx.fillText("PEG-2k (~5 nm) on every surface", cx - half - 9, gt - 6);
+      ctx.fillText("PEG-2k (~5 nm) on every surface", cx - rAt(gt) - 9, gt - 6);
     }
 
     // Donor counts upward, acceptor downward from a shared baseline: the
@@ -444,11 +468,15 @@
         var f = k / 10;
         eg.addColorStop(f, rgba(C.laser, 0.85 * Math.exp(-(f * fT) / G.L)));
       }
-      ctx.fillStyle = eg; ctx.fillRect(cx - half, ft, 2 * half, fT);
+      var rf = rAt(gt);
+      ctx.fillStyle = eg;
+      ctx.beginPath(); ctx.moveTo(cx - half, ft); ctx.lineTo(cx + half, ft); ctx.lineTo(cx + rf, gt); ctx.lineTo(cx - rf, gt); ctx.closePath(); ctx.fill();
       var mg = ctx.createLinearGradient(0, ft, 0, gt);
       mg.addColorStop(0, rgba(C.text, 0.62)); mg.addColorStop(1, rgba(C.text, 0.44));
       ctx.fillStyle = mg;
-      ctx.fillRect(0, ft, cx - half, fT); ctx.fillRect(cx + half, ft, W - cx - half, fT);
+      // the metal, with the undercut walls: wider at the floor than at the mouth
+      ctx.beginPath(); ctx.moveTo(0, ft); ctx.lineTo(cx - half, ft); ctx.lineTo(cx - rf, gt); ctx.lineTo(0, gt); ctx.closePath(); ctx.fill();
+      ctx.beginPath(); ctx.moveTo(W, ft); ctx.lineTo(cx + half, ft); ctx.lineTo(cx + rf, gt); ctx.lineTo(W, gt); ctx.closePath(); ctx.fill();
       ctx.fillStyle = rgba(C.text, 0.8);
       ctx.fillRect(0, ft, cx - half, 2); ctx.fillRect(cx + half, ft, W - cx - half, 2);
       drawPassivation();
