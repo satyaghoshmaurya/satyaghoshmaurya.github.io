@@ -2,7 +2,7 @@
 
 The species knowledge lives in the Awadh Biodiversity Atlas vault
 (`G:\My Drive\New_Projects\Citizen_Science\Native_flora_fauna\awadh-biodiversity-atlas`,
-332 species profiles, `species_index.csv` is the master list). The photos live in
+`species_index.csv` is the master list; the count grows, 682 on 2026-10-26). The photos live in
 Google Photos. This folder holds the script that joins the two and puts the result on
 `hobbies.html`. The inbox deliberately stays in Google Drive while the site itself is
 edited in this repository at `D:\Projects\website`.
