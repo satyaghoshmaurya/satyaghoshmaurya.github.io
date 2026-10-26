@@ -385,16 +385,25 @@
       ctx.stroke();
       ctx.textAlign = "center"; ctx.fillStyle = rgba(C.muted, 1);
       ctx.fillText("d = " + d + " nm", cx, yd - 6);
-      // undercut: a bracket under the floor, right corner, from the mouth line to the floor edge
-      var rf = rAt(gt), ub = gt + 9;
-      ctx.strokeStyle = rgba(C.muted, 0.9); ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.moveTo(cx + half, ub); ctx.lineTo(cx + rf, ub);
-      ctx.moveTo(cx + half, ub - 4); ctx.lineTo(cx + half, ub + 4);
-      ctx.moveTo(cx + rf, ub - 4); ctx.lineTo(cx + rf, ub + 4);
-      ctx.stroke();
-      ctx.textAlign = "left"; ctx.fillStyle = rgba(C.muted, 1);
-      ctx.fillText("undercut " + UNDERCUT + " nm", cx + rf + 6, ub + 4);
+      // undercut: a bracket under the floor from the mouth line to the floor edge, with its
+      // label on whichever side has room (the laser label sits bottom right, the substrate
+      // label bottom left; on a narrow canvas the right side is taken)
+      var rf = rAt(gt), ub = gt + 9, ut = "undercut " + UNDERCUT + " nm", uw = ctx.measureText(ut).width;
+      var laserW = ctx.measureText("532 nm excitation").width, glassW = ctx.measureText("Glass / quartz").width;
+      var rightOk = cx + rf + 6 + uw < W - 10 - laserW - 8;
+      var leftOk = cx - rf - 6 - uw > 10 + glassW + 8;
+      if (rightOk || leftOk) {   // no room for the label (phones): no bracket either, the flare speaks for itself
+        var side = rightOk ? 1 : -1;
+        ctx.strokeStyle = rgba(C.muted, 0.9); ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(cx + side * half, ub); ctx.lineTo(cx + side * rf, ub);
+        ctx.moveTo(cx + side * half, ub - 4); ctx.lineTo(cx + side * half, ub + 4);
+        ctx.moveTo(cx + side * rf, ub - 4); ctx.lineTo(cx + side * rf, ub + 4);
+        ctx.stroke();
+        ctx.fillStyle = rgba(C.muted, 1);
+        if (rightOk) { ctx.textAlign = "left"; ctx.fillText(ut, cx + rf + 6, ub + 4); }
+        else { ctx.textAlign = "right"; ctx.fillText(ut, cx - rf - 6, ub + 4); }
+      }
       // decay-length bracket on the film, right of the aperture floor
       var xb = cx + rf + 9, L = G.L;
       ctx.strokeStyle = rgba(C.bg, 0.9);
@@ -410,7 +419,9 @@
       ctx.beginPath(); ctx.moveTo(cx + half + 2, ft + 14); ctx.lineTo(xb - 3, ft + 14); ctx.stroke();
       // passivation note on the film, left of the aperture
       ctx.textAlign = "right"; ctx.fillStyle = rgba(C.bg, 0.95);
-      ctx.fillText("PEG-2k (~5 nm) on every surface", cx - rAt(gt) - 9, gt - 6);
+      var pegX = cx - rAt(gt) - 9, pegT = "PEG-2k (~5 nm) on every surface";
+      if (ctx.measureText(pegT).width > pegX - 8) pegT = "PEG-2k on every surface";
+      if (ctx.measureText(pegT).width <= pegX - 8) ctx.fillText(pegT, pegX, gt - 6);
     }
 
     // Donor counts upward, acceptor downward from a shared baseline: the
