@@ -139,10 +139,11 @@
     var outN = q("[data-zmw-out-n]"), outNc = q("[data-zmw-out-nc]");
 
     var d = 120;            // aperture diameter at the floor, nm (the apertures we mill)
-    // A milled aperture is wider at the mouth and narrows to d at the glass; TAPER is
-    // the extra radius at the mouth, nm, a drawing value. The milling continues
-    // UNDERETCH nm into the glass below the film, so the floor sits in a recess.
-    var TAPER = 50, UNDERETCH = 50;
+    // A milled aperture is a slightly tapered cone, widest at the mouth, and the
+    // milling continues UNDERETCH nm into the glass below the film, so the cone runs
+    // on through the recess to the floor. SIDEWALL_DEG is the wall angle from the
+    // vertical; a focused ion beam gives a few degrees to about fifteen.
+    var SIDEWALL_DEG = 12, UNDERETCH = 50;
     var logc = Math.log10(20);  // log10 of enzyme concentration in nM (default 20 nM)
     var playing = false, rafId = null, visible = true;
     var scale = compact ? 0.62 : 1;
@@ -171,9 +172,9 @@
       G.cx = W * 0.5;
       G.half = Math.min(d * scale, W * 0.42) / 2;
       var sh = G.half / (d * scale / 2);                   // shrink factor on narrow canvases
-      G.taper = TAPER * scale * sh;                        // extra radius at the mouth, px
       G.rec = UNDERETCH * scale * sh;                      // depth of the recess into the glass, px
       G.floor = G.glassTop + G.rec;                        // the aperture floor, below the film
+      G.slope = Math.tan(SIDEWALL_DEG * Math.PI / 180);    // extra radius per unit height above the floor
       G.L = decayLength(d) * scale;                // evanescent intensity decay length, px
       G.r = compact ? 1.8 : 2.4;                   // molecule radius when drawn as a dot
       G.top = 6;
@@ -213,13 +214,11 @@
       return Math.max(4, Math.round(n * (compact ? 0.5 : Math.min(1, W / 820))));
     }
 
-    // Radius of the hole at depth y: widest at the mouth, narrowing linearly through the
-    // film to half at the glass, then straight down through the recess to the floor.
+    // Radius of the hole at depth y: d/2 at the floor, growing at the sidewall angle all
+    // the way up through the recess and the film, one cone.
     function rAt(y) {
-      if (y <= G.filmTop) return G.half + G.taper;
-      if (y >= G.glassTop) return G.half;
-      var t = (y - G.filmTop) / G.filmT;
-      return G.half + G.taper * (1 - t);
+      var h = Math.max(0, G.floor - Math.max(y, G.filmTop));
+      return G.half + G.slope * h;
     }
 
     function ok(x, y, z) {
@@ -391,7 +390,7 @@
       // the recess: milled on into the glass below the film; a bracket on its right wall
       var ut = "milled " + UNDERETCH + " nm into the glass", uw = ctx.measureText(ut).width;
       var laserW = ctx.measureText("532 nm excitation").width;
-      var xr = cx + half + 6;
+      var xr = cx + rAt(gt) + 8;
       if (xr + 6 + uw < W - 10 - laserW - 8) {   // no room for the label (phones): no bracket either
         ctx.strokeStyle = rgba(C.muted, 0.9); ctx.lineWidth = 1;
         ctx.beginPath();
@@ -403,7 +402,7 @@
       }
       // decay-length bracket on the film, right of the aperture floor
       // decay length: a bracket up from the floor on the left wall of the recess, label to its left
-      var L = G.L, yT = fl - L, xl = cx - half - 6, lt = "L ≈ " + Math.round(decayLength(d)) + " nm";
+      var L = G.L, yT = fl - L, xl = cx - rAt(gt) - 8, lt = "L ≈ " + Math.round(decayLength(d)) + " nm";
       var glassW = ctx.measureText("Glass / quartz").width, lw = ctx.measureText(lt).width;
       if (xl - 6 - lw > 10 + glassW + 8) {
         ctx.strokeStyle = rgba(C.muted, 0.9); ctx.lineWidth = 1;
@@ -475,7 +474,8 @@
       var gt = G.glassTop, ft = G.filmTop, cx = G.cx, half = G.half, fT = G.filmT, fl = G.floor, rm = rAt(ft);
       // glass, with the milled recess below the film left open
       ctx.fillStyle = rgba(C.accent, 0.10);
-      ctx.fillRect(0, gt, cx - half, H - gt); ctx.fillRect(cx + half, gt, W - cx - half, H - gt); ctx.fillRect(cx - half, fl, 2 * half, H - fl);
+      var rg = rAt(gt);   // the cone's radius where it enters the glass
+      ctx.beginPath(); ctx.moveTo(0, gt); ctx.lineTo(cx - rg, gt); ctx.lineTo(cx - half, fl); ctx.lineTo(cx + half, fl); ctx.lineTo(cx + rg, gt); ctx.lineTo(W, gt); ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath(); ctx.fill();
       var gl = ctx.createLinearGradient(0, H, 0, fl);
       gl.addColorStop(0, rgba(C.laser, 0)); gl.addColorStop(1, rgba(C.laser, 0.45));
       ctx.fillStyle = gl; ctx.fillRect(cx - half - 40 * scale, fl, 2 * half + 80 * scale, H - fl);
@@ -488,13 +488,13 @@
         eg.addColorStop(f, rgba(C.laser, 0.85 * Math.exp(-(f * hh) / G.L)));
       }
       ctx.fillStyle = eg;
-      ctx.beginPath(); ctx.moveTo(cx - rm, ft); ctx.lineTo(cx + rm, ft); ctx.lineTo(cx + half, gt); ctx.lineTo(cx + half, fl); ctx.lineTo(cx - half, fl); ctx.lineTo(cx - half, gt); ctx.closePath(); ctx.fill();
+      ctx.beginPath(); ctx.moveTo(cx - rm, ft); ctx.lineTo(cx + rm, ft); ctx.lineTo(cx + half, fl); ctx.lineTo(cx - half, fl); ctx.closePath(); ctx.fill();
       var mg = ctx.createLinearGradient(0, ft, 0, gt);
       mg.addColorStop(0, rgba(C.text, 0.62)); mg.addColorStop(1, rgba(C.text, 0.44));
       ctx.fillStyle = mg;
       // the metal, with the tapered walls of a milled aperture: wider at the mouth, d at the glass
-      ctx.beginPath(); ctx.moveTo(0, ft); ctx.lineTo(cx - rm, ft); ctx.lineTo(cx - half, gt); ctx.lineTo(0, gt); ctx.closePath(); ctx.fill();
-      ctx.beginPath(); ctx.moveTo(W, ft); ctx.lineTo(cx + rm, ft); ctx.lineTo(cx + half, gt); ctx.lineTo(W, gt); ctx.closePath(); ctx.fill();
+      ctx.beginPath(); ctx.moveTo(0, ft); ctx.lineTo(cx - rm, ft); ctx.lineTo(cx - rg, gt); ctx.lineTo(0, gt); ctx.closePath(); ctx.fill();
+      ctx.beginPath(); ctx.moveTo(W, ft); ctx.lineTo(cx + rm, ft); ctx.lineTo(cx + rg, gt); ctx.lineTo(W, gt); ctx.closePath(); ctx.fill();
       ctx.fillStyle = rgba(C.text, 0.8);
       ctx.fillRect(0, ft, cx - rm, 2); ctx.fillRect(cx + rm, ft, W - cx - rm, 2);
       drawPassivation();
