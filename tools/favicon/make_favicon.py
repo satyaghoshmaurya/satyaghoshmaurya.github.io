@@ -1,113 +1,113 @@
-"""Draw the site's favicon: a molecule sitting on top of its energy barrier.
+"""Draw the site's favicon: the monogram SM in Newsreader Bold, the serif the
+site's headings use, in off-white on the site's near-black tile.
 
-The mark is the same double-well potential the home page animates,
-U(x) = (x^2 - 1)^2 - 0.12x, with a dot at the barrier top. That is the moment
-the whole site is about, and it stays legible when shrunk to a browser tab.
+Chosen 2026-10-27 over the earlier double-well mark, which collapsed into a
+"W" at browser-tab size. Two bold letters survive 16 px; a landscape does not.
 
     python tools/favicon/make_favicon.py
 
 Writes, at the repository root:
     favicon.ico          16, 32 and 48 px, for older browsers and bookmarks
-    favicon.svg          scalable, used by current browsers
+    favicon.svg          scalable, used by current browsers (glyph outlines, no font needed)
     assets/img/icon/apple-touch-icon.png    180 px, for an iOS home screen
+
+Needs Pillow and fontTools, and Newsreader-Bold.ttf beside this script
+(SIL Open Font License, see OFL-Newsreader.txt).
 """
 import os
+from PIL import Image, ImageDraw, ImageFont
+from fontTools.ttLib import TTFont
+from fontTools.pens.svgPathPen import SVGPathPen
+from fontTools.pens.transformPen import TransformPen
+from fontTools.pens.boundsPen import BoundsPen
 
-from PIL import Image, ImageDraw
-
-ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(os.path.dirname(HERE))
 ICON_DIR = os.path.join(ROOT, "assets", "img", "icon")
+FONT = os.path.join(HERE, "Newsreader-Bold.ttf")
 
 INK = (31, 35, 40)        # --text, the site's near-black
-CURVE = (246, 248, 250)   # --bg-alt, an off-white that stays soft at 16 px
-DOT = (210, 153, 34)      # the amber the hero figure marks transition paths with
-
-XL, XR = -1.42, 1.42      # how much of the landscape to show
-PAD = 0.16                # margin inside the tile, as a fraction of its width
-SS = 8                    # supersampling factor, for smooth curves
-
-
-def U(x):
-    return (x * x - 1.0) ** 2 - 0.12 * x
+PAPER = (246, 248, 250)   # --bg-alt, an off-white that stays soft at 16 px
+TEXT = "SM"
+EM = 0.62                 # font size as a fraction of the tile
+TRACK = -0.06             # letter spacing as a fraction of the tile (tight, so the pair reads as one mark)
+RADIUS = 0.22             # corner radius of the tile
+SS = 8                    # supersampling for the raster tiles
 
 
-def curve_points(size):
-    """The potential, mapped into a square of the given pixel size."""
-    xs = [XL + (XR - XL) * i / 400.0 for i in range(401)]
-    us = [U(x) for x in xs]
-    umin, umax = min(us), max(us)
-    pad = PAD * size
-    span = size - 2 * pad
+def layout(size):
+    """Where each letter goes, in pixels, for a tile of the given size. Measured
+    from the font's own metrics so the raster and the SVG agree exactly."""
+    tt = TTFont(FONT)
+    upm = tt["head"].unitsPerEm
+    cmap = tt.getBestCmap()
+    gs = tt.getGlyphSet()
+    scale = EM * size / upm
+    glyphs = []
+    for ch in TEXT:
+        name = cmap[ord(ch)]
+        bp = BoundsPen(gs)
+        gs[name].draw(bp)
+        xmin, ymin, xmax, ymax = bp.bounds
+        glyphs.append((name, xmin * scale, ymin * scale, xmax * scale, ymax * scale))
+    gap = TRACK * size
+    total = sum(g[3] - g[1] for g in glyphs) + gap * (len(glyphs) - 1)
+    ymax = max(g[4] for g in glyphs)
+    ymin = min(g[2] for g in glyphs)
+    x = (size - total) / 2
+    # baseline placed so that the pair's ink box is centred vertically (font y points up)
+    baseline = size / 2 + (ymax + ymin) / 2
+    placed = []
+    for name, xmin, _, xmax, _ in glyphs:
+        placed.append((name, x - xmin, baseline))
+        x += (xmax - xmin) + gap
+    return gs, scale, placed
 
-    def px(x):
-        return pad + span * (x - XL) / (XR - XL)
 
-    def py(u):
-        # a little headroom above the barrier so the dot is not clipped
-        return pad + 0.20 * span + 0.80 * span * (umax - u) / (umax - umin)
+def tile_svg(size=64):
+    gs, scale, placed = layout(size)
+    paths = []
+    for name, dx, baseline in placed:
+        pen = SVGPathPen(gs, ntos=lambda v: ("%.2f" % v).rstrip("0").rstrip("."))
+        # font units -> tile pixels, y flipped, baseline placed
+        tp = TransformPen(pen, (scale, 0, 0, -scale, dx, baseline))
+        gs[name].draw(tp)
+        paths.append(pen.getCommands())
+    r = RADIUS * size
+    return ("<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 %d %d\">\n"
+            "  <title>Satyaghosh Maurya</title>\n"
+            "  <rect width=\"%d\" height=\"%d\" rx=\"%.0f\" fill=\"#%02x%02x%02x\"/>\n"
+            "  <path d=\"%s\" fill=\"#%02x%02x%02x\"/>\n</svg>\n"
+            % (size, size, size, size, r, INK[0], INK[1], INK[2], " ".join(paths), PAPER[0], PAPER[1], PAPER[2]))
 
-    return [(px(x), py(u)) for x, u in zip(xs, us)], px, py
 
-
-def draw(size):
+def tile_png(size, square=False):
     s = size * SS
     im = Image.new("RGBA", (s, s), (0, 0, 0, 0))
     d = ImageDraw.Draw(im)
-    d.rounded_rectangle([0, 0, s - 1, s - 1], radius=int(0.22 * s), fill=INK + (255,))
-
-    pts, px, py = curve_points(s)
-    width = max(SS, int(0.085 * s))
-    d.line(pts, fill=CURVE + (255,), width=width, joint="curve")
-    # round off the two ends, which `line` leaves square
-    for end in (pts[0], pts[-1]):
-        r = width / 2.0
-        d.ellipse([end[0] - r, end[1] - r, end[0] + r, end[1] + r], fill=CURVE + (255,))
-
-    # the molecule, poised at the top of the barrier. It sits just above the
-    # peak rather than on it, so the barrier is still visible underneath.
-    r = 0.125 * s
-    cx, cy = px(0.0), py(U(0.0)) - 0.055 * s
-    d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=DOT + (255,))
-
+    if square:
+        d.rectangle([0, 0, s - 1, s - 1], fill=INK + (255,))
+    else:
+        d.rounded_rectangle([0, 0, s - 1, s - 1], radius=int(RADIUS * s), fill=INK + (255,))
+    gs, scale, placed = layout(s)
+    font = ImageFont.truetype(FONT, int(EM * s))
+    for (name, dx, baseline), ch in zip(placed, TEXT):
+        # anchor "ls": the point given is the left end of the baseline
+        d.text((dx, baseline), ch, font=font, fill=PAPER + (255,), anchor="ls")
     return im.resize((size, size), Image.LANCZOS)
-
-
-def svg():
-    """The same drawing, as a path, so large sizes stay crisp."""
-    n = 64
-    pts, px, py = curve_points(64.0)
-    step = max(1, len(pts) // n)
-    sampled = pts[::step] + [pts[-1]]
-    path = "M " + " L ".join("%.2f %.2f" % p for p in sampled)
-    cx, cy = px(0.0), py(U(0.0)) - 0.055 * 64.0
-    return (
-        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">\n'
-        '  <title>Satyaghosh Maurya</title>\n'
-        '  <rect width="64" height="64" rx="14" fill="#1f2328"/>\n'
-        '  <path d="%s" fill="none" stroke="#f6f8fa" stroke-width="5.4"\n'
-        '        stroke-linecap="round" stroke-linejoin="round"/>\n'
-        '  <circle cx="%.2f" cy="%.2f" r="8.0" fill="#d29922"/>\n'
-        "</svg>\n" % (path, cx, cy)
-    )
 
 
 def main():
     os.makedirs(ICON_DIR, exist_ok=True)
-
-    big = draw(256)
-    big.save(os.path.join(ROOT, "favicon.ico"),
-             sizes=[(16, 16), (32, 32), (48, 48)])
-
+    tiles = {n: tile_png(n) for n in (16, 32, 48)}
+    tiles[48].save(os.path.join(ROOT, "favicon.ico"), format="ICO",
+                   sizes=[(16, 16), (32, 32), (48, 48)],
+                   append_images=[tiles[16], tiles[32]])
     # iOS crops transparent corners oddly, so the touch icon is drawn square
-    touch = Image.new("RGB", (180, 180), INK)
-    touch.paste(draw(180).convert("RGB"), (0, 0))
-    touch.save(os.path.join(ICON_DIR, "apple-touch-icon.png"))
-
+    tile_png(180, square=True).convert("RGB").save(os.path.join(ICON_DIR, "apple-touch-icon.png"))
     with open(os.path.join(ROOT, "favicon.svg"), "w", encoding="utf-8") as fh:
-        fh.write(svg())
-
-    for p in ("favicon.ico", "favicon.svg",
-              "assets/img/icon/apple-touch-icon.png"):
+        fh.write(tile_svg())
+    for p in ("favicon.ico", "favicon.svg", "assets/img/icon/apple-touch-icon.png"):
         full = os.path.join(ROOT, p.replace("/", os.sep))
         print("%-38s %6d bytes" % (p, os.path.getsize(full)))
 
