@@ -1,50 +1,50 @@
 {
-  "generated": "2026-10-25 22:12",
-  "species_profiled": 682,
+  "generated": "2026-11-03 11:44",
+  "species_profiled": 1000,
   "groups": [
     {
       "label": "Birds",
-      "count": 166
+      "count": 268
     },
     {
       "label": "Insects",
-      "count": 116
+      "count": 185
     },
     {
       "label": "Weeds, herbs and grasses",
-      "count": 78
-    },
-    {
-      "label": "Trees",
-      "count": 61
-    },
-    {
-      "label": "Fish, snails and crabs",
-      "count": 53
+      "count": 131
     },
     {
       "label": "Crops",
-      "count": 45
+      "count": 76
+    },
+    {
+      "label": "Trees",
+      "count": 75
+    },
+    {
+      "label": "Fish, snails and crabs",
+      "count": 64
     },
     {
       "label": "Reptiles and amphibians",
-      "count": 42
+      "count": 55
     },
     {
       "label": "Spiders and soil life",
-      "count": 41
+      "count": 50
     },
     {
       "label": "Mushrooms",
-      "count": 29
+      "count": 37
     },
     {
       "label": "Mammals",
-      "count": 28
+      "count": 30
     },
     {
       "label": "Aquatic and lower plants",
-      "count": 23
+      "count": 29
     }
   ],
   "cards": [
@@ -167,7 +167,7 @@
       "kingdom": "animalia",
       "english": "Checkered Keelback",
       "hindi": "धारीदार पानी साँप",
-      "scientific": "Xenochrophis piscator",
+      "scientific": "Fowlea piscator",
       "family": "Colubridae",
       "status": "Reptile",
       "hook": "The paddy field's water snake: non-venomous, harmless to people, and a steady predator of frogs, rodents and insects.",

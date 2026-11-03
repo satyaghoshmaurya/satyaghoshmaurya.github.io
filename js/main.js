@@ -173,3 +173,53 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+// ---- Live atlas counts (2026-11-03) ----
+// The Awadh Biodiversity Atlas publishes a one-kilobyte stats.json each time it is rebuilt.
+// Any element marked data-atlas="total" gets the live species count, and the bars marked
+// data-atlas="groups" are redrawn from it. The numbers already in the HTML are the fallback,
+// shown if the request fails or is slow, so the page never depends on it.
+// GROUPS must stay in step with GROUPS in tools/atlas/atlas_ingest.py.
+(function () {
+  var totals = document.querySelectorAll('[data-atlas="total"]');
+  var bars = document.querySelector('[data-atlas="groups"]');
+  if (!totals.length && !bars) return;
+  var GROUPS = [
+    ["Birds", ["fauna/birds"]],
+    ["Insects", ["fauna/insects"]],
+    ["Trees", ["flora/trees"]],
+    ["Weeds, herbs and grasses", ["flora/weeds", "flora/shrubs", "flora/medicinal", "flora/grasses", "flora/climbers"]],
+    ["Fish, snails and crabs", ["fauna/fish", "fauna/mollusks", "fauna/crustaceans"]],
+    ["Reptiles and amphibians", ["fauna/reptiles", "fauna/amphibians"]],
+    ["Spiders and soil life", ["fauna/spiders", "fauna/soil_fauna", "fauna/myriapods"]],
+    ["Crops", ["flora/crops", "flora/crops_associated"]],
+    ["Mammals", ["fauna/mammals"]],
+    ["Mushrooms", ["fungi/mushrooms", "fungi/bracket_fungi", "fungi/lichens", "fungi/molds"]],
+    ["Aquatic and lower plants", ["flora/aquatic", "lower_plants/mosses", "lower_plants/ferns", "lower_plants/liverworts", "lower_plants/algae"]]
+  ];
+  function fmt(n) { return Number(n).toLocaleString("en-IN"); }
+  if (!window.fetch) return;
+  fetch("https://sgmaurya.github.io/awadh-biodiversity-atlas-site/stats.json")
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (st) {
+      if (!st || !st.total || !st.byCategory) return;
+      for (var i = 0; i < totals.length; i++) totals[i].textContent = fmt(st.total);
+      if (!bars) return;
+      var seen = {}, groups = [], other = 0, k, j;
+      for (i = 0; i < GROUPS.length; i++) {
+        var n = 0;
+        for (j = 0; j < GROUPS[i][1].length; j++) { seen[GROUPS[i][1][j]] = 1; n += st.byCategory[GROUPS[i][1][j]] || 0; }
+        if (n) groups.push([GROUPS[i][0], n]);
+      }
+      for (k in st.byCategory) if (!seen[k]) other += st.byCategory[k];
+      if (other) groups.push(["Other", other]);
+      groups.sort(function (a, b) { return b[1] - a[1]; });
+      var mx = groups[0][1], html = "";
+      for (i = 0; i < groups.length; i++) {
+        html += '<li><span class="ag-label">' + groups[i][0] + '</span><span class="ag-bar" aria-hidden="true"><i style="--w:'
+          + Math.round(100 * groups[i][1] / mx) + '%"></i></span><span class="ag-n">' + fmt(groups[i][1]) + '</span></li>';
+      }
+      bars.innerHTML = html;
+    })
+    .catch(function () { /* keep the numbers already on the page */ });
+})();
