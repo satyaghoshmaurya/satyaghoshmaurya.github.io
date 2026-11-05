@@ -533,7 +533,7 @@ def render_cards(cards):
                          % (p["thumb"], p["full"], esc(alt), THUMB_SIZE[0], THUMB_SIZE[1]))
             lines.append("    </div>")
         else:
-            lines.append('    <a class="atlas-media atlas-empty atlas-link" href="%s" data-kingdom="%s" aria-label="%s, full entry in the atlas">'
+            lines.append('    <a class="atlas-media atlas-empty atlas-link" href="%s" data-kingdom="%s" aria-label="%s, its page in the atlas">'
                          % (c["url"], c["kingdom"], esc(c["english"])))
             lines.append('      <svg class="atlas-picto" aria-hidden="true"><use href="#pic-%s"/></svg><span class="atlas-soon">Open in the atlas &middot; <span lang="hi">एटलस में देखें</span></span>' % c["picto"])
             lines.append("    </a>")

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-03 11:44",
+  "generated": "2026-11-05 12:22",
   "species_profiled": 1000,
   "groups": [
     {
@@ -74,8 +74,8 @@
       "scientific": "Calotropis gigantea",
       "family": "Apocynaceae",
       "status": "Weed",
-      "hook": "Toxic latex and star-shaped flowers; the only plant the Plain Tiger butterfly will lay its eggs on.",
-      "hook_hi": "ज़हरीला दूध और तारे जैसे फूल; प्लेन टाइगर तितली अपने अंडे सिर्फ़ इसी पौधे पर देती है।",
+      "hook": "Toxic latex and star-shaped flowers; one of the milkweeds the Plain Tiger butterfly lays its eggs on, and the source of the poison that protects it.",
+      "hook_hi": "ज़हरीला दूध और तारे जैसे फूल; प्लेन टाइगर तितली जिन मदार पौधों पर अंडे देती है, उनमें से एक, और उसकी रक्षा करने वाले ज़हर का स्रोत।",
       "picto": "herb",
       "url": "https://sgmaurya.github.io/awadh-biodiversity-atlas-site/species/calotropis_gigantea/",
       "photo_count": 0
@@ -154,8 +154,8 @@
       "scientific": "Pantala flavescens",
       "family": "Libellulidae",
       "status": "Insect",
-      "hook": "The dragonfly that migrates across oceans with the monsoon, catching mosquitoes on nine attempts out of ten.",
-      "hook_hi": "मानसून के साथ समुद्र पार कर आने वाली व्याधपतंग, जो दस में से नौ झपट्टों में मच्छर पकड़ लेती है।",
+      "hook": "The dragonfly that crosses oceans with the monsoon winds, and one of the most efficient insect hunters there is.",
+      "hook_hi": "मानसून की हवाओं के साथ समुद्र पार कर आने वाली व्याधपतंग, और कीड़ों के सबसे कुशल शिकारियों में से एक।",
       "picto": "dragonfly",
       "url": "https://sgmaurya.github.io/awadh-biodiversity-atlas-site/species/wandering_glider/",
       "photo_count": 0
