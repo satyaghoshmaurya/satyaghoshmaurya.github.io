@@ -1732,9 +1732,11 @@ a.atlas-link:focus-visible {
   font-size: 0.95rem;
 }
 
-.atlas-status-hi {
+.atlas-status + .atlas-status {
   margin-top: 0;
   border-top: 1px solid var(--border);
+}
+.atlas-status-hi {
   color: var(--text-muted);
 }
 

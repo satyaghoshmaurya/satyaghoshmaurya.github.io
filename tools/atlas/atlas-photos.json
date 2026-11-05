@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-05 12:22",
+  "generated": "2026-11-05 13:09",
   "species_profiled": 1000,
   "groups": [
     {
@@ -234,8 +234,8 @@
       "scientific": "Boselaphus tragocamelus",
       "family": "Bovidae",
       "status": "Mammal",
-      "hook": "An antelope with 'cow' in its name: raids wheat and sugarcane at night, and is protected all the same.",
-      "hook_hi": "नाम में 'गाय' वाला मृग: रात में गेहूँ और गन्ना उजाड़ता है, फिर भी संरक्षित है।",
+      "hook": "An antelope with 'cow' in its name: raids wheat and sugarcane at night, and farmers spare it all the same.",
+      "hook_hi": "नाम में 'गाय' वाला मृग: रात में गेहूँ और गन्ना उजाड़ता है, फिर भी किसान उसे बख़्श देते हैं।",
       "picto": "mammal",
       "url": "https://sgmaurya.github.io/awadh-biodiversity-atlas-site/species/nilgai/",
       "photo_count": 0

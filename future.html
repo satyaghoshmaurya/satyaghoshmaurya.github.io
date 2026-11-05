@@ -75,7 +75,7 @@
           What the laboratory will work on: chemical engineering at the scale of one molecule.
         </p>
         <p>
-          A chemical engineer understands a process through its reactions, its transport of heat and material, and the equipment that makes it work. We want to understand a single protein the same way: as the smallest chemical process there is (<a href="research.html#chemeng">the same subjects at two scales</a>). Four directions follow from the <a href="research.html">present work</a>. Two are science: how a protein crosses from one shape to another, and how its crowded surroundings slow it down. Two are engineering: making the nanostructures that let us watch this cheaply and in quantity, and building an affordable instrument from them for teaching laboratories and clinics.
+          We want to understand a single protein as the smallest chemical process there is: through its reactions, its transport, and the equipment that makes it work. Four directions follow from the <a href="research.html">present work</a>. Two are science: how a protein crosses from one shape to another, and how its crowded surroundings slow it down. Two are engineering: making the nanostructures that let us watch this cheaply and in quantity, and building an affordable instrument from them for teaching laboratories and clinics. The research page sets out <a href="research.html#chemeng">the same subjects at two scales</a>.
         </p>
         <p>
           We think of the laboratory as one process rather than four projects, in the way a chemical plant is drawn as a flow sheet. Devices are made, photons are measured, and the molecule&rsquo;s path is worked out from them. The results feed the science and the affordable instrument, and what both of those need decides what gets built next.
@@ -185,7 +185,7 @@
               <line x1="400" y1="40" x2="424" y2="40" class="curve amber"/><text x="430" y="44" class="t">measured</text>
               <line x1="400" y1="60" x2="424" y2="60" class="curve blue dash"/><text x="430" y="64" class="t">simulated</text>
             </svg>
-            <figcaption class="fd-figcap">What the first direction tests. The distribution of crossing times for one conformational change, measured in a waveguide (amber) and computed by all-atom simulation (blue, dashed), must agree. Where they differ, the barrier&rsquo;s shape or the friction along it is wrong, and that is the result.</figcaption>
+            <figcaption class="fd-figcap">Left, the crossing on the energy landscape. Right, the distribution of crossing times for the same change, measured in a waveguide (amber) and computed by all-atom simulation (blue, dashed).</figcaption>
           </figure>
           <p>
             A conformational change is a unimolecular reaction, and the distribution of transition-path times is the residence-time distribution of the barrier region. With photon rates high enough to resolve microseconds, the crossing can be measured rather than inferred from the rate, and the activation, transport and efficiency questions of reaction engineering can be asked of one molecule.
@@ -221,13 +221,13 @@
               <text x="330" y="211" class="m" text-anchor="middle">solvent viscosity &#8594;</text>
               <text x="44" y="105" class="m" text-anchor="middle" transform="rotate(-90 44 105)">transition-path time &#8594;</text>
             </svg>
-            <figcaption class="fd-figcap">The second direction&rsquo;s measurement. The crossing takes longer as the solvent is made more viscous. The slope is the friction of the water; the intercept is the protein&rsquo;s own, which no solvent change removes. Crowders of different architecture extend the series to where the bulk viscosity stops predicting the slope.</figcaption>
+            <figcaption class="fd-figcap">Transition-path time against solvent viscosity: the slope is the friction of the solvent, the intercept is the protein&rsquo;s own, and the shaded region is the crowded media still to be measured.</figcaption>
           </figure>
           <p>
             Inside a cell a protein moves through a crowded, structured, non-Newtonian fluid, and bulk rheology says little about the friction a nanometre-scale domain feels as it swings shut. Timing the crossing across solvents, crowders and condensed phases is a way to find the length scale at which continuum transport breaks down.
           </p>
           <ol class="fd-steps">
-            <li>The viscosity series already gives a friction term for the crossing. The first step repeats it in crowders of different architecture, flexible and branched polymers and small proteins at cellular volume fractions, to find the scale at which the bulk viscosity stops predicting the friction a swinging domain feels.</li>
+            <li>The viscosity series already gives a friction term for the crossing. The first step repeats it in crowders of different architecture, flexible and branched polymers and small proteins at cellular volume fractions.</li>
             <li>The second step is interpretation, and the theory has just moved. Makarov and Sollich have shown that a rough energy landscape, whether frozen or fluctuating in time, can give the same apparent diffusivity, and have re-derived the bounds on roughness that an experiment can infer (<a href="https://doi.org/10.1073/pnas.2516241123" target="_blank" rel="noopener"><i>PNAS</i> 2026</a>). The temperature and viscosity dependence of the transition-path time is the measurement that can separate roughness from solvent friction, since roughness enters as a squared ratio of energy to temperature while solvent friction enters linearly through the viscosity.</li>
             <li>Where it leads is a transport coefficient for the crowded interior of a cell, measured on one molecule and usable in models of intracellular kinetics. The crowded-membrane measurements of the doctoral work, in which a grafted polymer layer set the friction on a surface, are the two-dimensional version of the same question.</li>
           </ol>
@@ -259,7 +259,7 @@
               <text x="330" y="206" class="m">a whole array per press,</text>
               <text x="330" y="222" class="m">then a vapour etch</text>
             </svg>
-            <figcaption class="fd-figcap">The third direction&rsquo;s engineering. The apertures on the research page were milled one at a time by a focused ion beam, so every chip carries the cost of that instrument. A master written once and pressed into a sol-gel film gives a whole array per press (Khelidj and co-workers, <i>Small</i> 2026), and the laboratory needs no ion beam of its own.</figcaption>
+            <figcaption class="fd-figcap">Top, today: an ion beam mills the apertures one at a time. Bottom, next: a master written once is pressed into a sol-gel film and gives a whole array per press (Khelidj and co-workers, <i>Small</i> 2026).</figcaption>
           </figure>
           <p>
             Zero-mode waveguides and plasmonic antennas are our measurement platform, and an engineering problem in their own right: electromagnetic design, nanofabrication, surface passivation, colloidal synthesis and bioconjugation, and the mass transfer of molecules into a volume of a few hundred zeptolitres.
@@ -295,13 +295,13 @@
               <text x="260" y="192" class="m" text-anchor="middle">Not needed to begin:</text>
               <text x="260" y="209" class="m" text-anchor="middle">single-photon detectors, timing electronics, a research microscope</text>
             </svg>
-            <figcaption class="fd-figcap">The fourth direction&rsquo;s instrument. A molecule made bright by the chip can be followed by an ordinary camera at kilohertz frame rates, so the expensive parts of a single-molecule microscope are not needed to begin. The same instrument is the one students build in the teaching laboratory.</figcaption>
+            <figcaption class="fd-figcap">The parts of the first instrument, left to right: a laser diode, a lens, an imprinted chip, an objective and a camera. The parts not needed to begin are listed below them.</figcaption>
           </figure>
           <p>
             A plasmonic structure that makes a molecule many times brighter changes which detector is needed. Fast kinetics that today demand single-photon counters and a research microscope could be read with an inexpensive camera, and the inference software beside it can be open.
           </p>
           <ol class="fd-steps">
-            <li>Byagathvalli, Challita and Bhamla define frugal science not as cheaper components but as a different design approach to the same physics, and make the case for it as chemical engineering (<a href="https://doi.org/10.1021/acs.iecr.1c02868" target="_blank" rel="noopener"><i>Ind. Eng. Chem. Res.</i> 2021</a>). The design approach here is to move the expense out of the detector and into the nanostructure. A molecule made many times brighter by a plasmonic structure can be followed by an ordinary CMOS camera at kilohertz frame rates, where today it needs a photon-counting detector and a research microscope.</li>
+            <li>Byagathvalli, Challita and Bhamla define frugal science not as cheaper components but as a different design approach to the same physics, and make the case for it as chemical engineering (<a href="https://doi.org/10.1021/acs.iecr.1c02868" target="_blank" rel="noopener"><i>Ind. Eng. Chem. Res.</i> 2021</a>). The design approach here moves the expense out of the detector and into the nanostructure.</li>
             <li>The first instrument is therefore a camera-based plasmonic microscope built around a laser diode and a replicated chip from the device direction. It is inexpensive by design, which makes it the instrument a new laboratory can start with, and the photon-counting instrument can follow.</li>
             <li>Where it leads: the same instrument in an <a href="teaching.html#laboratory">undergraduate teaching laboratory</a>, and, with a clinical partner, a diagnostic that reads what a molecule is doing rather than only whether it is present, from a small sample.</li>
           </ol>
@@ -318,7 +318,7 @@
           The camera-based instrument is inexpensive by design and is also the teaching-laboratory instrument, so it can be built by students as one of the laboratory&rsquo;s first projects rather than bought. The comparison with simulation in the first direction costs nothing but a collaboration, and the crowded-media work in the second needs reagents, not equipment.
         </p>
         <p>
-          Together these make one laboratory: kinetics and transport as the science, devices as the engineering, and affordable measurement as the way it reaches students and clinics. Students thinking of joining it one day can read <a href="students.html">what it will be like</a>.
+          Students thinking of joining one day can read <a href="students.html">what the laboratory will be like</a>.
         </p>
 
       </section>

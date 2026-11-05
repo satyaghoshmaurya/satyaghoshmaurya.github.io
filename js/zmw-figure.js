@@ -142,8 +142,10 @@
     // A milled aperture is a slightly tapered cone, widest at the mouth, and the
     // milling continues UNDERETCH nm into the glass below the film, so the cone runs
     // on through the recess to the floor. SIDEWALL_DEG is the wall angle from the
-    // vertical; a focused ion beam gives a few degrees to about fifteen.
-    var SIDEWALL_DEG = 12, UNDERETCH = 50;
+    // vertical: 8 degrees, measured off the cross-section that the Wenger group
+    // deduced from cross-cut SEM of their milled aluminium apertures (Baibakov et
+    // al., Fig. 1c; left wall 8.4, right wall 7.7 degrees).
+    var SIDEWALL_DEG = 8, UNDERETCH = 50;
     var logc = Math.log10(20);  // log10 of enzyme concentration in nM (default 20 nM)
     var playing = false, rafId = null, visible = true;
     var scale = compact ? 0.62 : 1;
