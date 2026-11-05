@@ -2067,14 +2067,7 @@ a.atlas-link:focus-visible {
 }
 .footer-updated::before { content: "\00b7\00a0"; }
 
-/* ---- Contribution lines, small notes, print (2026-10-25) ---- */
-.pub-role {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  margin: 0.3rem 0 0.4rem;
-  padding-left: 0.7rem;
-  border-left: 2px solid var(--border);
-}
+/* ---- Small notes, print (2026-10-25) ---- */
 .small-note {
   font-size: 0.85rem;
   color: var(--text-muted);
